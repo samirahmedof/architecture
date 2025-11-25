@@ -11,7 +11,6 @@ const AboutPage = () => {
 	// Niyə edirik? {data, isLoading} yoxlamaları ilə kodu çirkləndirməmək üçün. Data həmişə var!
 	const { data } = useSuspenseQuery(aboutQueryOptions);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
 	return (
 		<div className={styles.container}>
 			{/* Artıq Valibot tərəfindən transform olunmuş datanı istifadə edirik */}
