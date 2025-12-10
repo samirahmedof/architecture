@@ -1,6 +1,6 @@
 import { Button, Modal } from '@shared/ui';
 import { useSuspenseQuery } from '@tanstack/react-query'; // <--- Diqqət: Suspense
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './about.module.scss';
 import { aboutQueryOptions } from './api/about.api';
 
@@ -11,6 +11,12 @@ const AboutPage = () => {
 	// Niyə edirik? {data, isLoading} yoxlamaları ilə kodu çirkləndirməmək üçün. Data həmişə var!
 	const { data } = useSuspenseQuery(aboutQueryOptions);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	// if (Math.random() > 0.5) throw new Error("Süni partlayış! 💣");
+	useEffect(() => {
+		setTimeout(() => {
+			console.log('test');
+		}, 5000);
+	}, []);
 	return (
 		<div className={styles.container}>
 			{/* Artıq Valibot tərəfindən transform olunmuş datanı istifadə edirik */}

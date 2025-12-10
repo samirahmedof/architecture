@@ -5,12 +5,13 @@
 	"type": "module",
 	"sideEffects": false,
 	"scripts": {
-		"dev": "pnpm css-types & vite",
-		"build": "pnpm css-types && tsc && vite build",
+		"dev": "pnpm css-types:build & vite",
+		"build": "pnpm css-types:build && tsc && vite build",
 		"preview": "vite preview",
 		"lint": "biome check src",
 		"format": "biome check --apply src",
-		"css-types": "typed-scss-modules src --watch --ignore '**/_*.scss'",
+		"css-types": "typed-scss-modules \\'src/**/*.module.scss\\' --watch",
+		"css-types:build": "typed-scss-modules \\'src/**/*.module.scss\\'",
 		"prepare": "husky"
 	},
 	"dependencies": {
@@ -23,9 +24,12 @@
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.19",
 		"lucide-react": "^0.554.0",
+		"nprogress": "^0.2.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
+		"react-error-boundary": "^6.0.0",
 		"react-hook-form": "^7.66.1",
+		"sonner": "^2.0.7",
 		"valibot": "^1.2.0",
 		"zustand": "^5.0.8"
 	},
@@ -36,6 +40,7 @@
 		"@eslint/js": "^9.39.1",
 		"@tanstack/react-router-devtools": "^1.139.3",
 		"@types/node": "^24.10.1",
+		"@types/nprogress": "^0.2.3",
 		"@types/react": "^19.2.5",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react-swc": "^4.2.2",

@@ -1,13 +1,13 @@
-import {createRoute} from '@tanstack/react-router';
-import {Route as RootRoute} from '@app/routes/root.route.tsx';
-import {aboutQueryOptions} from '@pages/about/api/about.api.ts';
+import { publicLayoutRoute } from '@app/layouts/public/public.route.tsx';
+import { PATHS } from '@app/router/paths.router.ts';
+import { aboutQueryOptions } from '@pages/about/api/about.api.ts';
+import { createRoute } from '@tanstack/react-router';
 import AboutPage from './about.page.tsx';
 
 export const aboutRoute = createRoute({
-    getParentRoute: () => RootRoute,
-    path: '/about',
-    component: AboutPage,
-    // TanStack Router-in sehri: Səhifə açılmamış datanı yükləməyə başlayır
-    loader: ({context: {queryClient}}) =>
-        queryClient.ensureQueryData(aboutQueryOptions),
+	getParentRoute: () => publicLayoutRoute,
+	path: PATHS.ABOUT,
+	component: AboutPage,
+	// TanStack Router-in sehri: Səhifə açılmamış datanı yükləməyə başlayır
+	loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(aboutQueryOptions),
 });

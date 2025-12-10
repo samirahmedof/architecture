@@ -1,0 +1,22 @@
+// ======================================================
+// 1. STATIC VARIABLES (Sass Only)
+// - Build time (Kompilyasiya vaxtı) lazımdır
+// - Media Queries və Z-Index üçün
+// ======================================================
+
+// Breakpoints
+$breakpoint-xs: 375px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Z-Index Levels
+$z-base: 1;
+$z-dropdown: 1000;
+$z-sticky: 1020; // Sticky header üçün standart
+$z-overlay: 2000; // Modal backdrop
+$z-modal: 3000; // Modal content
+$z-toast: 4000; // Notifications
+$z-tooltip: 5000; // Ən üstdə

@@ -1,0 +1,103 @@
+// ============================================================================
+// Adds smooth transitions with optional motion-reduction support
+// Usage: @include transition(opacity, 0.3s, ease-in-out);
+// ============================================================================
+@mixin transition($property: all, $time: 0.3s, $func: ease) {
+  will-change: $property;
+  transition: $property $time $func;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// ============================================================================
+// Handles responsive queries dynamically
+// Usage: @include breakpoint($breakpoint-md) { ... }
+// ============================================================================
+@mixin breakpoint($breakpoint, $direction: "max") {
+  @media screen and (#{$direction}-width: $breakpoint) {
+    @content;
+  }
+}
+
+// ============================================================================
+// Truncates text after a specific number of lines
+// Usage: @include ellipsis(2);
+// ============================================================================
+@mixin ellipsis($lines: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  @if $lines == 1 {
+    white-space: nowrap;
+  }
+}
+
+@mixin font-face($family, $folder, $file, $weight, $style: normal) {
+  @font-face {
+    font-family: $family;
+    src: url("./../../fonts/#{$folder}/#{$file}.woff2") format("woff2");
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+@mixin font($type: "main", $weight: 400) {
+  @if $type == "main" {
+    font-family: var(--font-main);
+  } @else if $type == "secondary" {
+    font-family: var(--font-secondary);
+  } @else if $type == "fancy" {
+    font-family: var(--font-fancy);
+  } @else {
+    @error "Unknown font type: #{$type}";
+  }
+  font-weight: $weight;
+}
+
+@mixin bg-cover {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--brand-primary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--brand-primary);
+  }
+}
+
+@mixin scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

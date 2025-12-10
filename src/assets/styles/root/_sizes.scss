@@ -1,0 +1,43 @@
+// ======================================================
+// 2. DYNAMIC VARIABLES (CSS Custom Properties)
+// - Runtime (Brauzer vaxtı) lazımdır
+// - Theming və Density üçün
+// ======================================================
+
+:root {
+  // --- Spacing Scale (8px Grid System) ---
+  // Prefiks: --space-
+  --space-xxs: 0.25rem; // 4px
+  --space-xs: 0.5rem; // 8px
+  --space-sm: 0.75rem; // 12px
+  --space-md: 1rem; // 16px
+  --space-lg: 1.5rem; // 24px
+  --space-xl: 2rem; // 32px
+  --space-xxl: 3rem; // 48px
+  --space-3xl: 4rem; // 64px
+
+  // --- Border Radius ---
+  // Prefiks: --radius-
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem; // Standart kart/input radiusu
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px; // Pill shape (Circle yerinə daha universal)
+
+  // --- Layout Dimensions ---
+  // Prefiks: --layout-
+  --layout-sidebar-width: 15rem;
+  --layout-header-height: 4rem;
+  --layout-content-max-width: 1200px;
+}
+
+// ======================================================
+// 3. DENSITY MODES (Gələcək üçün Sığorta)
+// İstəsən "Compact" class-ı əlavə edib saytı sıxa bilərsən
+// ======================================================
+[data-density="compact"] {
+  --space-md: 0.75rem; // Boşluqlar azalır
+  --space-lg: 1rem;
+  --radius-md: 0.25rem; // Radiuslar kəskinləşir
+}

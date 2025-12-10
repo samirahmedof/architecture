@@ -1,4 +1,25 @@
 # React + TypeScript + Vite
+pages/
+ ├── about
+ │   ├── api/
+ │   │    ├── about.query.ts
+ │   │    ├── about.mutation.ts 
+ │   │    └── about.service.ts
+ │   ├── models/
+ │   │    └── about.schema.ts
+ │   ├── ui/
+ │   │    ├── about-item/
+ │   │    │   ├── about-item.component.tsx
+ │   │    │   ├── about-item.module.scss
+ │   │    │   ├── about-item.module.scss.d.ts
+ │   │    │   └── about-item.d.ts
+ │   │    └── about-bg/
+ │   ├── about.page.tsx
+ │   ├── about.module.scss
+ │   ├── about.module.scss.d.ts
+ │   ├── about.route.ts
+ │   └── about.d.ts
+ └── home/
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

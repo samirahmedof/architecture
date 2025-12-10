@@ -1,9 +1,10 @@
-import {createRoute} from '@tanstack/react-router';
-import {Route as RootRoute} from '@app/routes/root.route.tsx';
+import { authLayoutRoute } from '@app/layouts/auth/auth.route.tsx';
+import { PATHS } from '@app/router/paths.router.ts';
 import LoginPage from '@pages/login/login.page.tsx';
+import { createRoute } from '@tanstack/react-router';
 
 export const loginRoute = createRoute({
-    getParentRoute: () => RootRoute,
-    path: '/login',
-    component: LoginPage,
+	getParentRoute: () => authLayoutRoute,
+	path: PATHS.LOGIN,
+	component: LoginPage,
 });

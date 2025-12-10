@@ -1,0 +1,37 @@
+@use "../abstracts" as v;
+
+html {
+  font-size: 100%;
+  @include v.scrollbar;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text-default);
+  background-color: var(--bg-body);
+  @include v.font("main");
+  line-height: 1.5;
+  font-feature-settings: "ss03";
+  -webkit-font-smoothing: antialiased;
+}
+
+.container-fluid {
+  @include v.breakpoint(v.$breakpoint-lg) {
+    padding: 0;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.88);
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
