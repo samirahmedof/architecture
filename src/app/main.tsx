@@ -6,20 +6,23 @@ import { createRoot } from 'react-dom/client';
 import './main.scss';
 
 const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: 1,
-			refetchOnWindowFocus: false,
-			staleTime: 1000 * 60 * 5,
-		},
-	},
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 5,
+    },
+  },
 });
 const router = createProjectRouter(queryClient);
-
-createRoot(document.getElementById('root')!).render(
-	<StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<RouterProvider router={router} />
-		</QueryClientProvider>
-	</StrictMode>
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element error');
+}
+createRoot(rootElement).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  </StrictMode>,
 );

@@ -1,5 +1,5 @@
 # Type Check (Bütün layihə üçün vacibdir, staged ola bilmir)
 pnpm tsc --noEmit
 
-# Lint & Format (Yalnız dəyişən fayllar üçün)
+# Lint & Format (Yalnız dəyişən fayllar üçün) TODO: check husky logic
 pnpm exec lint-staged

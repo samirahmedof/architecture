@@ -4,7 +4,7 @@ import HomePage from '@pages/home/home.page.tsx';
 import { createRoute } from '@tanstack/react-router';
 
 export const homeRoute = createRoute({
-	getParentRoute: () => publicLayoutRoute,
-	path: PATHS.HOME,
-	component: HomePage,
+  getParentRoute: () => publicLayoutRoute,
+  path: PATHS.HOME,
+  component: HomePage,
 });

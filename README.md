@@ -18,7 +18,7 @@ pages/
  │   ├── about.module.scss
  │   ├── about.module.scss.d.ts
  │   ├── about.route.ts
- │   └── about.d.ts
+ │   └── about.types.ts
  └── home/
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

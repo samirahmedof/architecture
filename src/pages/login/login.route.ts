@@ -4,7 +4,7 @@ import LoginPage from '@pages/login/login.page.tsx';
 import { createRoute } from '@tanstack/react-router';
 
 export const loginRoute = createRoute({
-	getParentRoute: () => authLayoutRoute,
-	path: PATHS.LOGIN,
-	component: LoginPage,
+  getParentRoute: () => authLayoutRoute,
+  path: PATHS.LOGIN,
+  component: LoginPage,
 });

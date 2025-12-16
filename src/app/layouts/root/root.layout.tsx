@@ -9,21 +9,21 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'sonner';
 
 const RootLayout = () => {
-	return (
-		<>
-			<QueryErrorResetBoundary>
-				{({ reset }) => (
-					<ErrorBoundary onReset={reset} FallbackComponent={MainErrorFallback}>
-						<Suspense fallback={<LoaderComponent />}>
-							<Outlet />
-						</Suspense>
-					</ErrorBoundary>
-				)}
-			</QueryErrorResetBoundary>
-			<Toaster position="top-right" richColors closeButton />
-			{/*TODO: check this */}
-			{ENV.IS_DEV && <TanStackRouterDevtools />}
-		</>
-	);
+  return (
+    <>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary onReset={reset} FallbackComponent={MainErrorFallback}>
+            <Suspense fallback={<LoaderComponent />}>
+              <Outlet />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+      <Toaster position="top-right" richColors closeButton />
+      {/*TODO: check this */}
+      {ENV.IS_DEV && <TanStackRouterDevtools />}
+    </>
+  );
 };
 export default RootLayout;

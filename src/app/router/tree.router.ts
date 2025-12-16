@@ -8,23 +8,23 @@ import { createRouter } from '@tanstack/react-router';
 import { rootRouter } from './root.router.ts';
 
 const routeTree = rootRouter.addChildren([
-	publicLayoutRoute.addChildren([homeRoute, aboutRoute]),
-	authLayoutRoute.addChildren([loginRoute]),
+  publicLayoutRoute.addChildren([homeRoute, aboutRoute]),
+  authLayoutRoute.addChildren([loginRoute]),
 ]);
 
 export const createProjectRouter = (queryClient: QueryClient) =>
-	createRouter({
-		routeTree,
-		defaultPreload: 'intent',
-		defaultPendingMs: 300,
-		defaultPendingMinMs: 500,
-		context: {
-			queryClient,
-		},
-	});
+  createRouter({
+    routeTree,
+    defaultPreload: 'intent',
+    defaultPendingMs: 300,
+    defaultPendingMinMs: 500,
+    context: {
+      queryClient,
+    },
+  });
 
 declare module '@tanstack/react-router' {
-	interface Register {
-		router: ReturnType<typeof createProjectRouter>;
-	}
+  interface Register {
+    router: ReturnType<typeof createProjectRouter>;
+  }
 }

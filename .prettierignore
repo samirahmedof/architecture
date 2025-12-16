@@ -1,0 +1,16 @@
+# .prettierignore
+node_modules
+dist
+build
+pnpm-lock.yaml
+package-lock.json
+coverage
+.vite
+.docusaurus
+
+# ƏN VACİB HİSSƏ: JS/TS fayllarına toxunma, onları Biome edəcək!
+**/*.ts
+**/*.tsx
+**/*.js
+**/*.jsx
+**/*.json
