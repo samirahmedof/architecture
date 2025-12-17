@@ -25,4 +25,29 @@ export default {
 
     'header-max-length': [2, 'always', 100],
   },
+  prompt: {
+    // Hansı sualları ATLAMAQ istəyirsən?
+    skipQuestions: ['body', 'footer', 'issues'],
+
+    // Scopes siyahısını avtomatik tapmaq üçün (boş buraxsan əllə yazırsan)
+    // scopes: [],
+
+    // Mesajları qısa və konkret edək
+    messages: {
+      type: 'Select the type of change:',
+      scope: 'Denote the SCOPE of this change (optional):',
+      subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
+      confirmCommit: 'Are you sure you want to proceed with the commit above?',
+    },
+
+    // Seçim siyahısında neçə element görunsün
+    typesAppend: [{ value: 'wip', name: 'wip:      Work in progress' }],
+
+    // Təqdimat stilini sadələşdir
+    allowCustomScopes: true,
+    allowEmptyScopes: true,
+    upperCaseSubject: false,
+    markBreakingChangeMode: false,
+    allowBreakingChanges: ['feat', 'fix'],
+  },
 };

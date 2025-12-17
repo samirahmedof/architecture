@@ -1,38 +1,38 @@
 {
-	"compilerOptions": {
-		/* Base Options */
-		"composite": true, // <--- Xətanı düzəldən əsas kod
-		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo", // Cache üçün
-		"target": "ES2020",
-		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
-		"skipLibCheck": true,
+  "compilerOptions": {
+    /* Base Options */
+    "composite": true, // <--- Xətanı düzəldən əsas kod
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo", // Cache üçün
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
 
-		/* Bundler mode */
-		"moduleResolution": "bundler",
-		"allowImportingTsExtensions": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"moduleDetection": "force",
-		"noEmit": true,
-		"jsx": "react-jsx",
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
 
-		/* Linting */
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
 
-		/* Aliases (Sənin Paths ayarların burada olmalıdır) */
-		"baseUrl": ".",
-		"paths": {
-			"@app/*": ["src/app/*"],
-			"@core/*": ["src/core/*"],
-			"@pages/*": ["src/pages/*"],
-			"@shared/*": ["src/shared/*"],
-			"@assets/*": ["src/assets/*"]
-		}
-	},
-	"include": ["src"] // src-ni yalnız bu fayl idarə edir
+    /* Aliases (Sənin Paths ayarların burada olmalıdır) */
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@core/*": ["src/core/*"],
+      "@pages/*": ["src/pages/*"],
+      "@shared/*": ["src/shared/*"],
+      "@assets/*": ["src/assets/*"]
+    }
+  },
+  "include": ["src"] // src-ni yalnız bu fayl idarə edir
 }
