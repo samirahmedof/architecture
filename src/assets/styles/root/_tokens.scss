@@ -1,0 +1,26 @@
+:root {
+  /*
+  ============================================================================
+  COMPONENT TOKENS
+  ----------------------------------------------------------------------------
+  - Component-specific color tokens derived from the semantic palette.
+  - Naming convention: --[type]-[role]-[prominence]
+  --[COMPONENT] - [ELEMENT] - [PROPERTY] - [STATE]
+  Element could be [text, bg, border, shadow, stroke]
+  ============================================================================
+  */
+
+  --header-navbar-bg: var(--blue-800);
+  --header-icon-color: var(--white);
+  --header-sub-bg: var(--gray-50);
+
+  --input-border: var(--gray-300);
+  --input-border-focus: var(--blue-700);
+  --input-color: var(--blue-600);
+  --input-bg-hover: var(--gray-50);
+
+  --input-color-disabled: var(--gray-300);
+  --input-placeholder-color: var(--gray-300);
+
+  --sidebar-border: var(--gray-300);
+}

@@ -12,6 +12,17 @@ $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1400px;
 
+$grid-breakpoints: (
+        xs: $breakpoint-xs,
+        sm: $breakpoint-sm,
+        md: $breakpoint-md,
+        lg: $breakpoint-lg,
+        xl: $breakpoint-xl,
+        xxl: $breakpoint-xxl
+);
+
+$grid-columns: 12;
+
 // Z-Index Levels
 $z-base: 1;
 $z-dropdown: 1000;

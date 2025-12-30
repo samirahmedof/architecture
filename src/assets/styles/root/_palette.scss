@@ -1,0 +1,29 @@
+:root {
+  /*
+  ============================================================================
+  BASE PALETTE
+  ----------------------------------------------------------------------------
+  - Raw color values used as the foundation of the design system.
+  - Follow the 50–900 tonal scale convention (lighter → darker).
+  - Reference: https://materialpalettes.com/
+  ============================================================================
+  */
+
+  --white: #fff;
+  --black: #030305;
+
+  --gray-50: #fafafa;
+  --gray-100: #f1f2f3;
+  --gray-200: #d7e0ea;
+  --gray-300: #bfc9d4;
+  --gray-500: #515365;
+
+  --blue-300: #506690;
+  --blue-500: #4361ee;
+  --blue-600: #3b3f5c;
+  --blue-700: #202939;
+  --blue-800: #0e1726;
+
+  --red-500: #ef4444;
+
+}

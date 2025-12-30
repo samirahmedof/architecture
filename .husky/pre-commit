@@ -1,5 +1,5 @@
-# Type Check (Bütün layihə üçün vacibdir, staged ola bilmir)
+echo "🔎 Checking Types..."
 pnpm tsc --noEmit
 
-# Lint & Format (Yalnız dəyişən fayllar üçün) TODO: check husky logic
+echo "✨ Linting & Formatting..."
 pnpm exec lint-staged

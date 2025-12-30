@@ -1,0 +1,94 @@
+@use '@/assets/styles/abstracts' as *;
+
+$item-height: rem(25);
+.trigger {
+  @include flex-center;
+  line-height: 1;
+  gap: var(--space-xs);
+  box-shadow: var(--shadow-soft);
+  background-color: var(--white);
+  padding: var(--space-sm);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  @include transition();
+  user-select: none;
+  &.small {
+    padding: var(--space-xxs);
+  }
+
+  &:hover {
+    background-color: var(--input-bg-hover);
+  }
+
+  &:focus-visible {
+    @include focus-ring(var(--brand-primary));
+  }
+
+  &[data-placeholder] {
+    color: var(--input-placeholder-color);
+  }
+
+}
+
+.icon {
+  color: var(--input-placeholder-color);
+}
+
+.content {
+  overflow: hidden;
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-strong);
+  color: var(--input-color);
+  z-index: $z-tooltip;
+}
+
+.viewport {
+  padding: 5px;
+}
+
+.item {
+  font-size: rem(14);
+  line-height: 1;
+  color: var(--text-main);
+  border-radius: var(--radius-xxs);
+  display: flex;
+  align-items: center;
+  height: $item-height;
+  padding: 0 rem(35) 0 rem(25);
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+
+  &[data-disabled] {
+    color: var(--input-color-disabled);
+    pointer-events: none;
+  }
+
+  &[data-highlighted], &[data-state="checked"] {
+    background-color: var(--brand-primary);
+    color: var(--white);
+    outline: none;
+  }
+}
+
+.label {
+  font-size: rem(14);
+}
+
+.scroll {
+  @include flex-center;
+  height: $item-height;
+  background-color: var(--white);
+  color: var(--brand-primary);
+  cursor: default;
+}
+
+.up {
+  border-bottom: solid 1px var(--input-border);
+}
+
+.down {
+  border-top: solid 1px var(--input-border);
+}

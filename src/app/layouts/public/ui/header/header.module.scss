@@ -1,0 +1,60 @@
+@use '@/assets/styles/abstracts' as *;
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  left: 0;
+}
+
+.navbar {
+  background-color: var(--header-navbar-bg);
+  padding: var(--space-sm);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    display: block;
+    width: rem(100);
+  }
+}
+
+.items {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 15px;
+
+  img {
+    width: rem(28);
+    height: rem(28);
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+
+.logout {
+  cursor: pointer;
+  color: var(--header-icon-color);
+}
+
+.toggle {
+  display: flex;
+  cursor: pointer;
+}
+
+.sub {
+  background: var(--header-sub-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-medium);
+  padding: var(--space-xs);
+}

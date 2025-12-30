@@ -11,11 +11,3 @@
   $clean-pixel: if(unitless($pixel), $pixel, math.div($pixel, 1px));
   @return math.div($clean-pixel, 16) * 1rem;
 }
-
-// ============================================================================
-// Returns spacing values (margin, padding, gaps) based on an 8px scale system.
-// Usage: [property]: spacing(2);
-// ============================================================================
-@function spacing($multiplier, $base: 8) {
-  @return rem($multiplier * $base);
-}

@@ -21,7 +21,6 @@ const RootLayout = () => {
         )}
       </QueryErrorResetBoundary>
       <Toaster position="top-right" richColors closeButton />
-      {/*TODO: check this */}
       {ENV.IS_DEV && <TanStackRouterDevtools />}
     </>
   );

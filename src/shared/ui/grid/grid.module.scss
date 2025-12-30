@@ -1,0 +1,82 @@
+@use '@/assets/styles/abstracts/variables' as v;
+@use '@/assets/styles/abstracts/mixins' as m;
+
+// --- CONTAINER ---
+.container {
+  width: 100%;
+  // Containerin daxili boşluğu (padding)
+  padding-inline: calc(var(--grid-gutter) / 2);
+  margin-inline: auto;
+
+  @each $bp, $width in v.$grid-breakpoints {
+    @include m.breakpoint($bp) {
+      &:not(.fluid) {
+        max-width: calc(#{$width} - var(--grid-gutter));
+      }
+    }
+  }
+
+  &.fluid {
+    max-width: 100%;
+  }
+}
+
+// --- GRID ROW ---
+.row {
+  display: grid;
+  grid-template-columns: repeat(v.$grid-columns, 1fr);
+  gap: var(--grid-gutter);
+  width: 100%;
+
+  // Alignment
+  &.align-start {
+    align-items: start;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.align-end {
+    align-items: end;
+  }
+}
+
+// --- COLUMN ---
+.col {
+  grid-column: span v.$grid-columns;
+
+  &.auto {
+    grid-column: auto;
+  }
+}
+
+// --- LOOPS (SPAN MƏNTİQİ) ---
+
+// Mobile First (xs)
+@for $i from 1 through v.$grid-columns {
+  .col-#{$i} {
+    grid-column: span $i;
+  }
+}
+
+// Responsive
+@each $bp, $width in v.$grid-breakpoints {
+  @include m.breakpoint($bp) {
+    @for $i from 1 through v.$grid-columns {
+      .#{$bp}-#{$i} {
+        grid-column: span $i;
+      }
+    }
+
+    @for $i from 1 through (v.$grid-columns - 1) {
+      .#{$bp}-offset-#{$i} {
+        grid-column-start: #{$i + 1};
+      }
+    }
+
+    .#{$bp}-auto {
+      grid-column: auto;
+    }
+  }
+}

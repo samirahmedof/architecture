@@ -1,17 +1,19 @@
 {
 	"compilerOptions": {
-		"composite": true, // <--- Əlavə et
+		"composite": true,
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
 		"skipLibCheck": true,
 		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
-		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
 		"moduleDetection": "force",
 		"noEmit": true,
 		"target": "ES2022",
 		"lib": ["ES2022"],
-		"strict": true
+		"strict": true,
+		"noImplicitAny": true,
+		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["vite.config.ts"]
 }

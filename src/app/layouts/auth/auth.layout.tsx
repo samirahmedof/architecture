@@ -1,18 +1,11 @@
-import { Outlet } from '@tanstack/react-router';
+import {Outlet} from '@tanstack/react-router';
+import styles from './auth.module.scss';
 
 const AuthLayout = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: '#e9ecef',
-      }}
-    >
-      <Outlet />
-    </div>
-  );
+    return (
+        <div className={styles.layout}>
+            <Outlet/>
+        </div>
+    );
 };
 export default AuthLayout;

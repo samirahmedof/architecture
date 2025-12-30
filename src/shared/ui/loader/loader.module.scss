@@ -1,3 +1,5 @@
+@use '@/assets/styles/abstracts' as *;
+
 $spinner-first-arrow: var(--brand-primary);
 $spinner-second-arrow: var(--brand-primary);
 $backdrop-color: rgba(140, 140, 140, 0.9);
@@ -9,9 +11,7 @@ $backdrop-color: rgba(140, 140, 140, 0.9);
   width: 100%;
   height: 100vh;
   z-index: 9999; // Hər şeyin, hətta modalların üzərində
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   background-color: $backdrop-color;
   backdrop-filter: blur(2px); // Modern "Glassmorphism" effekti (istəməsən sil)
 }

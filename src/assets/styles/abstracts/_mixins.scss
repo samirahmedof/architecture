@@ -1,9 +1,9 @@
+@use "variables" as v;
 // ============================================================================
 // Adds smooth transitions with optional motion-reduction support
 // Usage: @include transition(opacity, 0.3s, ease-in-out);
 // ============================================================================
 @mixin transition($property: all, $time: 0.3s, $func: ease) {
-  will-change: $property;
   transition: $property $time $func;
 
   @media (prefers-reduced-motion: reduce) {
@@ -12,12 +12,18 @@
 }
 
 // ============================================================================
-// Handles responsive queries dynamically
-// Usage: @include breakpoint($breakpoint-md) { ... }
+// Handles responsive queries dynamically (Mobile First)
+// Usage: @include breakpoint('md') { ... }
 // ============================================================================
-@mixin breakpoint($breakpoint, $direction: "max") {
-  @media screen and (#{$direction}-width: $breakpoint) {
-    @content;
+@mixin breakpoint($bp) {
+  @if map-has-key(v.$grid-breakpoints, $bp) {
+    $value: map-get(v.$grid-breakpoints, $bp);
+
+    @media screen and (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$bp}. Use one of these: #{map-keys(v.$grid-breakpoints)}";
   }
 }
 
@@ -100,4 +106,12 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@mixin focus-ring($color: var(--brand-primary)) {
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 2px var(--bg-surface),
+  0 0 0 4px color-mix(in srgb, $color, transparent 40%);
+  border: 1px solid $color;
 }

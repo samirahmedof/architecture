@@ -16,7 +16,6 @@ export const AboutModelSchema = v.pipe(
   })),
 );
 
-export type AboutModel = v.InferOutput<typeof AboutModelSchema>;
 
 export const UserCreateSchema = v.object({
   name: v.pipe(v.string(), v.minLength(3, 'Ad qısadır')),
@@ -27,4 +26,3 @@ export const UserCreateSchema = v.object({
   avatar: v.optional(v.instance(File)),
 });
 
-export type UserCreateForm = v.InferOutput<typeof UserCreateSchema>;

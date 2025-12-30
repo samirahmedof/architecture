@@ -5,9 +5,9 @@ import { homeRoute } from '@pages/home/home.route.ts';
 import { loginRoute } from '@pages/login/login.route.ts';
 import type { QueryClient } from '@tanstack/react-query';
 import { createRouter } from '@tanstack/react-router';
-import { rootRouter } from './root.router.ts';
+import { rootRoute } from '../layouts/_root/root.route.ts';
 
-const routeTree = rootRouter.addChildren([
+const routeTree = rootRoute.addChildren([
   publicLayoutRoute.addChildren([homeRoute, aboutRoute]),
   authLayoutRoute.addChildren([loginRoute]),
 ]);

@@ -1,3 +1,5 @@
+@use "../abstracts/mixins" as m;
+
 // ======================================================
 // 2. DYNAMIC VARIABLES (CSS Custom Properties)
 // - Runtime (Brauzer vaxtı) lazımdır
@@ -6,7 +8,6 @@
 
 :root {
   // --- Spacing Scale (8px Grid System) ---
-  // Prefiks: --space-
   --space-xxs: 0.25rem; // 4px
   --space-xs: 0.5rem; // 8px
   --space-sm: 0.75rem; // 12px
@@ -17,19 +18,26 @@
   --space-3xl: 4rem; // 64px
 
   // --- Border Radius ---
-  // Prefiks: --radius-
-  --radius-xs: 0.125rem;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem; // Standart kart/input radiusu
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
+  --radius-xxs: 0.125rem; // 2px
+  --radius-xs: 0.25rem; // 4px
+  --radius-sm: 0.375rem; // 6px
+  --radius-md: 0.5rem; // 8px
+  --radius-lg: 1rem; // 16px
+  --radius-xl: 1.5rem; // 24px
   --radius-full: 9999px; // Pill shape (Circle yerinə daha universal)
 
+
+
   // --- Layout Dimensions ---
-  // Prefiks: --layout-
   --layout-sidebar-width: 15rem;
-  --layout-header-height: 4rem;
+  --layout-sidebar-spacing: 5rem;
   --layout-content-max-width: 1200px;
+
+  // --- Grid ---
+  --grid-gutter: var(--space-lg);
+  @include m.breakpoint('sm') {
+    --grid-gutter: var(--space-lg);
+  }
 }
 
 // ======================================================
