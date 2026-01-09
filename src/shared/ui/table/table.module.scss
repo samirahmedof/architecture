@@ -1,0 +1,87 @@
+@use '@/assets/styles/abstracts' as a;
+
+$border: var(--table-border);
+$text-color: var(--table-text-color);
+$text-color-empty: var(--table-text-color-empty);
+$row-bg-hover: var(--table-row-bg-hover);
+$row-bg-active: var(--table-row-bg-active);
+$border-radius: var(--radius-md);
+$heading-color: var(--table-head-text-color);
+$heading-bg: var(--table-head-bg);
+$white: var(--white);
+$space-sm: var(--space-sm);
+$space-md: var(--space-md);
+$space-xxl: var(--space-xxl);
+
+.wrapper {
+  position: relative;
+  border: 1px solid $border;
+  border-radius: $border-radius;
+  background: $white;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  color: $text-color;
+  font-size: a.rem(14);
+  text-align: left;
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: a.$z-sticky;
+    background-color: $heading-bg;
+    user-select: none;
+    th {
+      @include a.transition();
+      border-bottom: 1px solid $border;
+      padding: $space-sm $space-md;
+      color: $heading-color;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      @include a.transition();
+      border-bottom: 1px solid $border;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: $row-bg-hover;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      padding: $space-sm $space-md;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:active {
+    background-color: $row-bg-active;
+  }
+}
+
+.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.empty {
+  padding: $space-xxl;
+  color: $text-color-empty;
+  font-size: a.rem(14);
+  text-align: center;
+}

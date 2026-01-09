@@ -10,25 +10,24 @@
   --brand-error: var(--red-500);
 
   // Layout Backgrounds
-  --bg-body: var(--gray-50);
-  --bg-surface: var(--white); // Card və ya Dropdown üçün baza
+  --bg-body: var(--gray-100);
+  --bg-surface: var(--white);
 
   // Typography
-  --text-main: var(--blue-800); /* Əsas mətn rəngi */
-  --text-muted: var(--gray-500); /* Düzəliş: blue-700 çox tünddür, gray-500 idealdır */
+  --text-main: var(--blue-800);
+  --text-muted: var(--gray-500);
   --text-inverse: var(--white);
 
   // Borders
-  --border-default: var(--gray-200); /* Düzəliş: blue-700 border üçün çox qalındır */
+  --border-default: var(--gray-300);
   --border-active: var(--brand-primary);
   --border-error: var(--brand-error);
 
   // Status & Actions
   --action-main: var(--brand-primary);
 
-  // Shadows (Bunlar qlobaldır)
+  // Shadows
   --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
 }

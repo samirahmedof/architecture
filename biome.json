@@ -1,12 +1,13 @@
 {
-  "$schema": "/node_modules/@biomejs/biome/configuration_schema.json",
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["**", "!public"]
   },
   "formatter": {
     "enabled": true,
@@ -28,13 +29,17 @@
         "useHookAtTopLevel": "error"
       },
       "style": {
-        "noNonNullAssertion": "error",
+        "noNonNullAssertion": "warn",
         "useBlockStatements": "off",
         "useSelfClosingElements": "error",
-        "noParameterAssign": "error"
+        "noParameterAssign": "error",
+        "useImportType": "error"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": "warn"
+      },
+      "suspicious": {
+        "useBiomeIgnoreFolder": "error"
       },
       "a11y": {
         "noSvgWithoutTitle": "off"
@@ -60,9 +65,18 @@
     "formatter": {
       "quoteStyle": "single",
       "jsxQuoteStyle": "double",
-      "trailingCommas": "all",
       "semicolons": "always",
-      "arrowParentheses": "always"
+      "arrowParentheses": "always",
+      "trailingCommas": "all"
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true
+    },
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single"
     }
   },
   "assist": {

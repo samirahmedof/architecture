@@ -8,39 +8,39 @@ $backdrop-color: rgba(140, 140, 140, 0.9);
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999; // Hər şeyin, hətta modalların üzərində
   width: 100%;
   height: 100vh;
-  z-index: 9999; // Hər şeyin, hətta modalların üzərində
   @include flex-center;
-  background-color: $backdrop-color;
   backdrop-filter: blur(2px); // Modern "Glassmorphism" effekti (istəməsən sil)
+  background-color: $backdrop-color;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
   display: inline-block;
   position: relative;
+  animation: 1s rotate linear infinite;
+  box-sizing: border-box;
   border-width: 3px 2px 3px 2px;
   border-style: solid;
   border-color: $spinner-first-arrow transparent #fff transparent;
   border-radius: 50%;
-  box-sizing: border-box;
-  animation: 1s rotate linear infinite;
+  width: 48px;
+  height: 48px;
 }
 .loader:before,
 .loader:after {
-  content: "";
+  position: absolute;
   top: 0;
   left: 0;
-  position: absolute;
+  transform: translate(-10px, 19px) rotate(-35deg);
   border: 10px solid transparent;
   border-bottom-color: #fff;
-  transform: translate(-10px, 19px) rotate(-35deg);
+  content: '';
 }
 .loader:after {
-  border-color: $spinner-first-arrow #0000 #0000 #0000;
   transform: translate(32px, 3px) rotate(-35deg);
+  border-color: $spinner-first-arrow #0000 #0000 #0000;
 }
 @keyframes rotate {
   100% {

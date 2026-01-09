@@ -8,7 +8,6 @@ coverage
 .vite
 .docusaurus
 
-# ƏN VACİB HİSSƏ: JS/TS fayllarına toxunma, onları Biome edəcək!
 **/*.ts
 **/*.tsx
 **/*.js

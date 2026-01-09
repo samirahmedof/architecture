@@ -1,4 +1,4 @@
-@use "../abstracts/mixins" as m;
+@use '../abstracts/mixins' as m;
 
 // ======================================================
 // 2. DYNAMIC VARIABLES (CSS Custom Properties)
@@ -24,13 +24,11 @@
   --radius-md: 0.5rem; // 8px
   --radius-lg: 1rem; // 16px
   --radius-xl: 1.5rem; // 24px
-  --radius-full: 9999px; // Pill shape (Circle yerinə daha universal)
-
-
+  --radius-full: 9999px;
 
   // --- Layout Dimensions ---
   --layout-sidebar-width: 15rem;
-  --layout-sidebar-spacing: 5rem;
+  --layout-sidebar-spacing: 6rem;
   --layout-content-max-width: 1200px;
 
   // --- Grid ---
@@ -44,7 +42,7 @@
 // 3. DENSITY MODES (Gələcək üçün Sığorta)
 // İstəsən "Compact" class-ı əlavə edib saytı sıxa bilərsən
 // ======================================================
-[data-density="compact"] {
+[data-density='compact'] {
   --space-md: 0.75rem; // Boşluqlar azalır
   --space-lg: 1rem;
   --radius-md: 0.25rem; // Radiuslar kəskinləşir

@@ -1,13 +1,17 @@
-@use "sass:math";
+@use 'sass:math';
 
 // ============================================================================
 // Converts a given pixel value to `rem` units based on the root font size.
 // Usage: [property]: rem(32);
 // ============================================================================
 @function rem($pixel) {
-  @if type-of($pixel) != "number" {
+  @if type-of($pixel) != 'number' {
     @error "`#{$pixel}` is not number.";
   }
   $clean-pixel: if(unitless($pixel), $pixel, math.div($pixel, 1px));
   @return math.div($clean-pixel, 16) * 1rem;
+}
+
+@function fade($color, $percentage) {
+  @return unquote('color-mix(in srgb, #{$color}, transparent #{$percentage}%)');
 }

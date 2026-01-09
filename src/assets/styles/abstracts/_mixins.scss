@@ -1,4 +1,4 @@
-@use "variables" as v;
+@use 'variables' as v;
 // ============================================================================
 // Adds smooth transitions with optional motion-reduction support
 // Usage: @include transition(opacity, 0.3s, ease-in-out);
@@ -32,9 +32,9 @@
 // Usage: @include ellipsis(2);
 // ============================================================================
 @mixin ellipsis($lines: 1) {
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: $lines;
   @if $lines == 1 {
@@ -44,20 +44,20 @@
 
 @mixin font-face($family, $folder, $file, $weight, $style: normal) {
   @font-face {
-    font-family: $family;
-    src: url("./../../fonts/#{$folder}/#{$file}.woff2") format("woff2");
-    font-weight: $weight;
     font-style: $style;
+    font-weight: $weight;
+    src: url('./../../fonts/#{$folder}/#{$file}.woff2') format('woff2');
+    font-family: $family;
     font-display: swap;
   }
 }
 
-@mixin font($type: "main", $weight: 400) {
-  @if $type == "main" {
+@mixin font($type: 'main', $weight: 400) {
+  @if $type == 'main' {
     font-family: var(--font-main);
-  } @else if $type == "secondary" {
+  } @else if $type == 'secondary' {
     font-family: var(--font-secondary);
-  } @else if $type == "fancy" {
+  } @else if $type == 'fancy' {
     font-family: var(--font-fancy);
   } @else {
     @error "Unknown font type: #{$type}";
@@ -66,16 +66,16 @@
 }
 
 @mixin bg-cover {
-  content: "";
   display: inline-block;
   position: absolute;
+  z-index: -1;
   inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
+  content: '';
 }
 
 @mixin flex-center {
@@ -109,9 +109,12 @@
 }
 
 @mixin focus-ring($color: var(--brand-primary)) {
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
   outline: 2px solid transparent;
-  box-shadow: 0 0 0 2px var(--bg-surface),
-  0 0 0 4px color-mix(in srgb, $color, transparent 40%);
+  box-shadow:
+    0 0 0 2px var(--bg-surface),
+    0 0 0 4px color-mix(in srgb, $color, transparent 40%);
   border: 1px solid $color;
 }

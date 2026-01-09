@@ -16,7 +16,6 @@ export const AboutModelSchema = v.pipe(
   })),
 );
 
-
 export const UserCreateSchema = v.object({
   name: v.pipe(v.string(), v.minLength(3, 'Ad qısadır')),
   email: v.pipe(v.string(), v.email('Email səhvdir')),
@@ -25,4 +24,3 @@ export const UserCreateSchema = v.object({
   companyName: v.pipe(v.string(), v.minLength(1, 'Şirkət adı vacibdir')),
   avatar: v.optional(v.instance(File)),
 });
-

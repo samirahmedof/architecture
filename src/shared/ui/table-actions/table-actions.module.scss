@@ -1,0 +1,49 @@
+@use '@/assets/styles/abstracts' as a;
+
+$size: a.rem(32);
+$gap: var(--space-xs);
+$radius: var(--radius-sm);
+//$default-color: #64748b;
+$default-color: var(--table-action-default-color);
+//$edit-color: #0ea5e9;
+$edit-color: var(--table-action-edit-color);
+//$delete-color: #ef4444;
+$delete-color: var(--table-action-delete-color);
+//$view-color: #10b981;
+$view-color: var(--table-action-view-color);
+
+.wrapper {
+  @include a.flex-center;
+  gap: $gap;
+}
+
+.button {
+  @include a.flex-center;
+  @include a.transition;
+  cursor: pointer;
+  border: none;
+  border-radius: $radius;
+  background-color: transparent;
+  width: $size;
+  height: $size;
+  color: $default-color;
+
+  &:hover {
+    background-color: a.fade($default-color, 80);
+  }
+
+  &.edit:hover {
+    background-color: a.fade($edit-color, 80);
+    color: $edit-color;
+  }
+
+  &.delete:hover {
+    background-color: a.fade($delete-color, 80);
+    color: $delete-color;
+  }
+
+  &.view:hover {
+    background-color: a.fade($view-color, 80);
+    color: $view-color;
+  }
+}

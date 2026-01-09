@@ -3,14 +3,14 @@
 $item-height: rem(25);
 .trigger {
   @include flex-center;
-  line-height: 1;
   gap: var(--space-xs);
+  cursor: pointer;
   box-shadow: var(--shadow-soft);
-  background-color: var(--white);
-  padding: var(--space-sm);
   border: 1px solid var(--input-border);
   border-radius: var(--radius-sm);
-  cursor: pointer;
+  background-color: var(--white);
+  padding: var(--space-sm);
+  line-height: 1;
   @include transition();
   user-select: none;
   &.small {
@@ -28,7 +28,6 @@ $item-height: rem(25);
   &[data-placeholder] {
     color: var(--input-placeholder-color);
   }
-
 }
 
 .icon {
@@ -36,12 +35,12 @@ $item-height: rem(25);
 }
 
 .content {
-  overflow: hidden;
-  background-color: var(--white);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-strong);
-  color: var(--input-color);
   z-index: $z-tooltip;
+  box-shadow: var(--shadow-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  overflow: hidden;
+  color: var(--input-color);
 }
 
 .viewport {
@@ -49,27 +48,28 @@ $item-height: rem(25);
 }
 
 .item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  border-radius: var(--radius-xxs);
+  padding: 0 rem(35) 0 rem(25);
+  height: $item-height;
+  color: var(--text-main);
   font-size: rem(14);
   line-height: 1;
-  color: var(--text-main);
-  border-radius: var(--radius-xxs);
-  display: flex;
-  align-items: center;
-  height: $item-height;
-  padding: 0 rem(35) 0 rem(25);
-  position: relative;
   user-select: none;
-  cursor: pointer;
 
   &[data-disabled] {
-    color: var(--input-color-disabled);
     pointer-events: none;
+    color: var(--input-color-disabled);
   }
 
-  &[data-highlighted], &[data-state="checked"] {
+  &[data-highlighted],
+  &[data-state='checked'] {
+    outline: none;
     background-color: var(--brand-primary);
     color: var(--white);
-    outline: none;
   }
 }
 
@@ -79,10 +79,10 @@ $item-height: rem(25);
 
 .scroll {
   @include flex-center;
-  height: $item-height;
-  background-color: var(--white);
-  color: var(--brand-primary);
   cursor: default;
+  background-color: var(--white);
+  height: $item-height;
+  color: var(--brand-primary);
 }
 
 .up {

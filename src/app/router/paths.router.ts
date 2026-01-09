@@ -6,9 +6,10 @@ export const PATHS = {
   // public
   PUBLIC: 'public',
   HOME: '/',
+  POST: '/post',
+  POST_DETAIL: '/post/$postId',
+
   ABOUT: '/about',
-  NEWS: '/news',
-  NEWS_DETAIL: '/news/$newsId',
 
   // error
   ERROR: 'error',

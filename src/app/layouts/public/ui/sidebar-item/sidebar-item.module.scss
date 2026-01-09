@@ -1,0 +1,89 @@
+@use '@/assets/styles/abstracts' as *;
+
+.item {
+  margin-bottom: var(--space-xxs);
+  color: var(--sidebar-item-color);
+  font-size: rem(13);
+  user-select: none;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+  @include transition();
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: var(--space-xs);
+  width: rem(20);
+  height: rem(20);
+  @include transition();
+}
+
+.link {
+  align-items: center;
+  border-radius: var(--radius-xs);
+  width: 100%;
+  @include transition();
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+
+  &.open,
+  &.active,
+  &:hover {
+    box-shadow: var(--shadow-soft);
+    background-color: var(--white);
+    color: var(--sidebar-item-color-hover);
+  }
+
+  &:hover {
+    background-color: var(--sidebar-item-bg-hover);
+  }
+
+  &.active {
+    pointer-events: none;
+  }
+}
+
+.submenu {
+  margin-left: var(--space-xl);
+}
+
+.sublink {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  @include transition();
+  padding: var(--space-xs) var(--space-sm) var(--space-xs) var(--space-lg);
+  color: var(--sidebar-item-sub-color);
+
+  &::before {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border-radius: var(--radius-full);
+    background-color: var(--sidebar-item-sub-dot-bg);
+    width: 3px;
+    height: 3px;
+    content: '';
+    @include transition();
+  }
+
+  &:hover,
+  &.active {
+    color: var(--brand-primary);
+
+    &::before {
+      background-color: var(--brand-primary);
+    }
+  }
+
+  &.active {
+    pointer-events: none;
+  }
+}

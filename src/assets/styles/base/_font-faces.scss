@@ -1,53 +1,18 @@
-@use "../abstracts/mixins" as m;
+@use '../abstracts/mixins' as m;
 
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-ExtraLight", 100);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-Light", 300);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-Regular", 400);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-SemiBold", 600);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-Bold", 700);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-ExtraBold", 800);
-@include m.font-face("NunitoSans", "nunito", "NunitoSans-Black", 900);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-ExtraLight', 100);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-Light', 300);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-Regular', 400);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-SemiBold', 600);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-Bold', 700);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-ExtraBold', 800);
+@include m.font-face('NunitoSans', 'nunito', 'NunitoSans-Black', 900);
 
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-Thin",
-  100
-);
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-Light",
-  300
-);
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-Regular",
-  400
-);
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-Medium",
-  500
-);
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-Bold",
-  700
-);
-@include m.font-face(
-  "PFSquareSansPro",
-  "pf-square-sans-pro",
-  "PFSquareSansPro-XBlack",
-  900
-);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-Thin', 100);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-Light', 300);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-Regular', 400);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-Medium', 500);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-Bold', 700);
+@include m.font-face('PFSquareSansPro', 'pf-square-sans-pro', 'PFSquareSansPro-XBlack', 900);
 
-@include m.font-face(
-  "Imperial Script",
-  "imperial-script",
-  "ImperialScript-Regular",
-  400
-);
+@include m.font-face('Imperial Script', 'imperial-script', 'ImperialScript-Regular', 400);

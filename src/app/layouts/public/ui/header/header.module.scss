@@ -1,11 +1,11 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
 .header {
   position: fixed;
-  width: 100%;
   top: 0;
-  z-index: 100;
   left: 0;
+  z-index: a.$z-header;
+  width: 100%;
 }
 
 .navbar {
@@ -19,7 +19,7 @@
 
   img {
     display: block;
-    width: rem(100);
+    width: a.rem(100);
   }
 }
 
@@ -27,16 +27,19 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  li {
+    @include a.flex-center;
+  }
 }
 
 .avatar {
   margin-right: 15px;
 
   img {
-    width: rem(28);
-    height: rem(28);
-    object-fit: cover;
     border-radius: 5px;
+    width: a.rem(28);
+    height: a.rem(28);
+    object-fit: cover;
   }
 }
 
@@ -48,13 +51,14 @@
 .toggle {
   display: flex;
   cursor: pointer;
+  color: var(--header-toggle-icon-color);
 }
 
 .sub {
-  background: var(--header-sub-bg);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   box-shadow: var(--shadow-medium);
+  background-color: var(--header-sub-bg);
   padding: var(--space-xs);
 }

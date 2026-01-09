@@ -1,5 +1,9 @@
-import type {ComponentProps} from 'react';
+import type { ComponentProps } from 'react';
 
 export type SidebarProps = ComponentProps<'aside'> & {
-    isOpen: boolean;
-}
+  isOpen: boolean;
+};
+
+export type SidebarItem = {
+  isOpen: boolean;
+};

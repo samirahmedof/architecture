@@ -13,12 +13,12 @@ $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1400px;
 
 $grid-breakpoints: (
-        xs: $breakpoint-xs,
-        sm: $breakpoint-sm,
-        md: $breakpoint-md,
-        lg: $breakpoint-lg,
-        xl: $breakpoint-xl,
-        xxl: $breakpoint-xxl
+  xs: $breakpoint-xs,
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  xxl: $breakpoint-xxl,
 );
 
 $grid-columns: 12;
@@ -26,7 +26,8 @@ $grid-columns: 12;
 // Z-Index Levels
 $z-base: 1;
 $z-dropdown: 1000;
-$z-sticky: 1020; // Sticky header üçün standart
+$z-sticky: 1010; // Sticky header üçün standart
+$z-header: 1020; // Sticky header üçün standart
 $z-overlay: 2000; // Modal backdrop
 $z-modal: 3000; // Modal content
 $z-toast: 4000; // Notifications

@@ -3,6 +3,7 @@ import { Loader2 } from 'lucide-react'; // Icon
 import React, { type ButtonHTMLAttributes, type ReactNode } from 'react';
 import styles from './button.module.scss';
 
+// TODO: change button cmp
 // Buttonun qəbul edəcəyi proplar
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'danger' | 'outline';

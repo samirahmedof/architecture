@@ -3,10 +3,10 @@
 
 // --- CONTAINER ---
 .container {
-  width: 100%;
+  margin-inline: auto;
   // Containerin daxili boşluğu (padding)
   padding-inline: calc(var(--grid-gutter) / 2);
-  margin-inline: auto;
+  width: 100%;
 
   @each $bp, $width in v.$grid-breakpoints {
     @include m.breakpoint($bp) {

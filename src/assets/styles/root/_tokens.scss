@@ -10,17 +10,39 @@
   ============================================================================
   */
 
-  --header-navbar-bg: var(--blue-800);
-  --header-icon-color: var(--white);
-  --header-sub-bg: var(--gray-50);
-
-  --input-border: var(--gray-300);
+  // shared
+  //TODO: check input colors
+  //TODO: move component tokens to other file
+  --input-border: var(--border-default);
   --input-border-focus: var(--blue-700);
   --input-color: var(--blue-600);
   --input-bg-hover: var(--gray-50);
-
   --input-color-disabled: var(--gray-300);
   --input-placeholder-color: var(--gray-300);
 
-  --sidebar-border: var(--gray-300);
+  --table-border: var(--border-default);
+  --table-text-color: var(--text-main);
+  --table-text-color-empty: var(--brand-primary-dark);
+  --table-row-bg-hover: var(--gray-50);
+  --table-row-bg-active: var(--gray-200);
+  --table-head-bg: var(--gray-300);
+  --table-head-text-color: var(--brand-primary-dark);
+
+  --table-action-default-color: var(--gray-500);
+  --table-action-edit-color: var(--blue-500);
+  --table-action-delete-color: var(--red-500);
+  --table-action-view-color: var(--green-700);
+
+  // layout
+  --header-navbar-bg: var(--blue-800);
+  --header-icon-color: var(--white);
+  --header-sub-bg: var(--gray-50);
+  --header-toggle-icon-color: var(--blue-600);
+
+  --sidebar-border: var(--border-default);
+  --sidebar-item-color: var(--blue-300);
+  --sidebar-item-color-hover: var(--black);
+  --sidebar-item-bg-hover: var(--gray-300);
+  --sidebar-item-sub-color: var(--gray-700);
+  --sidebar-item-sub-dot-bg: var(--gray-400);
 }
