@@ -3,6 +3,10 @@ import type { AxiosError } from 'axios';
 import { toast } from 'sonner';
 import { ValiError } from 'valibot';
 
+type ServerError = {
+  message?: string;
+  errors?: Record<string, string[]>;
+};
 const handleGlobalError = (error: unknown) => {
   // Valibot errors (status 200/201)
   if (error instanceof ValiError) {
@@ -12,7 +16,7 @@ const handleGlobalError = (error: unknown) => {
   }
 
   // Axios (Server/Network) errors
-  const axiosError = error as AxiosError<unknown>;
+  const axiosError = error as AxiosError<ServerError>;
 
   // 1. İnternet yoxdur və ya Server tamamilə ölüb
   if (!axiosError.response) {
