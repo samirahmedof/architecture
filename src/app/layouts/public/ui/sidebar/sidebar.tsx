@@ -1,4 +1,4 @@
-import type { SidebarProps } from '@app/layouts/public/ui/sidebar/sidebar.types.ts';
+import type { SidebarMenuItem, SidebarProps } from '@app/layouts/public/model/public.types.ts';
 import SidebarItem from '@app/layouts/public/ui/sidebar-item/sidebar-item.tsx';
 import { PATHS } from '@app/router/paths.router.ts';
 import clsx from 'clsx';
@@ -6,7 +6,7 @@ import { House, NotepadText, Table } from 'lucide-react';
 import s from './sidebar.module.scss';
 
 const Sidebar = ({ isOpen }: SidebarProps) => {
-  const items = [
+  const items: SidebarMenuItem[] = [
     {
       id: 1,
       name: 'Home',
@@ -41,7 +41,7 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   return (
     <aside className={clsx(s.sidebar, isOpen && s.open)}>
       <ul>
-        {items.map((i: any) => (
+        {items.map((i: SidebarMenuItem) => (
           <SidebarItem key={i.id} name={i.name} link={i.link} icon={i.icon} submenu={i.submenu} />
         ))}
       </ul>

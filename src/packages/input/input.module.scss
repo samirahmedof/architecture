@@ -1,0 +1,69 @@
+@use '@/assets/styles/abstracts' as a;
+
+.input {
+  display: block; // Input flex olmur, block olmalıdır
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  padding: var(--space-sm); // Select trigger padding-i ilə eyni
+  // --- Layout & Box Model (Select .trigger ilə eyni) ---
+  width: 100%;
+  color: var(--input-color);
+  font-size: a.rem(14); // Select item font-size ilə eyni
+  line-height: 1;
+
+  // --- Typography ---
+  font-family: inherit;
+
+  // --- Transitions ---
+  @include a.transition();
+
+  // --- States ---
+
+  // Hover (Select ilə eyni)
+  &:hover:not(:disabled) {
+    background-color: var(--input-bg-hover);
+  }
+
+  // Focus (Select focus-ring ilə eyni)
+  &:focus-visible,
+  &:focus {
+    outline: none;
+    border-color: var(--input-border-focus); // Token-dən gələn rəng
+    // Əgər focus-ring mixin-i border-i dəyişirsə, yuxarıdakı sətri silə bilərsən
+    @include a.focus-ring(var(--brand-primary));
+  }
+
+  // Placeholder styling
+  &::placeholder {
+    opacity: 1; // Firefox fix
+    color: var(--input-placeholder-color);
+  }
+
+  // Disabled state
+  &:disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    background-color: var(--gray-50); // Və ya --input-bg-hover
+    color: var(--input-color-disabled);
+  }
+
+  // --- Variants ---
+
+  // Error State
+  &.error {
+    border-color: var(--red-500); // Paletdən gələn qırmızı
+
+    &:focus-visible,
+    &:focus {
+      @include a.focus-ring(var(--red-500));
+    }
+  }
+
+  // Small Variant (Select .small ilə eyni)
+  &.small {
+    padding: var(--space-xxs);
+    font-size: a.rem(13); // Kiçik input üçün fontu biraz kiçiltmək olar
+  }
+}

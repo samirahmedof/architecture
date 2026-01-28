@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import s from './grid.module.scss';
-import type { ContainerProps, RowProps, ColProps } from './grid.types.ts'; // Module import
+import type { ColProps, ContainerProps, RowProps } from './grid.types.ts'; // Module import
 
 export const Container = ({ children, className, fluid, ...props }: ContainerProps) => {
   const classes = clsx(s.container, fluid && s.fluid, className);

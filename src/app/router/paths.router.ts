@@ -7,7 +7,8 @@ export const PATHS = {
   PUBLIC: 'public',
   HOME: '/',
   POST: '/post',
-  POST_DETAIL: '/post/$postId',
+  POST_EDIT: '/post/$postId',
+  POST_CREATE: '/post/create',
 
   ABOUT: '/about',
 

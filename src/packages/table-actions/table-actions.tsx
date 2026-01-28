@@ -1,10 +1,7 @@
-import type {
-  ActionButtonProps,
-  TableActionsProps,
-} from '@shared/ui/table-actions/table-actions.types.ts';
 import clsx from 'clsx';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 import s from './table-actions.module.scss';
+import type { ActionButtonProps, TableActionsProps } from './table-actions.types.ts';
 
 const ActionBtn = ({ onClick, icon, variant, title }: ActionButtonProps) => {
   if (!onClick) return null;

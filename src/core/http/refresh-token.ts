@@ -4,20 +4,20 @@ import { ENDPOINTS } from '@core/config/endpoints.config.ts';
 import { ENV } from '@core/config/env.config';
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
+// make it dynamic
 const refreshClient = axios.create({
   baseURL: ENV.BASE_URL,
-  withCredentials: true, // Cookie getsin deyə
+  withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// 2. Queue Sistemi
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (token: string) => void;
-  reject: (error: any) => void;
+  reject: (error: unknown) => void;
 }> = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);

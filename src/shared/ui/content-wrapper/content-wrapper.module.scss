@@ -1,0 +1,8 @@
+@use '@/assets/styles/abstracts' as a;
+
+.card {
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  padding: var(--space-lg);
+}

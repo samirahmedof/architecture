@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 import s from './table.module.scss';
-import type { TableProps } from './table.types';
+import type { TableProps } from './table.types.ts';
 
 export const Table = <T extends object>({
   data,

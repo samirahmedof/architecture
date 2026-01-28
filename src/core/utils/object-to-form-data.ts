@@ -1,19 +1,15 @@
 export const objectToFormData = (
-  obj: Record<string, any>,
+  obj: Record<string, unknown>,
   form?: FormData,
   namespace?: string,
 ): FormData => {
   const fd = form || new FormData();
-  let formKey: any;
+  let formKey: string;
 
   for (const property in obj) {
     if (Object.hasOwn(obj, property)) {
       if (namespace) {
-        // Standart: address[city]
         formKey = `${namespace}[${property}]`;
-
-        // Əgər sənə mütləq "address.city" lazımdırsa bunu aç:
-        // formKey = namespace + '.' + property;
       } else {
         formKey = property;
       }
@@ -39,7 +35,7 @@ export const objectToFormData = (
           });
         } else {
           // Dərinə get!
-          objectToFormData(value, fd, formKey);
+          objectToFormData(value as Record<string, unknown>, fd, formKey);
         }
       }
 

@@ -1,6 +1,6 @@
 import { ENV } from '@core/config/env.config.ts';
-import { MainErrorFallback } from '@shared/ui/error/main-error.component.tsx';
-import { LoaderComponent } from '@shared/ui/loader/loader.component.tsx';
+import { MainErrorFallback } from '@shared/ui/error/main-error.tsx';
+import { Loader } from '@shared/ui/loader/loader.tsx';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
@@ -14,7 +14,7 @@ const RootLayout = () => {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} FallbackComponent={MainErrorFallback}>
-            <Suspense fallback={<LoaderComponent />}>
+            <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
           </ErrorBoundary>

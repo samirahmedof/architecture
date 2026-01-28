@@ -1,6 +1,6 @@
+import { Button, Modal } from '@packages';
 import { aboutQueries } from '@pages/about/data/about.queries.ts';
 import { AboutItem } from '@pages/about/ui/about-item';
-import { Button, Modal } from '@shared/ui';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import styles from './about.module.scss';

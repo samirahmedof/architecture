@@ -1,8 +1,8 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
-$item-height: rem(25);
+$item-height: a.rem(25);
 .trigger {
-  @include flex-center;
+  @include a.flex-center;
   gap: var(--space-xs);
   cursor: pointer;
   box-shadow: var(--shadow-soft);
@@ -11,7 +11,7 @@ $item-height: rem(25);
   background-color: var(--white);
   padding: var(--space-sm);
   line-height: 1;
-  @include transition();
+  @include a.transition();
   user-select: none;
   &.small {
     padding: var(--space-xxs);
@@ -22,7 +22,7 @@ $item-height: rem(25);
   }
 
   &:focus-visible {
-    @include focus-ring(var(--brand-primary));
+    @include a.focus-ring(var(--brand-primary));
   }
 
   &[data-placeholder] {
@@ -35,7 +35,7 @@ $item-height: rem(25);
 }
 
 .content {
-  z-index: $z-tooltip;
+  z-index: a.$z-tooltip;
   box-shadow: var(--shadow-strong);
   border-radius: var(--radius-sm);
   background-color: var(--white);
@@ -53,10 +53,10 @@ $item-height: rem(25);
   align-items: center;
   cursor: pointer;
   border-radius: var(--radius-xxs);
-  padding: 0 rem(35) 0 rem(25);
+  padding: 0 a.rem(35) 0 a.rem(25);
   height: $item-height;
   color: var(--text-main);
-  font-size: rem(14);
+  font-size: a.rem(14);
   line-height: 1;
   user-select: none;
 
@@ -74,11 +74,11 @@ $item-height: rem(25);
 }
 
 .label {
-  font-size: rem(14);
+  font-size: a.rem(14);
 }
 
 .scroll {
-  @include flex-center;
+  @include a.flex-center;
   cursor: default;
   background-color: var(--white);
   height: $item-height;

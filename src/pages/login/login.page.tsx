@@ -1,6 +1,6 @@
 import { PATHS } from '@app/router/paths.router.ts';
 import { cookieUtils } from '@core/utils/cookie.ts';
-import { Button } from '@shared/ui';
+import { Button } from '@packages';
 import { useRouter } from '@tanstack/react-router';
 
 const LoginPage = () => {

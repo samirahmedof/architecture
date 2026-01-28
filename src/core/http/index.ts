@@ -1,13 +1,10 @@
 import { ENV } from '@core/config/env.config';
+import { createHttpClient } from '@core/http/client-builder.ts';
 import axios from 'axios';
-import {
-  attachErrorInterceptor,
-  attachRefreshInterceptor,
-  attachTokenInterceptor,
-} from './interceptors';
+import { attachRefreshInterceptor, attachTokenInterceptor } from './interceptors';
 
 // --- MAIN API ---
-export const api = axios.create({
+const defaultAxiosInstance = axios.create({
   baseURL: ENV.BASE_URL,
   timeout: 15000,
   withCredentials: true,
@@ -15,7 +12,18 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+attachTokenInterceptor(defaultAxiosInstance);
+attachRefreshInterceptor(defaultAxiosInstance);
 
-attachTokenInterceptor(api);
-attachRefreshInterceptor(api);
-attachErrorInterceptor(api);
+export const api = createHttpClient(defaultAxiosInstance);
+// -----
+
+// --- EXAMPLE API ---
+const exampleAxiosInstance = axios.create({
+  baseURL: ENV.BASE_URL,
+  timeout: 20000,
+});
+attachTokenInterceptor(exampleAxiosInstance);
+
+export const apiExample = createHttpClient(exampleAxiosInstance);
+// -----

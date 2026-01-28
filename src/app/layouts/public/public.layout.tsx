@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import s from './public.module.scss';
 
+//change network error logic
 const PublicLayout = () => {
   const isSidebarOpen = useUiStore((state) => state.isSidebarOpen);
   const isOnline = useOnlineStatus();

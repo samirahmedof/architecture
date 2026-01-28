@@ -1,8 +1,9 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
 import clsx from 'clsx';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useId } from 'react';
 import s from './select.module.scss';
-import type { BaseSelectProps } from './select.types';
+import type { BaseSelectProps } from './select.types.ts';
 
 export const Select = ({
   options,
@@ -14,9 +15,15 @@ export const Select = ({
   small,
   ...props
 }: BaseSelectProps) => {
+  // add dynamic id
+  const selectId = useId();
   return (
     <div className={clsx(s.container, className)}>
-      {label && <label className={s.label}>{label}</label>}
+      {label && (
+        <label className={s.label} htmlFor={selectId}>
+          {label}
+        </label>
+      )}
 
       <SelectPrimitive.Root disabled={disabled} {...props}>
         <SelectPrimitive.Trigger className={clsx(s.trigger, error && s.error, small && s.small)}>

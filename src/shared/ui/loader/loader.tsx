@@ -1,6 +1,6 @@
 import styles from './loader.module.scss';
 
-export const LoaderComponent = () => {
+export const Loader = () => {
   return (
     <div className={styles.container}>
       <span className={styles.loader} />

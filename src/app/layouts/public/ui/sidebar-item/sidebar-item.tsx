@@ -1,4 +1,4 @@
-import type { SidebarItemProps } from '@app/layouts/public/ui/sidebar-item/sidebar-item.types.ts';
+import type { SidebarItemProps, SubmenuItem } from '@app/layouts/public/model/public.types.ts';
 import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { ChevronDown, ChevronRight } from 'lucide-react';
@@ -32,7 +32,7 @@ const SidebarItem = ({ name, link, icon: Icon, submenu }: SidebarItemProps) => {
           </button>
           {isOpen && (
             <ul className={s.submenu}>
-              {submenu.map((item: any) => {
+              {submenu.map((item: SubmenuItem) => {
                 return (
                   <li key={item.id}>
                     <Link
@@ -40,7 +40,6 @@ const SidebarItem = ({ name, link, icon: Icon, submenu }: SidebarItemProps) => {
                       className={s.sublink}
                       activeProps={{ className: s.active }}
                     >
-                      {item.icon}
                       <span>{item.name}</span>
                     </Link>
                   </li>
