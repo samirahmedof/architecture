@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "MyApp en",
+    "description": "Project description"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "posts": "Posts"
+  },
+  "actions": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}

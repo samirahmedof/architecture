@@ -1,0 +1,7 @@
+{
+  "required": "{{field}} mütləqdir",
+  "min_length": "{{field}} minimum {{min}} simvol olmalıdır",
+  "max_length": "{{field}} maksimum {{max}} simvol ola bilər",
+  "email": "Düzgün email daxil edin",
+  "password_mismatch": "Şifrələr uyğun gəlmir"
+}

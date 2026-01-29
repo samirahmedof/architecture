@@ -1,0 +1,14 @@
+{
+  "title": "Başlıq",
+  "description": "Təsvir",
+  "create": {
+    "title": "Yeni yazı yarat",
+    "success": "Yazı uğurla yaradıldı",
+    "error": "Yazı yaradılarkən səhv baş verdi"
+  },
+  "edit": {
+    "title": "Yazını redaktə et",
+    "success": "Yazı yeniləndi",
+    "error": "Yazı yenilənərkən səhv"
+  }
+}

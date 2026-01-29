@@ -1,0 +1,7 @@
+{
+  "required": "{{field}} is required",
+  "min_length": "{{field}} must be at least {{min}} characters",
+  "max_length": "{{field}} cannot exceed {{max}} characters",
+  "email": "Enter a valid email",
+  "password_mismatch": "Passwords do not match"
+}

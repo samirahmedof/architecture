@@ -1,0 +1,14 @@
+{
+  "title": "Title",
+  "description": "Description",
+  "create": {
+    "title": "Create new post",
+    "success": "Post created successfully",
+    "error": "Error creating post"
+  },
+  "edit": {
+    "title": "Edit post",
+    "success": "Post updated",
+    "error": "Error updating post"
+  }
+}

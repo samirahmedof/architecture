@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "MyApp az",
+    "description": "Proyekt təsviri"
+  },
+  "nav": {
+    "home": "Ana səhifə",
+    "about": "Haqqımızda",
+    "posts": "Yazılar"
+  },
+  "actions": {
+    "create": "Yarat",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "cancel": "Ləğv et",
+    "save": "Saxla"
+  }
+}

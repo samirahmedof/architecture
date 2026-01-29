@@ -30,7 +30,8 @@
       "@pages/*": ["src/pages/*"],
       "@shared/*": ["src/shared/*"],
       "@assets/*": ["src/assets/*"],
-      "@packages": ["src/packages"]
+      "@packages": ["src/packages"],
+      "@locales": ["public/locales"]
     }
   },
   "include": ["src"]

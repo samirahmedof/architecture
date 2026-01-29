@@ -3,7 +3,7 @@ import * as v from 'valibot';
 
 const schema = v.object({
   userId: v.optional(v.number()),
-  id: v.optional(v.number()),
+  id: v.number(),
   title: v.string(),
   body: v.string(),
 });

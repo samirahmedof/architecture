@@ -5,27 +5,29 @@ import logo from '@assets/images/sima-negative.svg';
 import { Col, Row, Select } from '@packages';
 import { Link } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import s from './header.module.scss';
 
+const LANGUAGES = [
+  { label: 'Azerbaycan', value: 'az' },
+  { label: 'English', value: 'en' },
+  { label: 'Russkiy', value: 'ru' },
+];
+
 export const Header = () => {
-  const selectData = [
-    {
-      label: 'az',
-      value: 'az',
-    },
-    {
-      label: 'ru',
-      value: 'ru',
-    },
-    {
-      label: 'en',
-      value: 'en',
-    },
-  ];
+  const { i18n } = useTranslation();
+
+  // TODO: make this global method
+  const currentLang = localStorage.getItem('i18n_lang') || 'en';
+
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
 
   const logout = () => {
     console.log('rest');
+  };
+
+  const changeLang = (lang: string) => {
+    i18n.changeLanguage(lang);
   };
 
   return (
@@ -60,7 +62,7 @@ export const Header = () => {
           <Menu />
         </button>
         <div>
-          <Select options={selectData} small value="az" />
+          <Select options={LANGUAGES} small defaultValue={currentLang} onValueChange={changeLang} />
         </div>
       </div>
     </header>
