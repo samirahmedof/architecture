@@ -1,7 +1,15 @@
-import type { PostFormSchema, PostSchema } from '@pages/post/model/post.schemas.ts';
-import type * as v from 'valibot';
+export type PostModel = {
+  id: number;
+  title: string;
+  description: string;
+  randNumber: boolean;
+};
 
-export type PostModel = v.InferOutput<typeof PostSchema>;
-export type PostResponseModel = v.InferInput<typeof PostSchema>;
-export type CreatePostModel = v.InferInput<typeof PostFormSchema>;
-export type UpdatePostModel = CreatePostModel & { id: number };
+export type PostCreateModel = {
+  title: string;
+  description: string;
+};
+
+export type PostUpdateModel = PostCreateModel & {
+  id: number;
+};

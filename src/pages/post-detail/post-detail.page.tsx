@@ -1,9 +1,9 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { Button, Form, FormField, Input } from '@packages';
-import { useCreatePostMutation, useUpdatePostMutation } from '@pages/post/data/post.mutations.ts';
-import { postQueries } from '@pages/post/data/post.queries.ts';
-import { PostFormSchema, toPostDto, toPostUpdateDto } from '@pages/post/model/post.schemas';
-import type { CreatePostModel } from '@pages/post/model/post.types.ts';
+import { useCreatePostMutation, useUpdatePostMutation } from '@pages/post/data/post.mutation.ts';
+import { postQuery } from '@pages/post/data/post.query.ts';
+import type { PostCreateModel } from '@pages/post/model/post.types.ts';
+import { usePostFormSchema } from '@pages/post/model/post.validation.ts';
 import { ContentWrapper } from '@shared/ui/content-wrapper/content-wrapper.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
@@ -16,15 +16,16 @@ const PostDetailPage = () => {
   const postId = params.postId ? Number(params.postId) : undefined;
   const createMutation = useCreatePostMutation();
   const updateMutation = useUpdatePostMutation();
+  const schema = usePostFormSchema();
 
   const { data: routeData } = useQuery({
-    ...postQueries.detail(postId ?? -1),
+    ...postQuery.detail(postId ?? -1),
     enabled: isEditMode,
     staleTime: 10 * 1000,
   });
 
-  const methods = useForm<CreatePostModel>({
-    resolver: valibotResolver(PostFormSchema),
+  const methods = useForm<PostCreateModel>({
+    resolver: valibotResolver(schema),
     defaultValues: {
       title: '',
       description: '',
@@ -32,19 +33,22 @@ const PostDetailPage = () => {
     values: routeData ? { ...routeData } : undefined,
   });
 
-  const onSubmit = (data: CreatePostModel) => {
+  const onSubmit = (data: PostCreateModel) => {
+    console.log(data);
     if (isEditMode && postId) {
-      const payload = toPostUpdateDto({ ...data, id: postId });
-      updateMutation.mutate(payload, {
-        onSuccess: () => {
-          console.log('Successfully updated post');
-          toast.success('Successfully UPDATED post');
+      updateMutation.mutate(
+        { ...data, id: postId },
+        {
+          onSuccess: () => {
+            console.log('Successfully updated post');
+            toast.success('Successfully UPDATED post');
+          },
         },
-      });
+      );
     } else {
-      createMutation.mutate(toPostDto(data), {
+      createMutation.mutate(data, {
         onSuccess: () => {
-          console.log('Successfully UPDATED post');
+          console.log('Successfully CREATED post');
           toast.success('Successfully CREATED post');
           methods.reset();
         },

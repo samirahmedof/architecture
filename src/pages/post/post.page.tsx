@@ -1,6 +1,6 @@
 import type { ColumnType } from '@packages';
 import { Table, TableActions } from '@packages';
-import { postQueries } from '@pages/post/data/post.queries.ts';
+import { postQuery } from '@pages/post/data/post.query.ts';
 import type { PostModel } from '@pages/post/model/post.types.ts';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -30,7 +30,8 @@ const columns: ColumnType<PostModel>[] = [
 ];
 
 const PostPage = () => {
-  const { data: posts } = useSuspenseQuery(postQueries.list());
+  // TODO: check suspend query for load
+  const { data: posts } = useSuspenseQuery(postQuery.list());
   return (
     <Table
       data={posts}
