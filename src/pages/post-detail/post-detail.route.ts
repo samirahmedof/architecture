@@ -1,6 +1,6 @@
 import { publicLayoutRoute } from '@app/layouts/public/public.route.tsx';
 import { PATHS } from '@app/router/paths.router.ts';
-import { postQuery } from '@pages/post/data/post.query.ts';
+import { postQueries } from '@pages/post/api/post.queries.ts';
 import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 
 export const postCreateRoute = createRoute({
@@ -26,5 +26,5 @@ export const postEditRoute = createRoute({
     }),
   },
   loader: ({ context, params }) =>
-    context.queryClient.ensureQueryData(postQuery.detail(Number(params.postId))),
+    context.queryClient.ensureQueryData(postQueries.detail(Number(params.postId))),
 });

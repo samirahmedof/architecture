@@ -1,9 +1,9 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { Button, Form, FormField, Input } from '@packages';
-import { useCreatePostMutation, useUpdatePostMutation } from '@pages/post/data/post.mutation.ts';
-import { postQuery } from '@pages/post/data/post.query.ts';
-import type { PostCreateModel } from '@pages/post/model/post.types.ts';
-import { usePostFormSchema } from '@pages/post/model/post.validation.ts';
+import { useCreatePostMutation, useUpdatePostMutation } from '@pages/post/api/post.mutations.ts';
+import { postQueries } from '@pages/post/api/post.queries.ts';
+import type { PostCreateModel } from '@pages/post/domain/post.model.ts';
+import { usePostFormSchema } from '@pages/post/domain/post.schema.ts';
 import { ContentWrapper } from '@shared/ui/content-wrapper/content-wrapper.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
@@ -19,7 +19,7 @@ const PostDetailPage = () => {
   const schema = usePostFormSchema();
 
   const { data: routeData } = useQuery({
-    ...postQuery.detail(postId ?? -1),
+    ...postQueries.detail(postId ?? -1),
     enabled: isEditMode,
     staleTime: 10 * 1000,
   });

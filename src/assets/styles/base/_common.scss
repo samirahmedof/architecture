@@ -17,7 +17,7 @@ body {
 }
 
 .container-fluid {
-  @include v.breakpoint(v.$breakpoint-lg) {
+  @include v.breakpoint('lg') {
     padding: 0;
   }
 }

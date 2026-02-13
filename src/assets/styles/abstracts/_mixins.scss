@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'sass:map';
 // ============================================================================
 // Adds smooth transitions with optional motion-reduction support
 // Usage: @include transition(opacity, 0.3s, ease-in-out);
@@ -16,14 +17,14 @@
 // Usage: @include breakpoint('md') { ... }
 // ============================================================================
 @mixin breakpoint($bp) {
-  @if map-has-key(v.$grid-breakpoints, $bp) {
-    $value: map-get(v.$grid-breakpoints, $bp);
+  @if map.has-key(v.$grid-breakpoints, $bp) {
+    $value: map.get(v.$grid-breakpoints, $bp);
 
     @media screen and (min-width: $value) {
       @content;
     }
   } @else {
-    @warn "Unknown breakpoint: #{$bp}. Use one of these: #{map-keys(v.$grid-breakpoints)}";
+    @warn "Unknown breakpoint: #{$bp}. Use one of these: #{map.keys(v.$grid-breakpoints)}";
   }
 }
 

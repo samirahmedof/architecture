@@ -1,9 +1,9 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
 .item {
   margin-bottom: var(--space-xxs);
   color: var(--sidebar-item-color);
-  font-size: rem(13);
+  font-size: a.rem(13);
   user-select: none;
 }
 
@@ -12,22 +12,22 @@
   align-items: center;
   font-weight: 600;
   letter-spacing: 1px;
-  @include transition();
+  @include a.transition();
 }
 
 .icon {
   vertical-align: middle;
   margin-right: var(--space-xs);
-  width: rem(20);
-  height: rem(20);
-  @include transition();
+  width: a.rem(20);
+  height: a.rem(20);
+  @include a.transition();
 }
 
 .link {
   align-items: center;
   border-radius: var(--radius-xs);
   width: 100%;
-  @include transition();
+  @include a.transition();
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -58,7 +58,7 @@
   display: flex;
   position: relative;
   justify-content: space-between;
-  @include transition();
+  @include a.transition();
   padding: var(--space-xs) var(--space-sm) var(--space-xs) var(--space-lg);
   color: var(--sidebar-item-sub-color);
 
@@ -71,7 +71,7 @@
     width: 3px;
     height: 3px;
     content: '';
-    @include transition();
+    @include a.transition();
   }
 
   &:hover,

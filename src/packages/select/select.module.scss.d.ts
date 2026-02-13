@@ -1,0 +1,10 @@
+export declare const content: string;
+export declare const down: string;
+export declare const icon: string;
+export declare const item: string;
+export declare const label: string;
+export declare const scroll: string;
+export declare const small: string;
+export declare const trigger: string;
+export declare const up: string;
+export declare const viewport: string;

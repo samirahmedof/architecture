@@ -1,15 +1,17 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
-.public {
+.layout {
   margin-left: 0;
   min-height: calc(100vh - 50px) !important;
-  @include transition();
-  padding: rem(110) rem(20) 0;
+  @include a.transition();
+  padding: a.rem(110) a.rem(20) 0;
 }
 
 .open {
   will-change: margin-left;
   margin-left: var(--layout-sidebar-width);
 }
+
 .network {
+  color: red;
 }

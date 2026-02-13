@@ -40,7 +40,7 @@ const PublicLayout = () => {
         </div>
       )}
       <Sidebar isOpen={isSidebarOpen} />
-      <main className={clsx(s.public, isSidebarOpen && s.open)}>
+      <main className={clsx(s.layout, isSidebarOpen && s.open)}>
         <Outlet />
       </main>
 

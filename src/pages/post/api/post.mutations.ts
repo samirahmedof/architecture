@@ -1,5 +1,5 @@
-import { postKeys } from '@pages/post/data/post.keys.ts';
-import { postService } from '@pages/post/data/post.service.ts';
+import { postKeys } from '@pages/post/api/post.keys.ts';
+import { postService } from '@pages/post/api/post.service.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useCreatePostMutation = () => {

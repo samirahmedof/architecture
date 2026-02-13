@@ -1,6 +1,7 @@
 @use '@/assets/styles/abstracts' as a;
 
 $item-height: a.rem(25);
+
 .trigger {
   @include a.flex-center;
   gap: var(--space-xs);
@@ -13,6 +14,7 @@ $item-height: a.rem(25);
   line-height: 1;
   @include a.transition();
   user-select: none;
+
   &.small {
     padding: var(--space-xxs);
   }

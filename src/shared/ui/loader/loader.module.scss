@@ -1,4 +1,4 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
 $spinner-first-arrow: var(--brand-primary);
 $spinner-second-arrow: var(--brand-primary);
@@ -11,7 +11,7 @@ $backdrop-color: rgba(140, 140, 140, 0.9);
   z-index: 9999; // Hər şeyin, hətta modalların üzərində
   width: 100%;
   height: 100vh;
-  @include flex-center;
+  @include a.flex-center;
   backdrop-filter: blur(2px); // Modern "Glassmorphism" effekti (istəməsən sil)
   background-color: $backdrop-color;
 }
@@ -28,6 +28,7 @@ $backdrop-color: rgba(140, 140, 140, 0.9);
   width: 48px;
   height: 48px;
 }
+
 .loader:before,
 .loader:after {
   position: absolute;
@@ -38,10 +39,12 @@ $backdrop-color: rgba(140, 140, 140, 0.9);
   border-bottom-color: #fff;
   content: '';
 }
+
 .loader:after {
   transform: translate(32px, 3px) rotate(-35deg);
   border-color: $spinner-first-arrow #0000 #0000 #0000;
 }
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);

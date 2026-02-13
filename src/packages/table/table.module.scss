@@ -35,6 +35,7 @@ $space-xxl: var(--space-xxl);
     z-index: a.$z-sticky;
     background-color: $heading-bg;
     user-select: none;
+
     th {
       @include a.transition();
       border-bottom: 1px solid $border;

@@ -1,9 +1,9 @@
 import { ENDPOINTS } from '@core/config/endpoints.config.ts';
 import { api } from '@core/http';
 import * as v from 'valibot';
-import { toPostCreateModel, toPostModel, toPostUpdateModel } from '../model/post.mapper.ts';
-import { PostDtoSchema } from '../model/post.schema.ts';
-import type { PostCreateModel, PostModel, PostUpdateModel } from '../model/post.types.ts';
+import { PostDtoSchema } from '../domain/post.dto.ts';
+import { toPostCreateModel, toPostModel, toPostUpdateModel } from '../domain/post.mapper.ts';
+import type { PostCreateModel, PostModel, PostUpdateModel } from '../domain/post.model.ts';
 
 export const postService = {
   getAll: async (): Promise<PostModel[]> => {

@@ -1,16 +1,17 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
 $translate: calc(var(--layout-sidebar-width) * -1);
+
 .sidebar {
   position: fixed;
   top: var(--layout-sidebar-spacing);
   left: 0;
   transform: translateX($translate);
   border-right: 1px solid var(--sidebar-border);
-  padding: rem(20) rem(15);
+  padding: a.rem(20) a.rem(15);
   width: var(--layout-sidebar-width);
   height: calc(100vh - var(--layout-sidebar-spacing));
-  @include transition();
+  @include a.transition();
 }
 
 .open {

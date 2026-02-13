@@ -1,5 +1,5 @@
-import type { PostDto } from '@pages/post/model/post.schema.ts';
-import type { PostCreateModel, PostModel, PostUpdateModel } from './post.types.ts';
+import type { PostDto } from '@pages/post/domain/post.dto.ts';
+import type { PostCreateModel, PostModel, PostUpdateModel } from './post.model.ts';
 
 export const toPostModel = (dto: PostDto): PostModel => {
   return {

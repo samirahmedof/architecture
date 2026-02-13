@@ -1,7 +1,8 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
+
 .container {
   flex-direction: column;
-  @include flex-center;
+  @include a.flex-center;
   margin: 20px;
   border: 1px solid #ffc9c9;
   border-radius: 8px;

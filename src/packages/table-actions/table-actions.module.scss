@@ -1,15 +1,11 @@
-@use '@/assets/styles/abstracts' as a;
+@use '../../assets/styles/abstracts' as a;
 
 $size: a.rem(32);
 $gap: var(--space-xs);
 $radius: var(--radius-sm);
-//$default-color: #64748b;
 $default-color: var(--table-action-default-color);
-//$edit-color: #0ea5e9;
 $edit-color: var(--table-action-edit-color);
-//$delete-color: #ef4444;
 $delete-color: var(--table-action-delete-color);
-//$view-color: #10b981;
 $view-color: var(--table-action-view-color);
 
 .wrapper {
@@ -37,7 +33,7 @@ $view-color: var(--table-action-view-color);
     color: $edit-color;
   }
 
-  &.delete:hover {
+  &.del:hover {
     background-color: a.fade($delete-color, 80);
     color: $delete-color;
   }

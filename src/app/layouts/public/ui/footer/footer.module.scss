@@ -1,12 +1,13 @@
-@use '@/assets/styles/abstracts' as *;
+@use '@/assets/styles/abstracts' as a;
 
 .footer {
-  margin-top: rem(20);
+  margin-top: a.rem(20);
   margin-left: 0;
-  font-size: rem(13);
+  font-size: a.rem(13);
   letter-spacing: 1px;
-  @include transition();
+  @include a.transition();
 }
+
 .open {
   will-change: margin-left;
   margin-left: var(--layout-sidebar-width);
