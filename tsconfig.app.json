@@ -32,7 +32,8 @@
       "@assets/*": ["src/assets/*"],
       "@packages": ["src/packages"],
       "@locales": ["public/locales"]
-    }
+    },
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }

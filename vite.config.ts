@@ -56,6 +56,17 @@ export default defineConfig(({ mode }) => {
       },
       devSourcemap: true,
     },
+    test: {
+      globals: true,
+      environment: 'happy-dom',
+      setupFiles: './src/core/test/setup.ts',
+      css: true,
+      include: ['src/**/*.{test,spec}.{ts,tsx}'],
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'json', 'html'],
+      },
+    },
     server: {
       port: 3000,
       strictPort: true,

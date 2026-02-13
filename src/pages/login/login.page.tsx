@@ -1,7 +1,7 @@
 import { PATHS } from '@app/router/paths.router.ts';
 import { NAMESPACES } from '@core/lang/i18n.config.ts';
-import { cookieUtils } from '@core/utils/cookie.ts';
 import { Button } from '@packages';
+import { cookieUtils } from '@shared/utils/cookie.ts';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
