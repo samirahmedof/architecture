@@ -9,15 +9,24 @@ export const attachTokenInterceptor = (instance: AxiosInstance) => {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // // // Add Sentry breadcrumb for API requests
+    // addSentryBreadcrumb(`${config.method?.toUpperCase()} ${config.url}`, 'http', 'info', {
+    //   url: config.url,
+    //   method: config.method,
+    //   baseURL: config.baseURL,
+    // });
+
     return config;
   });
 };
 
-// Refresh Logic
+// Refresh Logic + Sentry Error Tracking
 export const attachRefreshInterceptor = (instance: AxiosInstance) => {
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {
+      // Handle 401 refresh logic
       if (error.response?.status === 401 && !error.config._retry) {
         return refreshTokenLogic(error.config, instance);
       }

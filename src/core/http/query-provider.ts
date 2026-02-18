@@ -1,3 +1,5 @@
+import { captureException } from '@core/monitoring/sentry.config';
+import { logger } from '@shared/utils/logger.ts';
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -7,10 +9,13 @@ type ServerError = {
   message?: string;
   errors?: Record<string, string[]>;
 };
-const handleGlobalError = (error: unknown) => {
-  // Valibot errors (status 200/201)
+const handleGlobalError = (
+  error: unknown,
+  context?: { queryKey?: unknown; mutationKey?: unknown },
+) => {
+  // Valibot errors (status 200/201) - usually validation, don't send to Sentry
   if (error instanceof ValiError) {
-    console.error('Validation Error:', error.issues);
+    logger.error('Validation Error:', error.issues);
     toast.error('Data Xətası: Serverdən gələn məlumat düzgün formatda deyil.');
     return;
   }
@@ -21,11 +26,27 @@ const handleGlobalError = (error: unknown) => {
   // 1. İnternet yoxdur və ya Server tamamilə ölüb
   if (!axiosError.response) {
     toast.error('Serverlə əlaqə yoxdur. İnternetinizi yoxlayın.');
+    // Network errors are usually not worth reporting unless they're persistent
     return;
   }
 
   const { status, data } = axiosError.response;
   const serverMessage = data?.message || 'Naməlum xəta baş verdi.';
+
+  // Report server errors (5xx) and unexpected client errors to Sentry
+  if (
+    status >= 500 ||
+    (status >= 400 && status !== 401 && status !== 403 && status !== 404 && status !== 422)
+  ) {
+    captureException(error as Error, {
+      queryContext: context,
+      api: {
+        status,
+        statusText: axiosError.response.statusText,
+        data: data,
+      },
+    });
+  }
 
   // 2. Statusa görə xüsusi mesajlar
   switch (status) {
@@ -56,15 +77,15 @@ const handleGlobalError = (error: unknown) => {
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: (error) => {
-      handleGlobalError(error);
+    onError: (error, query) => {
+      handleGlobalError(error, { queryKey: query.queryKey });
     },
   }),
 
   mutationCache: new MutationCache({
     onError: (error, _variables, _context, mutation) => {
       if (mutation.options.onError) return;
-      handleGlobalError(error);
+      handleGlobalError(error, { mutationKey: mutation.options.mutationKey });
     },
   }),
 

@@ -6,6 +6,9 @@ import { createRoot } from 'react-dom/client';
 import './main.scss';
 import '@core/lang/i18n.config.ts';
 import { queryClient } from '@core/http/query-provider.ts';
+import { initSentry } from '@core/monitoring/sentry.config';
+
+initSentry();
 
 const router = createProjectRouter();
 const rootElement = document.getElementById('root');

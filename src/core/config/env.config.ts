@@ -12,4 +12,6 @@ export const ENV = {
   IS_PROD: import.meta.env.PROD,
 
   BASE_URL: getEnv('VITE_API_URL'),
+  SENTRY_DSN: getEnv('VITE_SENTRY_DSN'),
+  SENTRY_ENABLE_DEV: getEnv('VITE_SENTRY_ENABLE_DEV') === 'true',
 } as const;

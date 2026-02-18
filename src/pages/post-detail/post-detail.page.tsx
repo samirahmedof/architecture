@@ -5,6 +5,7 @@ import { postQueries } from '@pages/post/api/post.queries.ts';
 import type { PostCreateModel } from '@pages/post/domain/post.model.ts';
 import { usePostFormSchema } from '@pages/post/domain/post.schema.ts';
 import { ContentWrapper } from '@shared/ui/content-wrapper/content-wrapper.tsx';
+import { logger } from '@shared/utils/logger.ts';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
@@ -34,13 +35,13 @@ const PostDetailPage = () => {
   });
 
   const onSubmit = (data: PostCreateModel) => {
-    console.log(data);
+    logger.info('data', data);
     if (isEditMode && postId) {
       updateMutation.mutate(
         { ...data, id: postId },
         {
           onSuccess: () => {
-            console.log('Successfully updated post');
+            logger.error('Successfully updated post');
             toast.success('Successfully UPDATED post');
           },
         },
