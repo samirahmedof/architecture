@@ -1,4 +1,4 @@
-import type { UiState } from '@app/store/store';
+import type { UiState } from '@app/store/store.types.ts';
 import { APP } from '@core/config/app.config.ts';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';

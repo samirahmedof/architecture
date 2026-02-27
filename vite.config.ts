@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react-swc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
@@ -11,6 +12,12 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
+      tanstackRouter({
+        routesDirectory: './src/routes',
+        generatedRouteTree: './src/routes/routeTree.gen.ts',
+        routeFileIgnorePattern: 'routeTree.gen.ts',
+        quoteStyle: 'single',
+      }),
       react(),
       tsconfigPaths(),
       !isDev &&
@@ -79,7 +86,7 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: 'happy-dom',
-      setupFiles: './src/core/test/setup.ts',
+      setupFiles: './src/test/setup.ts',
       css: true,
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
       coverage: {

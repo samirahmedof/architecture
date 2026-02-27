@@ -1,4 +1,3 @@
-import { PATHS } from '@app/router/paths.router.ts';
 import { useAuthStore } from '@app/store/auth.store';
 import { ENDPOINTS } from '@core/config/endpoints.config.ts';
 import { ENV } from '@core/config/env.config';
@@ -64,7 +63,8 @@ export const refreshTokenLogic = async (
     processQueue(error, null);
     useAuthStore.getState().clearAuth();
 
-    window.location.href = PATHS.LOGIN;
+    window.location.href = '/';
+    // TODO: correct path?
 
     return Promise.reject(error);
   } finally {

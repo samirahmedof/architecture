@@ -1,6 +1,7 @@
 import type { SidebarMenuItem, SidebarProps } from '@app/layouts/public/model/public.types.ts';
 import SidebarItem from '@app/layouts/public/ui/sidebar-item/sidebar-item.tsx';
-import { PATHS } from '@app/router/paths.router.ts';
+import { DEFAULT_LANGUAGE } from '@core/lang/i18n.config.ts';
+import { useParams } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { House, NotepadText, Table } from 'lucide-react';
 import s from './sidebar.module.scss';
@@ -10,17 +11,17 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
     {
       id: 1,
       name: 'Home',
-      link: PATHS.HOME,
+      link: '/$locale/',
       icon: House,
       submenu: [
         {
           id: 1,
-          link: PATHS.HOME,
+          link: '/$locale/',
           name: 'test',
         },
         {
           id: 2,
-          link: PATHS.HOME,
+          link: '/$locale/',
           name: 'test2',
         },
       ],
@@ -28,21 +29,24 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
     {
       id: 2,
       name: 'Table',
-      link: PATHS.POST,
+      link: '/$locale/post',
       icon: Table,
+      exact: false,
     },
     {
       id: 3,
       name: 'Form',
-      link: PATHS.HOME,
+      link: '/$locale/',
       icon: NotepadText,
     },
   ];
+  const { locale } = useParams({ strict: false });
+
   return (
     <aside className={clsx(s.sidebar, isOpen && s.open)}>
       <ul>
         {items.map((i: SidebarMenuItem) => (
-          <SidebarItem key={i.id} name={i.name} link={i.link} icon={i.icon} submenu={i.submenu} />
+          <SidebarItem key={i.id} {...i} locale={locale ?? DEFAULT_LANGUAGE} />
         ))}
       </ul>
     </aside>

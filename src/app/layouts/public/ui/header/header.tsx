@@ -1,11 +1,10 @@
-import { PATHS } from '@app/router/paths.router.ts';
 import { useUiStore } from '@app/store/ui.store.ts';
 import avatar from '@assets/images/juan.webp';
 import logo from '@assets/images/sima-negative.svg';
+import { DEFAULT_LANGUAGE, type Language } from '@core/lang/i18n.config.ts';
 import { Col, Row, Select } from '@packages';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import s from './header.module.scss';
 
 const LANGUAGES = [
@@ -15,10 +14,8 @@ const LANGUAGES = [
 ];
 
 export const Header = () => {
-  const { i18n } = useTranslation();
-
-  // TODO: make this global method
-  const currentLang = localStorage.getItem('i18n_lang') || 'en';
+  const { locale } = useParams({ strict: false });
+  const navigate = useNavigate();
 
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
 
@@ -26,8 +23,12 @@ export const Header = () => {
     console.log('rest');
   };
 
-  const changeLang = (lang: string) => {
-    i18n.changeLanguage(lang);
+  const changeLang = (newLang: Language) => {
+    void navigate({
+      to: '.',
+      params: (prev) => ({ ...prev, locale: newLang }),
+      replace: true,
+    }).catch(console.error);
   };
 
   return (
@@ -36,7 +37,7 @@ export const Header = () => {
         <Row align="center">
           <Col sm={8}>
             <div className={s.logo}>
-              <Link to={PATHS.HOME}>
+              <Link to={'/$locale'} params={{ locale: locale || DEFAULT_LANGUAGE }}>
                 <img src={logo} alt="logo" />
               </Link>
             </div>
@@ -62,7 +63,7 @@ export const Header = () => {
           <Menu />
         </button>
         <div>
-          <Select options={LANGUAGES} small defaultValue={currentLang} onValueChange={changeLang} />
+          <Select options={LANGUAGES} small value={locale} onValueChange={changeLang} />
         </div>
       </div>
     </header>

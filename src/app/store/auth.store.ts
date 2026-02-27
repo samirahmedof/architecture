@@ -1,4 +1,4 @@
-import type { AuthState } from '@app/store/store';
+import type { AuthState } from '@app/store/store.types.ts';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 

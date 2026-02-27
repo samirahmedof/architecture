@@ -5,13 +5,26 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import s from './sidebar-item.module.scss';
 
-const SidebarItem = ({ name, link, icon: Icon, submenu }: SidebarItemProps) => {
+const SidebarItem = ({
+  name,
+  link,
+  icon: Icon,
+  submenu,
+  locale,
+  exact = true,
+}: SidebarItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <li className={s.item}>
       {!submenu ? (
-        <Link to={link} className={s.link} activeProps={{ className: s.active }}>
+        <Link
+          to={link}
+          params={{ locale }}
+          className={s.link}
+          activeOptions={{ exact }}
+          activeProps={{ className: s.active }}
+        >
           <div className={s.text}>
             <Icon className={s.icon} />
             <span>{name}</span>
@@ -37,7 +50,9 @@ const SidebarItem = ({ name, link, icon: Icon, submenu }: SidebarItemProps) => {
                   <li key={item.id}>
                     <Link
                       to={item.link}
+                      params={{ locale }}
                       className={s.sublink}
+                      activeOptions={{ exact }}
                       activeProps={{ className: s.active }}
                     >
                       <span>{item.name}</span>
