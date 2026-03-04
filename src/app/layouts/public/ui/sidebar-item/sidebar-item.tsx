@@ -1,4 +1,4 @@
-import type { SidebarItemProps, SubmenuItem } from '@app/layouts/public/model/public.types.ts';
+import type { SidebarItemProps, SubmenuItem } from '@app/layouts/public/public.types.ts';
 import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { ChevronDown, ChevronRight } from 'lucide-react';

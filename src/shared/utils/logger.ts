@@ -1,4 +1,4 @@
-import { ENV } from '@core/config/env.config.ts';
+import { ENV } from '@shared/config/env.config.ts';
 
 export const logger = {
   debug: (message: string, ...args: unknown[]) => {

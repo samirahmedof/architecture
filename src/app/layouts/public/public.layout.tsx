@@ -1,8 +1,8 @@
 import { Footer } from '@app/layouts/public/ui/footer/footer.tsx';
 import { Header } from '@app/layouts/public/ui/header/header.tsx';
 import Sidebar from '@app/layouts/public/ui/sidebar/sidebar.tsx';
-import { useUiStore } from '@app/store/ui.store.ts';
 import { useOnlineStatus } from '@shared/hooks/use-online-status.ts';
+import { useUiStore } from '@shared/store/ui.store.ts';
 import { Outlet } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';

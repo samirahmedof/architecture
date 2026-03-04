@@ -1,6 +1,6 @@
-import type { FooterProps } from '@app/layouts/public/model/public.types.ts';
-import { APP } from '@core/config/app.config.ts';
-import { Col, Container, Row } from '@packages';
+import type { FooterProps } from '@app/layouts/public/public.types.ts';
+import { APP } from '@shared/config/app.config.ts';
+import { Col, Container, Row } from '@shared/ui/grid/grid.tsx';
 import clsx from 'clsx';
 import s from './footer.module.scss';
 

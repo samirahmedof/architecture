@@ -86,7 +86,7 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: 'happy-dom',
-      setupFiles: './src/test/setup.ts',
+      setupFiles: './src/app/test/setup.ts',
       css: true,
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
       coverage: {

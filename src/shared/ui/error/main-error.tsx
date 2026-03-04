@@ -1,4 +1,4 @@
-import { Button } from '@packages'; // Bizim shared button
+import { Button } from '@shared/ui/button/button.tsx';
 import { AlertTriangle } from 'lucide-react';
 import type { FallbackProps } from 'react-error-boundary';
 import styles from './main-error.module.scss';

@@ -1,8 +1,9 @@
-import { useUiStore } from '@app/store/ui.store.ts';
+import { DEFAULT_LANGUAGE, type Language } from '@app/lang/i18n.config.ts';
 import avatar from '@assets/images/juan.webp';
 import logo from '@assets/images/sima-negative.svg';
-import { DEFAULT_LANGUAGE, type Language } from '@core/lang/i18n.config.ts';
-import { Col, Row, Select } from '@packages';
+import { useUiStore } from '@shared/store/ui.store.ts';
+import { Col, Row } from '@shared/ui/grid/grid.tsx';
+import { Select } from '@shared/ui/select/select.tsx';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
 import s from './header.module.scss';

@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE, LANGUAGES, type Language } from '@core/lang/i18n.config.ts';
+import { DEFAULT_LANGUAGE, LANGUAGES, type Language } from '@app/lang/i18n.config.ts';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 const SUPPORTED = Object.values(LANGUAGES) as Language[];
