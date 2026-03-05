@@ -1,10 +1,10 @@
 import { server } from '@app/test/server.ts';
-import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
+import { ENDPOINTS } from '@shared/config';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { type ReactNode, Suspense } from 'react';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import PostPage from './post.page.tsx';
 
 // 1. Saxta Data (Mock Data)
@@ -45,6 +45,12 @@ const renderWithClient = (ui: ReactNode) => {
     </QueryClientProvider>,
   );
 };
+
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
 describe('PostPage Integration Test', () => {
   // MSW Setup: API sorğularını tuturuq
   // DİQQƏT: '*/posts' hissəsini real API endpointinə uyğunlaşdır

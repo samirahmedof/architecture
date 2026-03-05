@@ -1,19 +1,22 @@
-import { useSentryRouterTracking } from '@app/monitoring/sentry-router-integration.tsx';
-import { useSentryUserSync } from '@app/monitoring/sentry-user-sync.ts';
+import { syncSentryUser, useSentryRouterTracking } from '@app/monitoring';
 import * as Sentry from '@sentry/react';
-import { ENV } from '@shared/config/env.config.ts';
-import { MainErrorFallback } from '@shared/ui/error/main-error.tsx';
-import { Loader } from '@shared/ui/loader/loader.tsx';
+import { ENV } from '@shared/config';
+import { useAuthStore } from '@shared/store';
+import { Loader, MainErrorFallback } from '@shared/ui';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'sonner';
 
 const RootLayout = () => {
   useSentryRouterTracking();
-  useSentryUserSync();
+  const token = useAuthStore((state) => state.accessToken);
+
+  useEffect(() => {
+    syncSentryUser(token);
+  }, [token]);
 
   return (
     <>

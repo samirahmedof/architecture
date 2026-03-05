@@ -1,5 +1,6 @@
-import { captureException } from '@app/monitoring/sentry.config.ts';
-import { logger } from '@shared/utils/logger.ts';
+import i18n, { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { captureException } from '@app/monitoring';
+import { logger } from '@shared/utils';
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -16,7 +17,7 @@ const handleGlobalError = (
   // Valibot errors (status 200/201) - usually validation, don't send to Sentry
   if (error instanceof ValiError) {
     logger.error('Validation Error:', error.issues);
-    toast.error('Data Xətası: Serverdən gələn məlumat düzgün formatda deyil.');
+    toast.error(i18n.t('error.validationData', { ns: NAMESPACES.COMMON }));
     return;
   }
 
@@ -25,13 +26,13 @@ const handleGlobalError = (
 
   // 1. İnternet yoxdur və ya Server tamamilə ölüb
   if (!axiosError.response) {
-    toast.error('Serverlə əlaqə yoxdur. İnternetinizi yoxlayın.');
+    toast.error(i18n.t('error.noConnection', { ns: NAMESPACES.COMMON }));
     // Network errors are usually not worth reporting unless they're persistent
     return;
   }
 
   const { status, data } = axiosError.response;
-  const serverMessage = data?.message || 'Naməlum xəta baş verdi.';
+  const serverMessage = data?.message || i18n.t('error.unknown', { ns: NAMESPACES.COMMON });
 
   // Report server errors (5xx) and unexpected client errors to Sentry
   if (
@@ -51,23 +52,28 @@ const handleGlobalError = (
   // 2. Statusa görə xüsusi mesajlar
   switch (status) {
     case 400:
-      toast.error(`Səhv sorğu: ${serverMessage}`);
+      toast.error(
+        i18n.t('error.badRequest', {
+          ns: NAMESPACES.COMMON,
+          message: serverMessage,
+        }),
+      );
       break;
 
     case 403:
-      toast.error('İcazəniz yoxdur (Forbidden).');
+      toast.error(i18n.t('error.forbidden', { ns: NAMESPACES.COMMON }));
       break;
 
     case 404:
-      toast.error('Axtarılan məlumat tapılmadı.');
+      toast.error(i18n.t('error.notFound', { ns: NAMESPACES.COMMON }));
       break;
 
     case 422:
-      toast.warning('Zəhmət olmasa daxil etdiyiniz məlumatları yoxlayın.');
+      toast.warning(i18n.t('error.validationFields', { ns: NAMESPACES.COMMON }));
       break;
 
     case 500:
-      toast.error('Server daxili xətası. Texniki dəstəklə əlaqə saxlayın.');
+      toast.error(i18n.t('error.internal', { ns: NAMESPACES.COMMON }));
       break;
 
     default:
