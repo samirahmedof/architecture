@@ -1,5 +1,7 @@
 import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/$locale/_public/')({
-  component: lazyRouteComponent(() => import('@features/home/pages/home.page.tsx')),
+  component: lazyRouteComponent(() =>
+    import('@features/home').then((module) => ({ default: module.HomePage })),
+  ),
 });

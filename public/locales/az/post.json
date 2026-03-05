@@ -1,6 +1,9 @@
 {
   "title": "Başlıq",
   "description": "Təsvir",
+  "list": {
+    "actions": "Əməliyyatlar"
+  },
   "create": {
     "title": "Yeni yazı yarat",
     "success": "Yazı uğurla yaradıldı",
@@ -10,5 +13,12 @@
     "title": "Yazını redaktə et",
     "success": "Yazı yeniləndi",
     "error": "Yazı yenilənərkən səhv"
+  },
+  "placeholders": {
+    "title": "Məqalə başlığı...",
+    "description": "Məzmunu daxil edin..."
+  },
+  "actions": {
+    "submit": "Paylaş"
   }
 }

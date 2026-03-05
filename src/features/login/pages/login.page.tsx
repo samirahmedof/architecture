@@ -1,6 +1,6 @@
 import { NAMESPACES } from '@app/lang/i18n.config.ts';
-import { Button } from '@shared/ui/button/button.tsx';
-import { cookieUtils } from '@shared/utils/cookie.ts';
+import { Button } from '@shared/ui';
+import { cookieUtils } from '@shared/utils';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 

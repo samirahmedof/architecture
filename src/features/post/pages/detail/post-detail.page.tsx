@@ -1,20 +1,22 @@
-import { useCreatePostMutation, useUpdatePostMutation } from '@features/post/api/post.mutations.ts';
-import { postQueries } from '@features/post/api/post.queries.ts';
-import type { PostCreateModel } from '@features/post/domain/post.model.ts';
-import { usePostFormSchema } from '@features/post/domain/post.schema.ts';
+import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import {
+  type PostCreateModel,
+  postQueries,
+  useCreatePostMutation,
+  usePostFormSchema,
+  useUpdatePostMutation,
+} from '@features/post';
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { Button } from '@shared/ui/button/button.tsx';
-import { ContentWrapper } from '@shared/ui/content-wrapper/content-wrapper.tsx';
-import { Form } from '@shared/ui/form/form';
-import { FormField } from '@shared/ui/form-field/form-field.tsx';
-import { Input } from '@shared/ui/input/input.tsx';
-import { logger } from '@shared/utils/logger.ts';
+import { Button, ContentWrapper, Form, FormField, Input } from '@shared/ui';
+import { logger } from '@shared/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 const PostDetailPage = () => {
+  const { t } = useTranslation(NAMESPACES.POST);
   const params = useParams({ strict: false });
   const isEditMode = !!params.postId;
   const postId = params.postId ? Number(params.postId) : undefined;
@@ -45,7 +47,7 @@ const PostDetailPage = () => {
         {
           onSuccess: () => {
             logger.error('Successfully updated post');
-            toast.success('Successfully UPDATED post');
+            toast.success(t('edit.success'));
           },
         },
       );
@@ -53,7 +55,7 @@ const PostDetailPage = () => {
       createMutation.mutate(data, {
         onSuccess: () => {
           console.log('Successfully CREATED post');
-          toast.success('Successfully CREATED post');
+          toast.success(t('create.success'));
           methods.reset();
         },
       });
@@ -63,24 +65,24 @@ const PostDetailPage = () => {
   return (
     <ContentWrapper>
       <Form methods={methods} onSubmit={onSubmit} className="space-y-4">
-        <FormField name="title" label="Başlıq">
+        <FormField name="title" label={t('title')}>
           <Input
-            placeholder="Məqalə başlığı..."
+            placeholder={t('placeholders.title')}
             {...methods.register('title')}
             isError={!!methods.formState.errors.title}
           />
         </FormField>
 
-        <FormField name="description" label="Mətn">
+        <FormField name="description" label={t('description')}>
           <Input
-            placeholder="Məzmunu daxil edin..."
+            placeholder={t('placeholders.description')}
             {...methods.register('description')}
             isError={!!methods.formState.errors.description}
           />
         </FormField>
 
         <Button type="submit" isLoading={updateMutation.isPending || createMutation.isPending}>
-          Paylaş
+          {t('actions.submit')}
         </Button>
       </Form>
     </ContentWrapper>

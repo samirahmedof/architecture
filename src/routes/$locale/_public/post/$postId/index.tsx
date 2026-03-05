@@ -1,8 +1,10 @@
-import { postQueries } from '@features/post/api/post.queries.ts';
+import { postQueries } from '@features/post';
 import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/$locale/_public/post/$postId/')({
-  component: lazyRouteComponent(() => import('@features/post/pages/detail/post-detail.page.tsx')),
+  component: lazyRouteComponent(() =>
+    import('@features/post').then((module) => ({ default: module.PostDetailPage })),
+  ),
   params: {
     parse: (raw) => {
       const id = Number(raw.postId);

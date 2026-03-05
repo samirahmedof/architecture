@@ -10,7 +10,7 @@ import type {
   PostModel,
   PostUpdateModel,
 } from '@features/post/domain/post.model.ts';
-import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
+import { ENDPOINTS } from '@shared/config';
 import * as v from 'valibot';
 
 export const postService = {

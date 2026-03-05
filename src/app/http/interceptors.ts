@@ -1,4 +1,4 @@
-import { useAuthStore } from '@shared/store/auth.store.ts';
+import { useAuthStore } from '@shared/store';
 import type { AxiosInstance } from 'axios';
 import { refreshTokenLogic } from './refresh-token.ts';
 

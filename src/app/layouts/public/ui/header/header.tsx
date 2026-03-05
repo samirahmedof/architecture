@@ -1,22 +1,22 @@
-import { DEFAULT_LANGUAGE, type Language } from '@app/lang/i18n.config.ts';
+import { DEFAULT_LANGUAGE, type Language, NAMESPACES } from '@app/lang/i18n.config.ts';
 import avatar from '@assets/images/juan.webp';
 import logo from '@assets/images/sima-negative.svg';
-import { useUiStore } from '@shared/store/ui.store.ts';
-import { Col, Row } from '@shared/ui/grid/grid.tsx';
-import { Select } from '@shared/ui/select/select.tsx';
+import { useUiStore } from '@shared/store';
+import { Col, Row, Select } from '@shared/ui';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import s from './header.module.scss';
 
-const LANGUAGES = [
-  { label: 'Azerbaycan', value: 'az' },
-  { label: 'English', value: 'en' },
-  { label: 'Russkiy', value: 'ru' },
-];
-
 export const Header = () => {
+  const { t } = useTranslation(NAMESPACES.COMMON);
   const { locale } = useParams({ strict: false });
   const navigate = useNavigate();
+  const LANGUAGES = [
+    { label: t('languages.az'), value: 'az' },
+    { label: t('languages.en'), value: 'en' },
+    { label: t('languages.ru'), value: 'ru' },
+  ];
 
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
 

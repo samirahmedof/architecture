@@ -1,6 +1,9 @@
 {
   "title": "Title",
   "description": "Description",
+  "list": {
+    "actions": "Actions"
+  },
   "create": {
     "title": "Create new post",
     "success": "Post created successfully",
@@ -10,5 +13,12 @@
     "title": "Edit post",
     "success": "Post updated",
     "error": "Error updating post"
+  },
+  "placeholders": {
+    "title": "Post title...",
+    "description": "Enter content..."
+  },
+  "actions": {
+    "submit": "Submit"
   }
 }
