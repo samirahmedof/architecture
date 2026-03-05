@@ -8,11 +8,40 @@
     "about": "About",
     "posts": "Posts"
   },
+  "languages": {
+    "az": "Azerbaijani",
+    "en": "English",
+    "ru": "Russian"
+  },
   "actions": {
     "create": "Create",
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "save": "Save"
-  }
+    "save": "Save",
+    "view": "View",
+    "retry": "Try again"
+  },
+  "footer": {
+    "copy": "copyright © {{year}} {{project}}, rights.",
+    "company": "AzInTelecom"
+  },
+  "error": {
+    "unexpected": "An unexpected error occurred",
+    "unknown": "Unknown error",
+    "validationData": "Data error: The data from the server is not in the correct format.",
+    "noConnection": "No connection to server. Please check your internet.",
+    "badRequest": "Bad request: {{message}}",
+    "forbidden": "You do not have permission (Forbidden).",
+    "notFound": "Requested data not found.",
+    "validationFields": "Please check the data you entered.",
+    "internal": "Internal server error. Please contact technical support."
+  },
+  "network": {
+    "initialOffline": "No internet connection",
+    "offline": "Internet connection is lost. Your data might not be saved.",
+    "online": "Internet connection has been restored",
+    "banner": "Internet connection is lost. Your data might not be saved."
+  },
+  "loadingTranslations": "Loading translations..."
 }

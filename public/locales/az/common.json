@@ -8,11 +8,40 @@
     "about": "Haqqımızda",
     "posts": "Yazılar"
   },
+  "languages": {
+    "az": "Azerbaycan",
+    "en": "İngilis",
+    "ru": "Rus"
+  },
   "actions": {
     "create": "Yarat",
     "edit": "Redaktə et",
     "delete": "Sil",
     "cancel": "Ləğv et",
-    "save": "Saxla"
-  }
+    "save": "Saxla",
+    "view": "Ətraflı bax",
+    "retry": "Yenidən cəhd et"
+  },
+  "footer": {
+    "copy": "copyright © {{year}} {{project}}, bütün hüquqlar qorunur.",
+    "company": "AzInTelecom"
+  },
+  "error": {
+    "unexpected": "Gözlənilməz xəta baş verdi",
+    "unknown": "Naməlum xəta",
+    "validationData": "Data Xətası: Serverdən gələn məlumat düzgün formatda deyil.",
+    "noConnection": "Serverlə əlaqə yoxdur. İnternetinizi yoxlayın.",
+    "badRequest": "Səhv sorğu: {{message}}",
+    "forbidden": "İcazəniz yoxdur (Forbidden).",
+    "notFound": "Axtarılan məlumat tapılmadı.",
+    "validationFields": "Zəhmət olmasa daxil etdiyiniz məlumatları yoxlayın.",
+    "internal": "Server daxili xətası. Texniki dəstəklə əlaqə saxlayın."
+  },
+  "network": {
+    "initialOffline": "İnternet bağlantısı yoxdur",
+    "offline": "İnternet bağlantısı kəsilib. Məlumatlarınız yadda saxlanılmaya bilər.",
+    "online": "İnternet bağlantısı bərpa olundu",
+    "banner": "İnternet bağlantısı kəsilib. Məlumatlarınız yadda saxlanılmaya bilər."
+  },
+  "loadingTranslations": "Tərcümələr yüklənir..."
 }
