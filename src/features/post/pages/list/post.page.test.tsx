@@ -46,11 +46,16 @@ const renderWithClient = (ui: ReactNode) => {
   );
 };
 
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
+vi.mock('react-i18next', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react-i18next')>();
+
+  return {
+    ...actual,
+    useTranslation: () => ({
+      t: (key: string) => key,
+    }),
+  };
+});
 describe('PostPage Integration Test', () => {
   // MSW Setup: API sorğularını tuturuq
   // DİQQƏT: '*/posts' hissəsini real API endpointinə uyğunlaşdır
@@ -99,7 +104,7 @@ describe('PostPage Integration Test', () => {
     // Gözləyirik ki, loading getsin və cədvəl boş olsun
     // (Table komponentinin boş olanda nə göstərdiyindən asılıdır, məsələn "No Data")
     // Amma ən azı başlıqlar görünməlidir
-    expect(await screen.findByText(/Başlıq/i)).toBeInTheDocument();
+    expect(await screen.findByText(/title/i)).toBeInTheDocument();
 
     // Post 1 artıq olmamalıdır
     expect(screen.queryByText(/TEST title/i)).not.toBeInTheDocument();
