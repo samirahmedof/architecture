@@ -17,9 +17,14 @@ vi.mock('@shared/config', () => ({
   ENV: { IS_DEV: false },
 }));
 
-vi.mock('@tanstack/react-router', () => ({
-  Outlet: () => <div>outlet</div>,
-}));
+vi.mock('@tanstack/react-router', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@tanstack/react-router')>();
+  return {
+    ...actual,
+    Outlet: () => <div>outlet</div>,
+    useRouterState: vi.fn(() => ({ location: { pathname: '/' } })),
+  };
+});
 
 vi.mock('@tanstack/react-query', () => ({
   QueryErrorResetBoundary: ({

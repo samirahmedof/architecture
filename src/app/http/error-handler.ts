@@ -1,6 +1,6 @@
 import i18n, { NAMESPACES } from '@app/lang/i18n.config.ts';
-import { captureException } from '@app/monitoring';
-import { logger } from '@shared/utils';
+import { captureException } from '@app/monitoring/sentry.config.ts';
+import { logger } from '@shared/utils/logger.ts';
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { toast } from 'sonner';

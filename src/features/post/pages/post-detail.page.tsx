@@ -8,7 +8,7 @@ import {
 } from '@features/post';
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { Button, ContentWrapper, Form, FormField, Input } from '@shared/ui';
-import { logger } from '@shared/utils';
+import { logger } from '@shared/utils/logger';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
@@ -54,7 +54,7 @@ const PostDetailPage = () => {
     } else {
       createMutation.mutate(data, {
         onSuccess: () => {
-          console.log('Successfully CREATED post');
+          logger.info('Successfully CREATED post');
           toast.success(t('create.success'));
           methods.reset();
         },

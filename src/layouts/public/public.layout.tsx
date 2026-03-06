@@ -1,15 +1,15 @@
 import { NAMESPACES } from '@app/lang/i18n.config.ts';
-import { Footer } from '@app/layouts/public/ui/footer/footer.tsx';
-import { Header } from '@app/layouts/public/ui/header/header.tsx';
-import Sidebar from '@app/layouts/public/ui/sidebar/sidebar.tsx';
-import { useOnlineStatus } from '@shared/hooks';
-import { useUiStore } from '@shared/store';
+import { useOnlineStatus } from '@shared/hooks/use-online-status.ts';
+import { useUiStore } from '@shared/store/ui.store.ts';
 import { Outlet } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
+import { Footer } from './footer/footer.tsx';
+import { Header } from './header/header.tsx';
 import s from './public.module.scss';
+import Sidebar from './sidebar/sidebar.tsx';
 
 //change network error logic
 const PublicLayout = () => {
@@ -33,7 +33,7 @@ const PublicLayout = () => {
       toast.dismiss('network-status');
       toast.success(t('network.online'), { id: 'network-success' });
     }
-  }, [isOnline]);
+  }, [isOnline, t]);
   return (
     <div>
       <Header />

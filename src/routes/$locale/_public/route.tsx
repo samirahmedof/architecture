@@ -1,6 +1,7 @@
 // src/routes/$locale/_public/route.tsx
-import PublicLayout from '@app/layouts/public/public.layout.tsx';
+
 import { createFileRoute, redirect } from '@tanstack/react-router';
+import PublicLayout from '../../../layouts/public/public.layout.tsx';
 
 const isAuth = true; // TODO: real auth logic
 

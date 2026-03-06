@@ -1,8 +1,9 @@
 import { DEFAULT_LANGUAGE, type Language, NAMESPACES } from '@app/lang/i18n.config.ts';
 import avatar from '@assets/images/juan.webp';
 import logo from '@assets/images/sima-negative.svg';
-import { useUiStore } from '@shared/store';
+import { useUiStore } from '@shared/store/ui.store.ts';
 import { Col, Row, Select } from '@shared/ui';
+import { logger } from '@shared/utils/logger.ts';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -21,13 +22,13 @@ export const Header = () => {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
 
   const logout = () => {
-    console.log('rest');
+    logger.info('rest');
   };
 
   const changeLang = (newLang: Language) => {
     void navigate({
       to: '.',
-      params: (prev) => ({ ...prev, locale: newLang }),
+      params: (prev: any) => ({ ...prev, locale: newLang }),
       replace: true,
     }).catch(console.error);
   };

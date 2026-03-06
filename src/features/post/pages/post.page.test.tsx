@@ -1,5 +1,5 @@
 import { server } from '@app/test/server.ts';
-import { ENDPOINTS } from '@shared/config';
+import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';

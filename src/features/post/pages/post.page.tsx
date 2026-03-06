@@ -1,6 +1,7 @@
 import { NAMESPACES } from '@app/lang/i18n.config.ts';
 import { type PostModel, postQueries } from '@features/post';
 import { type ColumnType, Table, TableActions } from '@shared/ui';
+import { logger } from '@shared/utils/logger.ts';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
@@ -24,9 +25,9 @@ const PostPage = () => {
       align: 'center',
       render: (record) => (
         <TableActions
-          onView={() => console.log('Bax:', record.id)}
-          onEdit={() => console.log('Düzəlt:', record.id)}
-          onDelete={() => console.log('Sil:', record.id)}
+          onView={() => logger.info('Bax:', record.id)}
+          onEdit={() => logger.info('Düzəlt:', record.id)}
+          onDelete={() => logger.info('Sil:', record.id)}
         />
       ),
     },
@@ -40,7 +41,7 @@ const PostPage = () => {
       columns={columns}
       rowKey={(record) => record.id}
       isLoading={false}
-      onRowClick={(record) => console.log('Seçildi:', record.title)}
+      onRowClick={(record) => logger.info('Seçildi:', record.title)}
     />
   );
 };

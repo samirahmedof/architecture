@@ -18,10 +18,10 @@ src/
 │   │   ├── endpoints.config.ts
 │   │   └── env.config.ts
 │   ├── http/                               ← STAYS
-│   │   ├── index.ts
+│   │   ├── base-instance.ts
 │   │   ├── client-builder.ts
 │   │   ├── interceptors.ts
-│   │   ├── query-provider.ts
+│   │   ├── error-handler.ts
 │   │   └── refresh-token.ts
 │   ├── lang/                               ← STAYS
 │   │   ├── i18n.config.ts
@@ -49,12 +49,12 @@ src/
 │   │   │       └── login-form.module.scss
 │   │   ├── pages/
 │   │   │   └── login.page.tsx              ← MOVED from features/login/login.page.tsx
-│   │   └── index.ts                        ← NEW (barrel: exports LoginPage, useAuthStore)
+│   │   └── base-instance.ts                        ← NEW (barrel: exports LoginPage, useAuthStore)
 │   │
 │   ├── home/                               ← ENRICHED (currently only 1 file)
 │   │   ├── pages/
 │   │   │   └── home.page.tsx               ← MOVED from features/home/home.page.tsx
-│   │   └── index.ts                        ← NEW (barrel: exports HomePage)
+│   │   └── base-instance.ts                        ← NEW (barrel: exports HomePage)
 │   │
 │   ├── post/                               ← RESTRUCTURED (already best example)
 │   │   ├── api/                            ← STAYS
@@ -76,7 +76,7 @@ src/
 │   │   │   └── post-detail.page.tsx        ← MOVED from post-detail.page.tsx
 │   │   ├── __tests__/                      ← NEW dir
 │   │   │   └── post.page.test.tsx          ← MOVED from post.page.test.tsx
-│   │   └── index.ts                        ← NEW (barrel: exports PostListPage, PostDetailPage)
+│   │   └── base-instance.ts                        ← NEW (barrel: exports PostListPage, PostDetailPage)
 │   │
 │   └── layout/                             ← NEW FEATURE (extracted from app/layouts)
 │       ├── model/
@@ -97,7 +97,7 @@ src/
 │       │   ├── public.module.scss.d.ts     ← MOVED from app/layouts/public/
 │       │   ├── error.layout.tsx            ← MOVED from app/layouts/error/
 │       │   └── root.layout.tsx             ← MOVED from app/layouts/root/
-│       └── index.ts                        ← NEW (barrel: exports all layouts, useUiStore)
+│       └── base-instance.ts                        ← NEW (barrel: exports all layouts, useUiStore)
 │
 ├── routes/                                 ← STAYS (TanStack Router file-based routing)
 │   ├── __root.tsx                          ← STAYS (update imports to @features/layout)
@@ -135,7 +135,7 @@ src/
 │   │   ├── content-wrapper/                ← STAYS
 │   │   ├── error/                          ← STAYS
 │   │   ├── loader/                         ← STAYS
-│   │   └── index.ts                        ← NEW (unified barrel for all shared UI)
+│   │   └── base-instance.ts                        ← NEW (unified barrel for all shared UI)
 │   └── utils/
 │       ├── cookie.ts
 │       ├── logger.ts

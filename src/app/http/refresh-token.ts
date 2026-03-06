@@ -1,5 +1,6 @@
-import { ENDPOINTS, ENV } from '@shared/config';
-import { useAuthStore } from '@shared/store';
+import { ENDPOINTS } from '@shared/config/endpoints.config';
+import { ENV } from '@shared/config/env.config.ts';
+import { useAuthStore } from '@shared/store/auth.store.ts';
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
 // make it dynamic

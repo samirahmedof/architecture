@@ -1,9 +1,9 @@
 import { DEFAULT_LANGUAGE } from '@app/lang/i18n.config.ts';
-import type { SidebarMenuItem, SidebarProps } from '@app/layouts/public/public.types.ts';
-import SidebarItem from '@app/layouts/public/ui/sidebar-item/sidebar-item.tsx';
 import { useParams } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { House, NotepadText, Table } from 'lucide-react';
+import type { SidebarMenuItem, SidebarProps } from '../public.types.ts';
+import SidebarItem from '../sidebar-item/sidebar-item.tsx';
 import s from './sidebar.module.scss';
 
 const Sidebar = ({ isOpen }: SidebarProps) => {

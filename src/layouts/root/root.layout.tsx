@@ -1,7 +1,8 @@
-import { syncSentryUser, useSentryRouterTracking } from '@app/monitoring';
+import { useSentryRouterTracking } from '@app/monitoring/sentry-router-integration';
+import { syncSentryUser } from '@app/monitoring/sentry-user-sync.ts';
 import * as Sentry from '@sentry/react';
-import { ENV } from '@shared/config';
-import { useAuthStore } from '@shared/store';
+import { ENV } from '@shared/config/env.config.ts';
+import { useAuthStore } from '@shared/store/auth.store.ts';
 import { Loader, MainErrorFallback } from '@shared/ui';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Outlet } from '@tanstack/react-router';
