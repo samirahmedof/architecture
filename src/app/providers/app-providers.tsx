@@ -1,5 +1,5 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
-import { QueryProviderWrapper } from '@app/providers/query-provider-wrapper.tsx';
+import { QueryProvider } from '@app/providers/query-provider.tsx';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import type { QueryClient } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { StrictMode, Suspense } from 'react';
@@ -21,9 +21,9 @@ export const AppProviders = ({ queryClient }: AppProvidersProps) => {
       <SentryProvider>
         <I18nProvider>
           <Suspense fallback={<div>{t('loadingTranslations')}</div>}>
-            <QueryProviderWrapper>
+            <QueryProvider>
               <AppRouterProvider queryClient={queryClient} />
-            </QueryProviderWrapper>
+            </QueryProvider>
           </Suspense>
         </I18nProvider>
       </SentryProvider>

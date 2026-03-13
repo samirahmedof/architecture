@@ -1,4 +1,4 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import clsx from 'clsx';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';

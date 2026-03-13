@@ -88,25 +88,6 @@ export const initSentry = () => {
 };
 
 /**
- * Set user context for Sentry (call when user logs in)
- */
-export const setSentryUser = (user: {
-  id?: string | number;
-  email?: string;
-  username?: string;
-  [key: string]: unknown;
-}) => {
-  Sentry.setUser(user);
-};
-
-/**
- * Clear user context (call when user logs out)
- */
-export const clearSentryUser = () => {
-  Sentry.setUser(null);
-};
-
-/**
  * Add breadcrumb for debugging
  */
 export const addSentryBreadcrumb = (
@@ -121,6 +102,26 @@ export const addSentryBreadcrumb = (
     level: level || 'info',
     data,
   });
+};
+
+export const syncSentryUser = (
+  token: string | null,
+  userData?: {
+    id?: string | number;
+    email?: string;
+    username?: string;
+    [key: string]: unknown;
+  },
+) => {
+  if (token && userData) {
+    Sentry.setUser(userData);
+  } else if (token) {
+    Sentry.setUser({
+      authenticated: true,
+    });
+  } else {
+    Sentry.setUser(null);
+  }
 };
 
 /**

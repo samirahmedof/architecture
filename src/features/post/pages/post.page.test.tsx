@@ -1,27 +1,11 @@
-import { server } from '@app/test/server.ts';
+import { server } from '@app/testing/server.ts';
 import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { type ReactNode, Suspense } from 'react';
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import PostPage from './post.page.tsx';
-
-// 1. Saxta Data (Mock Data)
-const mockPosts = [
-  {
-    userId: 1,
-    id: 1,
-    title: 'TEST title',
-    body: 'TEST body',
-  },
-  {
-    userId: 1,
-    id: 2,
-    title: 'qui est esse-TEST',
-    body: 'est rerum tempore-TEST',
-  },
-];
 
 // 2. Query Client Helper
 // Hər test üçün təmiz bir Client yaradırıq.
@@ -57,20 +41,6 @@ vi.mock('react-i18next', async (importOriginal) => {
   };
 });
 describe('PostPage Integration Test', () => {
-  // MSW Setup: API sorğularını tuturuq
-  // DİQQƏT: '*/posts' hissəsini real API endpointinə uyğunlaşdır
-  beforeAll(() => {
-    server.use(
-      http.get(`*${ENDPOINTS.POSTS.LIST}`, () => {
-        return HttpResponse.json(mockPosts);
-      }),
-    );
-  });
-
-  // MSW Cleanup
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
-
   it('render olanda cədvəldə postları göstərir', async () => {
     // 1. Render edirik
     renderWithClient(<PostPage />);
@@ -94,7 +64,7 @@ describe('PostPage Integration Test', () => {
   it('data boş olanda cədvəl boş render olunur', async () => {
     // Bu test üçün API cavabını dəyişirik (override)
     server.use(
-      http.get('*/posts', () => {
+      http.get(`*${ENDPOINTS.POSTS.LIST}`, () => {
         return HttpResponse.json([]);
       }),
     );

@@ -1,4 +1,4 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {

@@ -1,9 +1,9 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { Button } from '@shared/ui';
 import { AlertTriangle } from 'lucide-react';
 import type { FallbackProps } from 'react-error-boundary';
 import { useTranslation } from 'react-i18next';
-import styles from './main-error.module.scss';
+import styles from './error-fallback.module.scss';
 
 export const MainErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { t } = useTranslation(NAMESPACES.COMMON);

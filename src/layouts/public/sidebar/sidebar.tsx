@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE } from '@app/lang/i18n.config.ts';
+import { DEFAULT_LANGUAGE } from '@shared/config/i18n.config.ts';
 import { useParams } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { House, NotepadText, Table } from 'lucide-react';

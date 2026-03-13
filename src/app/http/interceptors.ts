@@ -10,13 +10,6 @@ export const attachTokenInterceptor = (instance: AxiosInstance) => {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    // // // Add Sentry breadcrumb for API requests
-    // addSentryBreadcrumb(`${config.method?.toUpperCase()} ${config.url}`, 'http', 'info', {
-    //   url: config.url,
-    //   method: config.method,
-    //   baseURL: config.baseURL,
-    // });
-
     return config;
   });
 };

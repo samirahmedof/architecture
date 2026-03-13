@@ -1,9 +1,15 @@
 import { APP } from '@shared/config/app.config.ts';
-import type { UiState } from '@shared/store/store.types.ts';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 const storeName = `ui-storage-${APP.NAME}`;
+
+interface UiState {
+  isSidebarOpen: boolean;
+  theme: 'light' | 'dark';
+  toggleSidebar: () => void;
+  setTheme: (theme: 'light' | 'dark') => void;
+}
 
 export const useUiStore = create<UiState>()(
   devtools(

@@ -1,4 +1,4 @@
-import type { Language } from '@app/lang/i18n.config.ts';
+import type { Language } from '@shared/config/i18n.config.ts';
 import type { LucideIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 

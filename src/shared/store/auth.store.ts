@@ -1,6 +1,11 @@
-import type { AuthState } from '@shared/store/store.types.ts';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+
+interface AuthState {
+  accessToken: string | null;
+  setAccessToken: (token: string) => void;
+  clearAuth: () => void;
+}
 
 export const useAuthStore = create<AuthState>()(
   devtools((set) => ({

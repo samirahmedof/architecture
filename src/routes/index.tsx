@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE } from '@app/lang/i18n.config.ts';
+import { DEFAULT_LANGUAGE } from '@shared/config/i18n.config.ts';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({

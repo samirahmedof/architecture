@@ -1,18 +1,27 @@
-import { useSentryRouterTracking } from '@app/monitoring/sentry-router-integration';
-import { syncSentryUser } from '@app/monitoring/sentry-user-sync.ts';
+import { addSentryBreadcrumb, syncSentryUser } from '@app/core/sentry.ts';
 import * as Sentry from '@sentry/react';
 import { ENV } from '@shared/config/env.config.ts';
 import { useAuthStore } from '@shared/store/auth.store.ts';
 import { Loader, MainErrorFallback } from '@shared/ui';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import { Outlet } from '@tanstack/react-router';
+import { Outlet, useRouterState } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { Suspense, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'sonner';
 
 const RootLayout = () => {
-  useSentryRouterTracking();
+  const routerState = useRouterState();
+  const { pathname, search, hash } = routerState.location;
+  useEffect(() => {
+    if (pathname) {
+      addSentryBreadcrumb(`Navigation: ${pathname}`, 'navigation', 'info', {
+        pathname: pathname,
+        search: search,
+        hash: hash,
+      });
+    }
+  }, [pathname, search, hash]);
   const token = useAuthStore((state) => state.accessToken);
 
   useEffect(() => {

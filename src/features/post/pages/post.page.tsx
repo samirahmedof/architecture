@@ -1,5 +1,5 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
 import { type PostModel, postQueries } from '@features/post';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { type ColumnType, Table, TableActions } from '@shared/ui';
 import { logger } from '@shared/utils/logger.ts';
 import { useSuspenseQuery } from '@tanstack/react-query';

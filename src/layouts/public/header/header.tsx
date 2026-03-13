@@ -1,6 +1,6 @@
-import { DEFAULT_LANGUAGE, type Language, NAMESPACES } from '@app/lang/i18n.config.ts';
 import avatar from '@assets/images/juan.webp';
 import logo from '@assets/images/sima-negative.svg';
+import { DEFAULT_LANGUAGE, type Language, NAMESPACES } from '@shared/config/i18n.config.ts';
 import { useUiStore } from '@shared/store/ui.store.ts';
 import { Col, Row, Select } from '@shared/ui';
 import { logger } from '@shared/utils/logger.ts';

@@ -1,4 +1,3 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
 import {
   type PostCreateModel,
   postQueries,
@@ -7,6 +6,7 @@ import {
   useUpdatePostMutation,
 } from '@features/post';
 import { valibotResolver } from '@hookform/resolvers/valibot';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { Button, ContentWrapper, Form, FormField, Input } from '@shared/ui';
 import { logger } from '@shared/utils/logger';
 import { useQuery } from '@tanstack/react-query';

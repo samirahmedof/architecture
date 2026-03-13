@@ -1,4 +1,4 @@
-import type i18n from '@app/lang/i18n.config.ts';
+import type i18n from '@app/core/i18n.ts';
 import type { createProjectRouter } from '@app/providers/router-provider.tsx';
 import type { QueryClient } from '@tanstack/react-query';
 import { createRootRouteWithContext } from '@tanstack/react-router';

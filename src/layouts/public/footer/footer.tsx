@@ -1,5 +1,5 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
 import { APP } from '@shared/config/app.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { Col, Container, Row } from '@shared/ui';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';

@@ -1,4 +1,4 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { useOnlineStatus } from '@shared/hooks/use-online-status.ts';
 import { useUiStore } from '@shared/store/ui.store.ts';
 import { Outlet } from '@tanstack/react-router';

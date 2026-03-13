@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import '@app/lang/i18n.config.ts';
+import '@app/core/i18n.ts';
 
 interface I18nProviderProps {
   children: ReactNode;

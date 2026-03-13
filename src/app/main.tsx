@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import './main.scss';
-import { queryClient } from '@app/http/error-handler.ts';
+import { queryClient } from '@app/core/query-error-handler.ts';
 import { AppProviders } from '@app/providers/app-providers.tsx';
 
 const rootElement = document.getElementById('root');

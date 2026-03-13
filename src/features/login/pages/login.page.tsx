@@ -1,4 +1,4 @@
-import { NAMESPACES } from '@app/lang/i18n.config.ts';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { Button } from '@shared/ui';
 import { cookieUtils } from '@shared/utils/cookie.ts';
 import { useRouter } from '@tanstack/react-router';

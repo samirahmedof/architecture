@@ -21,13 +21,13 @@ src/
 │   │   ├── base-instance.ts
 │   │   ├── client-builder.ts
 │   │   ├── interceptors.ts
-│   │   ├── error-handler.ts
+│   │   ├── query-error-handler.ts
 │   │   └── refresh-token.ts
 │   ├── lang/                               ← STAYS
-│   │   ├── i18n.config.ts
-│   │   └── i18.types.ts
+│   │   ├── i18n.ts
+│   │   └── i18n.types.ts
 │   ├── monitoring/                         ← STAYS
-│   │   ├── sentry.config.ts
+│   │   ├── sentry.ts
 │   │   ├── sentry-router-integration.tsx
 │   │   └── sentry-user-sync.ts
 │   └── test/                               ← MOVED from src/test/
@@ -69,7 +69,7 @@ src/
 │   │   │   └── post.schema.ts
 │   │   ├── ui/                             ← STAYS
 │   │   │   └── post-item/
-│   │   │       ├── post-item.ui.tsx
+│   │   │       ├── post-item.tsx
 │   │   │       └── post-item.module.scss
 │   │   ├── pages/                          ← NEW dir (pages pulled in)
 │   │   │   ├── post-list.page.tsx          ← RENAMED from post.page.tsx
