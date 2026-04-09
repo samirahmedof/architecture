@@ -31,3 +31,6 @@ dist-ssr
 *.env
 **/*.module.scss.d.ts
 .tanstack
+src/routes/routeTree.gen.ts
+
+prompt.md

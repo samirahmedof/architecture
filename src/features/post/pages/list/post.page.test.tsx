@@ -1,6 +1,6 @@
-import { server } from '@app/testing/server.ts';
 import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { server } from '@testing/server.ts';
 import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { type ReactNode, Suspense } from 'react';

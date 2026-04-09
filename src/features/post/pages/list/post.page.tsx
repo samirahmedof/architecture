@@ -1,7 +1,7 @@
 import { type PostModel, postQueries } from '@features/post';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
+import { logger } from '@shared/lib/logger.ts';
 import { type ColumnType, Table, TableActions } from '@shared/ui';
-import { logger } from '@shared/utils/logger.ts';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 

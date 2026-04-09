@@ -1,5 +1,5 @@
-import { createHttpClient } from '@app/http/client-builder.ts';
 import { ENV } from '@shared/config/env.config.ts';
+import { createHttpClient } from '@shared/lib/http/client-builder.ts';
 import axios from 'axios';
 import { attachRefreshInterceptor, attachTokenInterceptor } from './interceptors.ts';
 

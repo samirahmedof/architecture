@@ -1,6 +1,6 @@
-import { addSentryBreadcrumb, syncSentryUser } from '@app/core/sentry.ts';
 import * as Sentry from '@sentry/react';
 import { ENV } from '@shared/config/env.config.ts';
+import { addSentryBreadcrumb, syncSentryUser } from '@shared/lib/monitoring/sentry.ts';
 import { useAuthStore } from '@shared/store/auth.store.ts';
 import { Loader, MainErrorFallback } from '@shared/ui';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';

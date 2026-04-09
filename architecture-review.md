@@ -1,607 +1,1129 @@
-# Architecture Review — Feature-Based Architecture Compliance
+# Architecture Review: Feature-Based Architecture Analysis
 
-> **Project**: ARCHİTECTURE-V4  
-> **Stack**: React 19 · TypeScript 5.9 · Vite 7 · TanStack Router/Query · Zustand · SCSS Modules · Valibot  
-> **Review Date**: 2026-03-10  
-> **Verdict**: The project demonstrates a **solid foundational understanding** of Feature-Based Architecture but has **critical structural inconsistencies, naming violations, coupling leaks, and missing scaffolding** that will degrade as the codebase scales.
-
----
-
-## Table of Contents
-
-1. [Current Directory Tree](#1-current-directory-tree)
-2. [Naming & Placement Violations](#2-naming--placement-violations)
-3. [Structural Modifications (Recommendations)](#3-structural-modifications-recommendations)
-4. [Feature-Based Architecture Compliance](#4-feature-based-architecture-compliance)
-5. [DX & Clean Code Assessment](#5-dx--clean-code-assessment)
-6. [Optimal Refactored Directory Tree](#6-optimal-refactored-directory-tree)
+**Project:** ARCHİTECTURE-V4
+**Review Date:** 2026-04-08
+**Architecture Pattern:** Feature-Based Architecture
+**Tech Stack:** React 19, TanStack Router, TanStack Query, Valibot, Zustand, i18next
 
 ---
 
-## 1. Current Directory Tree
+## Executive Summary
+
+The current codebase demonstrates a **partial implementation** of Feature-Based Architecture with significant structural violations and inconsistencies. While the foundation shows understanding of feature-slicing principles, critical issues exist in naming conventions, file placement, separation of concerns, and architectural boundaries.
+
+**Compliance Score: 6.5/10**
+
+---
+
+## 1. Naming & Placement Analysis
+
+### 1.1 Critical Violations
+
+#### ❌ **Misnamed Components**
+
+| Current Path | Issue | Correct Path |
+|--------------|-------|--------------|
+| `src/layouts/public/sidebar-item/sidebar-item.tsx` | Single-component folder violates FSD | `src/layouts/public/ui/sidebar-item.tsx` |
+| `src/layouts/public/footer/footer.tsx` | Single-component folder | `src/layouts/public/ui/footer.tsx` |
+| `src/layouts/public/header/header.tsx` | Single-component folder | `src/layouts/public/ui/header.tsx` |
+| `src/layouts/public/sidebar/sidebar.tsx` | Single-component folder | `src/layouts/public/ui/sidebar.tsx` |
+
+**Rationale:** Creating a dedicated folder for a single component file violates the DRY principle and adds unnecessary nesting. Layout sub-components should be grouped in a single `ui/` directory.
+
+#### ❌ **Incorrect Shared Structure**
+
+| Current Path | Issue | Correct Path |
+|--------------|-------|--------------|
+| `src/shared/utils/cookie.ts` | Domain-specific util in shared | `src/shared/lib/cookie.ts` |
+| `src/shared/utils/logger.ts` | Infrastructure concern in utils | `src/shared/lib/logger.ts` |
+| `src/shared/utils/object-to-form-data.ts` | Generic utility | `src/shared/lib/form-data.ts` |
+
+**Rationale:** `utils` should be reserved for pure, business-agnostic helper functions. Infrastructure utilities (cookie, logger) belong in `lib/`. The `lib/` directory currently exists but is empty—a structural red flag.
+
+#### ❌ **Empty Directories**
+
+- `src/shared/lib/` - Created but unused (0 files)
+- `src/shared/types/` - Created but unused (0 files)
+
+**Impact:** Dead directories indicate incomplete refactoring or premature abstraction.
+
+### 1.2 Route Structure Issues
+
+#### ❌ **Generated File in Version Control**
+
+| File | Issue |
+|------|-------|
+| `src/routes/routeTree.gen.ts` | Generated files should be gitignored |
+
+**Action Required:** Add `routeTree.gen.ts` to `.gitignore` and document generation in README.
+
+#### ✅ **Route Organization (Acceptable)**
+
+The TanStack Router file-based routing structure is correctly implemented:
 
 ```
-src/
-├── app/
-│   ├── http/
-│   │   ├── base-instance.ts
-│   │   ├── client-builder.ts
-│   │   ├── query-error-handler.ts
-│   │   ├── interceptors.ts
-│   │   └── refresh-token.ts
-│   ├── lang/
-│   │   ├── i18n.types.ts              ← typo in filename
-│   │   └── i18n.ts
-│   ├── monitoring/
-│   │   ├── sentry-router-integration.tsx
-│   │   ├── sentry-user-sync.ts
-│   │   └── sentry.ts
-│   ├── providers/
-│   │   ├── app-providers.tsx
-│   │   ├── i18n-provider.tsx
-│   │   ├── query-provider.tsx
-│   │   ├── router-provider.tsx
-│   │   └── sentry-provider.tsx
-│   ├── test/
-│   │   ├── handlers.ts
-│   │   ├── server.ts
-│   │   └── setup.ts
-│   ├── main.scss
-│   └── main.tsx
-├── assets/
-│   ├── fonts/
-│   │   ├── imperial-script/
-│   │   ├── nunito/
-│   │   └── pf-square-sans-pro/
-│   ├── images/
-│   │   ├── juan.webp
-│   │   ├── logout.webp
-│   │   ├── notfound.svg
-│   │   └── sima-negative.svg
-│   └── styles/
-│       ├── abstracts/ (_functions, _mixins, _variables, index)
-│       ├── base/ (_common, _font-faces, _reset, index)
-│       └── root/ (_fonts, _palette, _sizes, _theme, _tokens, index)
-├── features/
-│   ├── home/
-│   │   ├── index.ts
-│   │   └── pages/
-│   │       └── home.page.tsx
-│   ├── login/
-│   │   ├── index.ts
-│   │   └── pages/
-│   │       └── login.page.tsx
-│   └── post/
-│       ├── api/
-│       │   ├── post.keys.ts
-│       │   ├── post.mocks.ts
-│       │   ├── post.mutations.ts
-│       │   ├── post.queries.ts
-│       │   └── post.service.ts
-│       ├── domain/
-│       │   ├── post.dto.ts
-│       │   ├── post.mapper.ts
-│       │   ├── post.model.ts
-│       │   └── post.schema.ts
-│       ├── index.ts
-│       ├── pages/
-│       │   ├── post-detail.page.test.tsx
-│       │   ├── post-detail.page.tsx
-│       │   ├── post.page.test.tsx
-│       │   └── post.page.tsx
-│       └── ui/
-│           └── post-item/
-│               ├── post-item.module.scss
-│               └── post-item.tsx
-├── layouts/
-│   ├── auth/
-│   │   ├── auth.layout.tsx
-│   │   ├── auth.module.scss
-│   │   └── auth.module.scss.d.ts
-│   ├── error/
-│   │   └── error.layout.tsx
-│   ├── public/
-│   │   ├── footer/
-│   │   │   ├── footer.module.scss
-│   │   │   ├── footer.module.scss.d.ts
-│   │   │   └── footer.tsx
-│   │   ├── header/
-│   │   │   ├── header.module.scss
-│   │   │   ├── header.module.scss.d.ts
-│   │   │   └── header.tsx
-│   │   ├── public.layout.tsx
-│   │   ├── public.module.scss
-│   │   ├── public.module.scss.d.ts
-│   │   ├── public.types.ts
-│   │   ├── sidebar/
-│   │   │   ├── sidebar.module.scss
-│   │   │   ├── sidebar.module.scss.d.ts
-│   │   │   └── sidebar.tsx
-│   │   └── sidebar-item/
-│   │       ├── sidebar-item.module.scss
-│   │       ├── sidebar-item.module.scss.d.ts
-│   │       └── sidebar-item.tsx
-│   └── root/
-│       ├── root.layout.test.tsx
-│       └── root.layout.tsx
-├── routes/
-│   ├── $locale/
-│   │   ├── _public/
-│   │   │   ├── index.tsx
-│   │   │   ├── post/
-│   │   │   │   ├── $postId/
-│   │   │   │   │   └── index.tsx
-│   │   │   │   ├── create/
-│   │   │   │   │   └── index.tsx
-│   │   │   │   └── index.tsx
-│   │   │   └── route.tsx
+src/routes/
+├── __root.tsx
+├── index.tsx
+└── $locale/
+    ├── route.tsx
+    ├── auth/
+    │   ├── route.tsx
+    │   └── login/index.tsx
+    └── _public/
+        ├── route.tsx
+        ├── index.tsx
+        └── post/
+            ├── index.tsx
+            ├── create/index.tsx
+            └── $postId/index.tsx
+```
+
+**Note:** While the structure is technically correct, the `$locale` dynamic segment at the root level creates unnecessary nesting for all routes.
+
+### 1.3 Testing Structure
+
+#### ⚠️ **Mixed Testing Location**
+
+| Current Path | Issue | Recommendation |
+|--------------|-------|----------------|
+| `src/testing/` (global) | Centralized test utilities | ✅ Correct |
+| `src/features/post/test/` | Feature-specific test utils | ✅ Correct |
+| `src/features/post/pages/post.page.test.tsx` | Test colocated with page | ⚠️ Inconsistent |
+
+**Issue:** Mixing colocated tests (`*.test.tsx` alongside components) with dedicated test folders creates inconsistency.
+
+**Recommendation:** Standardize on one approach:
+- **Option A (Colocation):** All tests alongside their components: `post.page.tsx` + `post.page.test.tsx`
+- **Option B (Separation):** All tests in `__tests__/` directories
+
+---
+
+## 2. Structural Modifications
+
+### 2.1 Required Deletions
+
+#### **Empty/Dead Directories**
+
+```bash
+# Delete these empty directories:
+src/shared/lib/
+src/shared/types/
+```
+
+**Rationale:** Empty directories clutter the codebase and suggest incomplete architecture. Create them when needed, not preemptively.
+
+#### **Distribution Artifacts**
+
+```bash
+# Add to .gitignore:
+dist/
+src/routes/routeTree.gen.ts
+```
+
+### 2.2 Required Additions
+
+#### **Missing Feature Exports**
+
+The `home` and `login` features lack proper structure:
+
+```
+src/features/login/
+├── api/              # ❌ MISSING
+├── domain/           # ❌ MISSING
+├── pages/            # ✅ EXISTS
+└── index.ts          # ✅ EXISTS (but exports only page)
+```
+
+**Required Structure:**
+
+```typescript
+// src/features/login/domain/login.schema.ts
+export const LoginSchema = v.object({ /* ... */ });
+
+// src/features/login/api/login.mutations.ts
+export const loginMutations = { /* ... */ };
+
+// src/features/login/api/login.service.ts
+export const loginService = { /* ... */ };
+```
+
+### 2.3 Required Refactoring
+
+#### **App Layer Structure**
+
+Current `src/app/` structure mixes concerns:
+
+```
+src/app/
+├── core/              # Infrastructure
+├── http/              # Infrastructure
+├── providers/         # React-specific
+└── main.tsx           # Entry point
+```
+
+**Issue:** `http/` and `core/` belong in `shared/lib/`, not `app/`. The `app/` layer should contain only:
+- Application entry point (`main.tsx`)
+- Provider composition (`providers/`)
+- Global app configuration
+
+**Recommended Refactoring:**
+
+```
+src/app/
+├── main.tsx
+├── providers/
+│   ├── app.tsx
+│   ├── i18n-provider.tsx
+│   ├── query-provider.tsx
+│   ├── router-provider.tsx
+│   └── sentry-provider.tsx
+└── config/
+    └── app.config.ts  # App-level config only
+
+src/shared/lib/
+├── http/
+│   ├── base-instance.ts
+│   ├── client-builder.ts
+│   ├── interceptors.ts
+│   └── refresh-token.ts
+├── i18n/
+│   ├── i18n.ts
+│   └── config.ts
+├── sentry/
+│   └── sentry.ts
+├── query/
+│   └── query-error-handler.ts
+├── cookie.ts
+└── logger.ts
+```
+
+---
+
+## 3. Feature-Based Architecture Compliance
+
+### 3.1 Feature Structure Evaluation
+
+#### ✅ **`post` Feature (Strong Compliance)**
+
+```
+src/features/post/
+├── api/
+│   ├── post.endpoints.ts
+│   ├── post.keys.ts
+│   ├── post.mutations.ts
+│   ├── post.queries.ts
+│   └── post.service.ts
+├── domain/
+│   ├── post.dto.ts
+│   ├── post.mapper.ts
+│   ├── post.model.ts
+│   └── post.schema.ts
+├── pages/
+│   ├── post.page.tsx
+│   ├── post.page.test.tsx
+│   ├── post-detail.page.tsx
+│   └── post-detail.page.test.tsx
+├── test/
+│   ├── post.handlers.ts
+│   └── post.mocks.ts
+├── ui/
+│   └── post-item/
+│       └── post-item.tsx  # ❌ ISSUE: Empty file
+└── index.ts
+```
+
+**Score: 8.5/10**
+
+**Issues:**
+1. `ui/post-item/post-item.tsx` is empty (verified via Read tool)
+2. Missing barrel exports for `api/` and `domain/` layers
+3. `pages/` should potentially be split: `post.page.tsx` (list view) vs. `post-detail.page.tsx` (detail view) suggest different features
+
+**Recommendation:**
+```typescript
+// src/features/post/api/index.ts
+export * from './post.queries';
+export * from './post.mutations';
+export * from './post.keys';
+
+// src/features/post/domain/index.ts
+export * from './post.model';
+export * from './post.schema';
+export * from './post.dto';
+export * from './post.mapper';
+```
+
+#### ❌ **`home` Feature (Incomplete)**
+
+```
+src/features/home/
+├── pages/
+│   └── home.page.tsx
+└── index.ts
+```
+
+**Score: 3/10**
+
+**Issues:**
+1. No `api/` layer
+2. No `domain/` layer
+3. Feature appears to be a single page component—should be moved to `pages/` at app level or removed if it's truly just a static page
+
+**Recommendation:** If `home` contains no business logic, move to:
+```
+src/pages/
+└── home/
+    └── home.page.tsx
+```
+
+Or delete the feature and define the home page directly in the route file.
+
+#### ❌ **`login` Feature (Incomplete)**
+
+```
+src/features/login/
+├── pages/
+│   └── login.page.tsx
+└── index.ts
+```
+
+**Score: 4/10**
+
+**Issues:**
+1. No `api/` layer (authentication logic is missing)
+2. No `domain/` layer (login schema, types)
+3. Authentication logic appears to use fake tokens (`handleFakeLogin` in `login.page.tsx:10-14`)
+
+**Critical Finding:** The login feature is a facade. No real authentication flow exists.
+
+```typescript
+// From src/features/login/pages/login.page.tsx:10-14
+const handleFakeLogin = () => {
+  const fakeToken = 'eyJhGciOiJIUzI1Ni...';
+  cookieUtils.setToken(fakeToken);
+  router.navigate({ to: '/' });
+};
+```
+
+**Required Structure:**
+
+```
+src/features/login/
+├── api/
+│   ├── login.mutations.ts
+│   ├── login.service.ts
+│   └── index.ts
+├── domain/
+│   ├── login.schema.ts
+│   ├── login.model.ts
+│   └── index.ts
+├── pages/
+│   └── login.page.tsx
+└── index.ts
+```
+
+### 3.2 Cross-Feature Dependencies (Coupling Analysis)
+
+#### ✅ **Low Coupling Detected**
+
+Features import only from:
+- `@shared/*` ✅
+- `@app/*` (providers, http) ⚠️ Should be `@shared/lib/*`
+- Own feature namespace ✅
+
+**Example from `post.page.tsx:1-6`:**
+
+```typescript
+import { type PostModel, postQueries } from '@features/post';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
+import { type ColumnType, Table, TableActions } from '@shared/ui';
+import { logger } from '@shared/utils/logger.ts';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
+```
+
+**Issue:** Features import from `@app/http/*` (seen in `post.service.ts:1`), which violates layer boundaries.
+
+```typescript
+// ❌ WRONG
+import { api } from '@app/http/base-instance.ts';
+
+// ✅ CORRECT
+import { api } from '@shared/lib/http';
+```
+
+---
+
+## 4. Developer Experience & Clean Code Assessment
+
+### 4.1 Must-Haves (Critical Issues)
+
+#### ❌ **1. Inconsistent HTTP Client Usage**
+
+**Location:** `src/app/http/base-instance.ts`
+
+The HTTP client is accessed globally via `@app/http/base-instance`, which creates tight coupling and makes testing difficult.
+
+**Impact:**
+- Cannot mock HTTP layer in tests easily
+- Features are tightly coupled to a specific HTTP implementation
+- Violates Dependency Inversion Principle
+
+**Fix:**
+```typescript
+// src/shared/lib/http/index.ts
+export { api } from './base-instance';
+export { createHttpClient } from './client-builder';
+export type { HttpClient } from './types';
+
+// Features should inject HTTP client or use context
+```
+
+#### ❌ **2. Authentication State Management Chaos**
+
+**Locations:**
+- `src/shared/store/auth.store.ts` - Zustand store for `accessToken`
+- `src/shared/utils/cookie.ts` - Cookie-based token management
+- `src/features/login/pages/login.page.tsx:12` - Direct cookie write
+
+**Issue:** Three different authentication state management mechanisms:
+
+```typescript
+// Method 1: Zustand (src/shared/store/auth.store.ts:5)
+const token = useAuthStore.getState().accessToken;
+
+// Method 2: Cookies (src/shared/utils/cookie.ts:5)
+const token = cookieUtils.getToken();
+
+// Method 3: Direct cookie manipulation (login.page.tsx:12)
+cookieUtils.setToken(fakeToken);
+```
+
+**Impact:**
+- State synchronization issues
+- Potential security vulnerabilities
+- Unclear single source of truth
+
+**Fix:** Consolidate to a single auth mechanism:
+
+```typescript
+// src/shared/lib/auth/auth-manager.ts
+export const authManager = {
+  getToken: () => cookieUtils.getToken(),
+  setToken: (token: string) => {
+    cookieUtils.setToken(token);
+    useAuthStore.getState().setAccessToken(token);
+  },
+  clearAuth: () => {
+    cookieUtils.deleteToken();
+    useAuthStore.getState().clearAuth();
+  },
+};
+```
+
+#### ❌ **3. Missing Error Boundaries at Feature Level**
+
+**Location:** Only exists at root level (`src/shared/ui/error-fallback/`)
+
+**Impact:** Errors in one feature crash the entire application.
+
+**Fix:** Add error boundaries per feature:
+
+```tsx
+// src/features/post/ui/post-error-boundary.tsx
+export const PostErrorBoundary = ({ children }: PropsWithChildren) => (
+  <ErrorBoundary FallbackComponent={PostErrorFallback}>
+    {children}
+  </ErrorBoundary>
+);
+```
+
+#### ❌ **4. No API Response Type Safety**
+
+**Location:** `src/features/post/api/post.service.ts:18`
+
+While Valibot schemas exist, there's no compile-time type safety between API responses and domain models.
+
+**Example:**
+
+```typescript
+// Current approach (runtime validation only)
+const dtos = await api.get(ENDPOINTS.POSTS.LIST, v.array(PostDtoSchema));
+return dtos.map(toPostModel);
+```
+
+**Issue:** If `PostDtoSchema` changes, TypeScript won't catch mismatches in `toPostModel`.
+
+**Fix:** Use Valibot's type inference:
+
+```typescript
+export type PostDto = v.InferOutput<typeof PostDtoSchema>;
+
+// Mapper signature becomes type-safe
+export const toPostModel = (dto: PostDto): PostModel => { /* ... */ };
+```
+
+#### ❌ **5. Barrel File Export Inconsistency**
+
+| Feature | Barrel File Status | Completeness |
+|---------|-------------------|--------------|
+| `post` | ✅ Exists | ⚠️ Partial (missing `api/index.ts`, `domain/index.ts`) |
+| `home` | ✅ Exists | ✅ Complete (only 1 export) |
+| `login` | ✅ Exists | ✅ Complete (only 1 export) |
+| `shared/ui` | ✅ Exists | ✅ Complete |
+| `shared/config` | ❌ Missing | ❌ N/A |
+| `shared/store` | ❌ Missing | ❌ N/A |
+
+**Impact:** Inconsistent import patterns across the codebase.
+
+```typescript
+// ❌ Current state
+import { useAuthStore } from '@shared/store/auth.store.ts';
+import { ENV } from '@shared/config/env.config.ts';
+
+// ✅ Should be
+import { useAuthStore } from '@shared/store';
+import { ENV } from '@shared/config';
+```
+
+### 4.2 Nice-to-Haves (Improvements)
+
+#### ⚠️ **1. Feature Flags System**
+
+**Recommendation:** Add feature flag infrastructure:
+
+```typescript
+// src/shared/lib/feature-flags/index.ts
+export const featureFlags = {
+  isEnabled: (flag: FeatureFlag) => { /* ... */ },
+};
+
+// src/shared/lib/feature-flags/flags.ts
+export enum FeatureFlag {
+  POST_CREATION = 'post-creation',
+  ADVANCED_SEARCH = 'advanced-search',
+}
+```
+
+#### ⚠️ **2. Storybook Integration**
+
+**Rationale:** `shared/ui/` components lack visual documentation.
+
+**Recommendation:** Add Storybook for component development:
+
+```bash
+src/shared/ui/
+├── button/
+│   ├── button.tsx
+│   ├── button.types.ts
+│   └── button.stories.tsx  # Add
+```
+
+#### ⚠️ **3. API Contract Testing**
+
+**Location:** `src/features/post/test/post.handlers.ts`
+
+**Current State:** MSW handlers exist but no schema validation against API contracts.
+
+**Recommendation:**
+
+```typescript
+// src/features/post/test/post.contract.test.ts
+import { postHandlers } from './post.handlers';
+import { PostDtoSchema } from '../domain/post.dto';
+
+describe('Post API Contract', () => {
+  it('should match PostDtoSchema', async () => {
+    const response = await fetch('/posts');
+    const data = await response.json();
+    expect(() => v.parse(PostDtoSchema, data[0])).not.toThrow();
+  });
+});
+```
+
+#### ⚠️ **4. Typed Route Parameters**
+
+**Location:** `src/routes/routeTree.gen.ts`
+
+**Current Issue:** Dynamic route parameters (`$postId`) lack type safety.
+
+**Recommendation:** Add route parameter schemas:
+
+```typescript
+// src/routes/$locale/_public/post/$postId/index.tsx
+import { createFileRoute } from '@tanstack/react-router';
+import * as v from 'valibot';
+
+const postIdSchema = v.object({
+  postId: v.pipe(v.string(), v.transform(Number)),
+});
+
+export const Route = createFileRoute('/$locale/_public/post/$postId/')({
+  validateSearch: postIdSchema,
+  // ...
+});
+```
+
+#### ⚠️ **5. Consistent File Naming Convention**
+
+**Current State:**
+
+```
+✅ Kebab-case: post-detail.page.tsx, sidebar-item.tsx
+✅ PascalCase: PostModel, LoginPage (types/components)
+⚠️ Inconsistent: post.page.tsx vs. PostPage component name
+```
+
+**Recommendation:** Standardize to:
+
+```
+ComponentName.tsx → component-name.tsx (file)
+ComponentName → ComponentName (export)
+
+Example:
+post-detail.page.tsx → export default PostDetailPage
+```
+
+### 4.3 Best Practices Comparison
+
+| Practice | Industry Standard | Current Implementation | Status |
+|----------|------------------|------------------------|--------|
+| Feature Slicing | Features contain api/domain/ui/pages | Partial (`post` ✅, `home`/`login` ❌) | ⚠️ |
+| Separation of Concerns | Clear layer boundaries | `app/` mixes concerns | ❌ |
+| Barrel Files | Consistent across layers | Inconsistent | ⚠️ |
+| Type Safety | End-to-end TypeScript | Runtime validation only | ⚠️ |
+| Error Handling | Granular error boundaries | Global only | ❌ |
+| Testing | Colocated or `__tests__/` | Mixed | ⚠️ |
+| State Management | Single source of truth | Multiple auth mechanisms | ❌ |
+| HTTP Client | Dependency injection | Global import | ❌ |
+| Route Structure | Flat when possible | Nested `$locale` at root | ⚠️ |
+| Configuration | Environment-based | Hardcoded in places | ⚠️ |
+
+---
+
+## 5. Security & Performance Issues
+
+### 5.1 Security Concerns
+
+#### 🔴 **Critical: Fake Authentication**
+
+**Location:** `src/features/login/pages/login.page.tsx:11`
+
+```typescript
+const fakeToken = 'eyJhGciOiJIUzI1Ni...';
+```
+
+**Impact:** Production-ready architecture with mock authentication is a security risk if deployed.
+
+**Recommendation:** Implement real authentication or clearly mark as demo-only.
+
+#### 🟡 **Medium: Cookie Security**
+
+**Location:** `src/shared/utils/cookie.ts:13`
+
+```typescript
+document.cookie = `${TOKEN_KEY}=${token}; path=/; max-age=86400; SameSite=Lax`;
+```
+
+**Issues:**
+- Missing `Secure` flag (non-HTTPS cookies)
+- Missing `HttpOnly` flag (XSS vulnerability)
+
+**Note:** `HttpOnly` cannot be set via JavaScript—must be set server-side.
+
+**Fix:**
+
+```typescript
+document.cookie = `${TOKEN_KEY}=${token}; path=/; max-age=86400; SameSite=Strict; Secure`;
+```
+
+### 5.2 Performance Issues
+
+#### 🟡 **Bundle Splitting**
+
+**Location:** `vite.config.ts:60-73`
+
+Current manual chunks are well-configured:
+
+```typescript
+manualChunks(id) {
+  if (id.includes('node_modules')) {
+    if (id.includes('react')) return 'react-core';
+    if (id.includes('@tanstack')) return 'tanstack-vendor';
+    // ...
+  }
+}
+```
+
+**Recommendation:** Add feature-based code splitting:
+
+```typescript
+if (!id.includes('node_modules')) {
+  const featureMatch = id.match(/src\/features\/([^/]+)/);
+  if (featureMatch) {
+    return `feature-${featureMatch[1]}`;
+  }
+}
+```
+
+#### 🟡 **Lazy Loading Routes**
+
+**Current State:** All routes are loaded eagerly.
+
+**Recommendation:**
+
+```typescript
+// src/routes/$locale/_public/post/index.tsx
+import { lazy } from 'react';
+
+const PostPage = lazy(() => import('@features/post'));
+
+export const Route = createFileRoute('/$locale/_public/post/')({
+  component: PostPage,
+});
+```
+
+---
+
+## 6. Dependency Analysis
+
+### 6.1 Dependency Graph Violations
+
+```
+┌─────────────────────────────────────────────┐
+│         Allowed Dependencies                │
+├─────────────────────────────────────────────┤
+│ features → shared    ✅                      │
+│ features → app       ⚠️ (should be shared)  │
+│ layouts → shared     ✅                      │
+│ routes → features    ✅                      │
+│ routes → layouts     ✅                      │
+│ app → features       ❌ VIOLATION            │
+│ shared → features    ❌ VIOLATION            │
+└─────────────────────────────────────────────┘
+```
+
+**Detected Violations:**
+
+None detected in current structure—features correctly import only from `shared` and `app`.
+
+**Warning:** `app/` should not export business logic. Move `app/http/` and `app/core/` to `shared/lib/`.
+
+### 6.2 Circular Dependency Risk
+
+**Potential Risk Zones:**
+
+1. `@shared/ui` → imports from `@shared/config`
+2. `@shared/store/auth.store.ts` ← → `@shared/utils/cookie.ts`
+
+**Recommendation:** Run circular dependency linter:
+
+```bash
+npx madge --circular --extensions ts,tsx src/
+```
+
+---
+
+## 7. Refactored Directory Tree
+
+```
+ARCHİTECTURE-V4/
+├── public/
+│   └── locales/
+│       ├── az/
+│       ├── en/
+│       └── ru/
+│
+├── src/
+│   ├── app/
+│   │   ├── providers/
+│   │   │   ├── app.tsx
+│   │   │   ├── i18n-provider.tsx
+│   │   │   ├── query-provider.tsx
+│   │   │   ├── router-provider.tsx
+│   │   │   ├── sentry-provider.tsx
+│   │   │   └── index.ts
+│   │   ├── config/
+│   │   │   ├── app.config.ts
+│   │   │   └── index.ts
+│   │   └── main.tsx
+│   │
+│   ├── features/
+│   │   ├── auth/                              # ← Renamed from 'login'
+│   │   │   ├── api/
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   ├── auth.mutations.ts
+│   │   │   │   ├── auth.queries.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── domain/
+│   │   │   │   ├── auth.model.ts
+│   │   │   │   ├── auth.schema.ts
+│   │   │   │   ├── auth.dto.ts
+│   │   │   │   ├── auth.mapper.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── pages/
+│   │   │   │   ├── login.page.tsx
+│   │   │   │   ├── login.page.test.tsx
+│   │   │   │   └── register.page.tsx
+│   │   │   ├── test/
+│   │   │   │   ├── auth.handlers.ts
+│   │   │   │   └── auth.mocks.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── post/
+│   │   │   ├── api/
+│   │   │   │   ├── post.service.ts
+│   │   │   │   ├── post.endpoints.ts
+│   │   │   │   ├── post.keys.ts
+│   │   │   │   ├── post.mutations.ts
+│   │   │   │   ├── post.queries.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── domain/
+│   │   │   │   ├── post.model.ts
+│   │   │   │   ├── post.schema.ts
+│   │   │   │   ├── post.dto.ts
+│   │   │   │   ├── post.mapper.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── pages/
+│   │   │   │   ├── post-list.page.tsx
+│   │   │   │   ├── post-list.page.test.tsx
+│   │   │   │   ├── post-detail.page.tsx
+│   │   │   │   ├── post-detail.page.test.tsx
+│   │   │   │   ├── post-create.page.tsx
+│   │   │   │   └── post-create.page.test.tsx
+│   │   │   ├── ui/
+│   │   │   │   ├── post-item.tsx
+│   │   │   │   ├── post-form.tsx
+│   │   │   │   └── post-error-boundary.tsx
+│   │   │   ├── test/
+│   │   │   │   ├── post.handlers.ts
+│   │   │   │   ├── post.mocks.ts
+│   │   │   │   └── post.contract.test.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   └── dashboard/                         # ← Renamed from 'home'
+│   │       ├── pages/
+│   │       │   ├── dashboard.page.tsx
+│   │       │   └── dashboard.page.test.tsx
+│   │       └── index.ts
+│   │
+│   ├── layouts/
+│   │   ├── root/
+│   │   │   ├── root.layout.tsx
+│   │   │   ├── root.layout.test.tsx
+│   │   │   └── index.ts
 │   │   ├── auth/
-│   │   │   ├── login/
-│   │   │   │   └── index.tsx
-│   │   │   └── route.tsx
-│   │   └── route.tsx
-│   ├── __root.tsx
-│   ├── index.tsx
-│   └── routeTree.gen.ts
-└── shared/
-    ├── config/
-    │   ├── app.config.ts
-    │   ├── endpoints.config.ts
-    │   └── env.config.ts
-    ├── hooks/
-    │   └── use-online-status.ts
-    ├── store/
-    │   ├── auth.store.ts
-    │   ├── store.types.ts
-    │   └── ui.store.ts
-    ├── ui/
-    │   ├── button/
-    │   ├── content-wrapper/
-    │   ├── error/
-    │   ├── form/
-    │   ├── form-field/
-    │   ├── grid/
-    │   ├── index.ts
-    │   ├── input/
-    │   ├── loader/
-    │   ├── modal/
-    │   ├── select/
-    │   ├── table/
-    │   └── table-actions/
-    └── utils/
-        ├── cookie.ts
-        ├── logger.ts
-        └── object-to-form-data.ts
-```
-
----
-
-## 2. Naming & Placement Violations
-
-### 2.1 Filename Errors
-
-| # | File | Issue | Correct Name |
-|---|------|-------|-------------|
-| 1 | `src/app/lang/i18n.types.ts` | Missing `n` — typo in filename. Convention is `i18n`. | `i18n.types.ts` |
-| 2 | `src/shared/ui/error/error-fallback.tsx` | Component file is named `main-error` but it lives inside a folder called `error`. The folder name is overly generic for a UI kit. Either rename the folder to `main-error` to match the component, or rename the component to `error-fallback.tsx` for semantic clarity. | Folder: `error-fallback/` or file: `error-fallback.tsx` |
-| 3 | `src/features/post/ui/post-item/post-item.tsx` | The `.ui.tsx` suffix is an outlier. No other component file in the entire project uses this suffix. Pages use `.page.tsx`, layouts use `.layout.tsx`, but UI components simply use `.tsx`. | `post-item.tsx` |
-
-### 2.2 Naming Convention Inconsistencies
-
-| # | Pattern | Where Used | Violation |
-|---|---------|-----------|-----------|
-| 1 | `kebab-case` folders | `shared/ui/*`, `layouts/public/*`, `features/post/ui/*` | ✅ Consistent |
-| 2 | `dot-notation` files | `post.service.ts`, `post.queries.ts`, `auth.store.ts` | ✅ Consistent |
-| 3 | Component suffixes | `.page.tsx`, `.layout.tsx` | ⚠️ `post-item.tsx` breaks the pattern — no other UI component uses `.ui.tsx` |
-| 4 | Config suffixes | `app.config.ts`, `env.config.ts`, `endpoints.config.ts` | ✅ Consistent |
-| 5 | Store types | `store.types.ts` as a single monolith file | ⚠️ Mixes `AuthState` and `UiState` in one file. Should be co-located or split per-store. |
-| 6 | Layout sub-components | `footer.tsx`, `header.tsx`, `sidebar.tsx` | ⚠️ Missing `.layout.tsx` or `.component.tsx` suffix — inconsistent with the parent `public.layout.tsx` |
-
-### 2.3 Misplaced Files & Folders
-
-| # | Current Location | Issue | Correct Location |
-|---|-----------------|-------|-----------------|
-| 1 | `src/shared/store/auth.store.ts` | Auth state is a **domain concern**, not a shared utility. It belongs to an `auth` feature. | `src/features/auth/store/auth.store.ts` |
-| 2 | `src/shared/store/store.types.ts` | Monolith type file mixing `AuthState` + `UiState`. Each type should be co-located with its store. | Split: `auth.store.types.ts` + `ui.store.types.ts` (co-located with respective stores) |
-| 3 | `src/shared/config/endpoints.config.ts` | Contains `AUTH.LOGIN`, `AUTH.REFRESH`, `POSTS.LIST`, etc. These are **feature-specific** endpoints mixed with shared endpoints. | Feature-specific endpoints should live inside their feature's `api/` directory. Only truly shared endpoints (e.g., `COMMON.UPLOAD`) should stay in `shared/config/`. |
-| 4 | `src/features/login/` | "Login" is a page within the Authentication domain, not an independent feature. | `src/features/auth/pages/login.page.tsx` |
-| 5 | `src/features/home/` | Home is a thin shell with zero domain logic (no api, no store, no domain model). It only exports a single page. This is not a "feature" — it is a page. | `src/features/dashboard/` or kept as `home` but requires domain justification |
-| 6 | `src/layouts/public/public.types.ts` | Sidebar types (`SidebarProps`, `SidebarMenuItem`, `SidebarItemProps`, `FooterProps`) are defined in a monolith `public.types.ts` instead of being co-located. | Split to respective component folders: `sidebar/sidebar.types.ts`, `footer/footer.types.ts` |
-| 7 | `src/app/http/query-error-handler.ts` | This file exports `queryClient` — a **QueryClient instance** bundled inside an error-handler file. The `queryClient` factory is an application-level concern, not an error-handler concern. | Extract `queryClient` creation to `src/app/providers/query-client.ts` or `src/app/query-client.ts` |
-| 8 | `src/features/post/domain/post.schema.ts` | The validation schema uses a React hook (`usePostFormSchema` calls `useTranslation`). A file in a `domain/` folder should be pure — no React dependencies. | Move to `src/features/post/ui/schemas/post-form.schema.ts` or `src/features/post/hooks/use-post-schema.ts` |
-
----
-
-## 3. Structural Modifications (Recommendations)
-
-### 3.1 Deletions — Redundant / Obsolete
-
-| # | Target | Reason |
-|---|--------|--------|
-| 1 | `src/shared/store/store.types.ts` | Monolith type file. Inline types into their respective store files or co-locate as `*.store.types.ts` alongside each store. |
-| 2 | `src/features/login/` (as standalone feature) | Login is a subset of auth. Merge into `src/features/auth/`. |
-| 3 | All `*.module.scss.d.ts` files | These are auto-generated by `typed-scss-modules`. They should be in `.gitignore` and regenerated on build. Committing them creates merge conflicts and stale types. |
-| 4 | `dist/` directory | Build artifacts should not be committed. Already in `.gitignore`? Verify and remove from repository if tracked. |
-| 5 | `.idea/` directory | IDE-specific config. Should be in `.gitignore`. |
-| 6 | `.tanstack/` directory | Auto-generated by TanStack Router. Should be in `.gitignore`. |
-
-### 3.2 Additions — Missing Structural Elements
-
-| # | Missing Element | Location | Justification |
-|---|----------------|----------|---------------|
-| 1 | `src/features/auth/` (full feature) | `src/features/auth/` | Auth is a domain: it has login, register, token management, store, API endpoints. Currently fragmented across `shared/store/auth.store.ts`, `features/login/`, `app/http/refresh-token.ts`, `shared/config/endpoints.config.ts (AUTH section)`. |
-| 2 | Feature-level `index.ts` barrel for `auth` | `src/features/auth/index.ts` | Public API boundary for the auth feature. |
-| 3 | `src/shared/types/` directory | `src/shared/types/` | For genuinely shared types: API response wrappers, pagination types, utility types, generic form types. |
-| 4 | `src/shared/lib/` directory | `src/shared/lib/` | For third-party library wrappers/adapters (e.g., the axios `client-builder.ts` pattern could be a shared lib if used by multiple API instances). |
-| 5 | Per-feature `hooks/` directories | `src/features/*/hooks/` | Feature-specific hooks (like `usePostFormSchema`) should live in a dedicated `hooks/` directory within the feature, not under `domain/`. |
-| 6 | `src/shared/ui/*/index.ts` per component | `src/shared/ui/button/index.ts` | Individual barrel files per component folder. Currently, the root `shared/ui/index.ts` deep-imports into component internals (e.g., `./button/button.tsx`). Each component should re-export through its own `index.ts`. |
-| 7 | Test files alongside all features | `src/features/home/pages/home.page.test.tsx`, `src/features/login/pages/login.page.test.tsx` | `home` and `login` features have zero test coverage. Only `post` and `shared/ui/loader` have tests. |
-| 8 | `src/shared/constants/` | `src/shared/constants/` | For application-wide magic values, regex patterns, enum-like constants that don't belong in `config/`. |
-| 9 | Error layout styles | `src/layouts/error/error.module.scss` | The `error/` layout has only a `.tsx` file with no styles — likely incomplete. |
-
-### 3.3 Refactoring — Merges & Splits
-
-| # | Target | Action | Result |
-|---|--------|--------|--------|
-| 1 | `features/login/` + `shared/store/auth.store.ts` + auth endpoints | **Merge** into `features/auth/` | `features/auth/` with `api/`, `store/`, `pages/login/`, `domain/` |
-| 2 | `shared/ui/index.ts` barrel | **Split** into per-component barrels | Each `shared/ui/<component>/index.ts` re-exports, root barrel re-exports from folders |
-| 3 | `layouts/public/public.types.ts` | **Split** into co-located type files | `sidebar/sidebar.types.ts`, `footer/footer.types.ts` |
-| 4 | `app/http/query-error-handler.ts` | **Split** `queryClient` out | `app/query-client.ts` + `app/http/query-error-handler.ts` (handler only) |
-| 5 | `shared/store/` directory | **Restructure** — keep only UI store in shared | `shared/store/ui.store.ts` (truly shared) + move auth store to feature |
-
----
-
-## 4. Feature-Based Architecture Compliance
-
-### 4.1 Compliance Scorecard
-
-| Principle | Status | Details |
-|-----------|--------|---------|
-| **Features are self-contained domains** | ⚠️ Partial | `post/` is well-structured (api, domain, pages, ui). `home/` and `login/` are hollow shells with zero domain logic. |
-| **Features own their API layer** | ⚠️ Partial | `post/` owns its api. `login/` has none despite performing auth (uses `cookieUtils` directly). Auth API logic is scattered across `app/http/`. |
-| **Features own their state** | ❌ Fail | `auth.store.ts` lives in `shared/store/` instead of an auth feature. `ui.store.ts` is appropriately shared. |
-| **Public API via barrel exports** | ⚠️ Partial | Feature `index.ts` files exist but export internal types directly. No explicit public/private boundary enforcement. |
-| **No cross-feature imports** | ✅ Pass | Routes import from feature barrels (`@features/post`, `@features/login`). No feature-to-feature direct imports detected. |
-| **Shared layer is generic only** | ❌ Fail | `shared/store/auth.store.ts` is domain-specific. `shared/config/endpoints.config.ts` contains feature-specific endpoints. |
-| **Routes are thin glue** | ✅ Pass | Route files are thin wrappers that lazy-load feature pages. Correct usage of `lazyRouteComponent`. |
-| **Layouts are presentation-only** | ⚠️ Partial | `root.layout.tsx` mixes presentation with business logic (Sentry user sync, auth store reading). `public.layout.tsx` handles network status — borderline acceptable. |
-
-### 4.2 Coupling Violations
-
-#### Violation 1: Auth domain leaking into shared layer
-
-```
-src/shared/store/auth.store.ts    → Domain-specific state in shared
-src/app/http/interceptors.ts      → Imports useAuthStore from shared
-src/app/http/refresh-token.ts     → Imports useAuthStore from shared
-src/shared/config/endpoints.config.ts → AUTH endpoints in shared config
-```
-
-**Impact**: Any feature that touches authentication is implicitly coupled to a non-feature location. Refactoring auth becomes a cross-cutting change.
-
-#### Violation 2: QueryClient instantiation buried in error handler
-
-```
-src/app/http/query-error-handler.ts exports queryClient
-src/app/main.tsx imports queryClient from error-handler
-```
-
-**Impact**: The QueryClient factory is an application concern. Coupling it to error-handling means you cannot change error strategy without risking QueryClient configuration.
-
-#### Violation 3: Login feature has no domain
-
-```
-src/features/login/pages/login.page.tsx
-  → imports cookieUtils from @shared/utils
-  → imports Button from @shared/ui
-  → has ZERO api/, domain/, store/ directories
-```
-
-**Impact**: `login` is not a feature — it is an orphaned page. Its auth logic (cookie manipulation, token storage) should belong to an `auth` feature with a proper service layer.
-
-#### Violation 4: Domain layer contains React hooks
-
-```
-src/features/post/domain/post.schema.ts
-  → exports usePostFormSchema() (uses useTranslation)
-```
-
-**Impact**: The `domain/` directory should contain pure business logic (types, mappers, validation rules). React hooks violate this boundary and make the domain layer untestable without a React context.
-
-### 4.3 Feature Maturity Matrix
-
-| Feature | `api/` | `domain/` | `pages/` | `ui/` | `hooks/` | `store/` | `index.ts` | Tests | Maturity |
-|---------|--------|-----------|----------|-------|----------|----------|-----------|-------|----------|
-| `post` | ✅ 5 files | ✅ 4 files | ✅ 4 files | ✅ 1 comp | ❌ | ❌ | ✅ | ✅ 2 | **High** |
-| `login` | ❌ | ❌ | ✅ 1 file | ❌ | ❌ | ❌ | ✅ | ❌ | **Very Low** |
-| `home` | ❌ | ❌ | ✅ 1 file | ❌ | ❌ | ❌ | ✅ | ❌ | **Very Low** |
-
----
-
-## 5. DX & Clean Code Assessment
-
-### 5.1 🚨 Must-Haves (Critical)
-
-| # | Issue | Severity | Details |
-|---|-------|----------|---------|
-| 1 | **Auth domain fragmentation** | 🔴 Critical | Auth logic is scattered across 4+ directories (`shared/store`, `app/http`, `features/login`, `shared/config`). This is the most severe architectural violation. |
-| 2 | **Filename typo: `i18n.types.ts`** | 🔴 Critical | Typo in a type augmentation file. Any developer searching for `i18n` will miss it. |
-| 3 | **`queryClient` in error-handler** | 🔴 Critical | Application bootstrap is coupled to error-handling internals. |
-| 4 | **React hook in domain layer** | 🔴 Critical | `usePostFormSchema` in `domain/` violates layer separation. Domain must be framework-agnostic. |
-| 5 | **No per-component barrel exports** | 🟠 High | `shared/ui/index.ts` deep-imports into every component file. Adding a file to a component folder requires editing the root barrel. |
-| 6 | **Hardcoded auth flag** | 🟠 High | `const isAuth = true; // TODO: real auth logic` in `routes/$locale/_public/route.tsx`. Bypasses real authentication. |
-| 7 | **String template bug** | 🟠 High | `refresh-token.ts:60` — `Bearer {newAccessToken}` is missing the `$` for template literal interpolation. This is a runtime bug. |
-| 8 | **Relative imports in route files** | 🟠 High | Route files use `../../../layouts/public/public.layout.tsx` instead of path aliases. Fragile and inconsistent with the rest of the codebase. |
-
-### 5.2 💡 Nice-to-Haves (Improvements)
-
-| # | Improvement | Impact |
-|---|------------|--------|
-| 1 | Add `@layouts` path alias | Eliminates deep relative imports in route files |
-| 2 | Add `@shared/store` path alias | Currently imports `@shared/store/auth.store.ts` — works but could benefit from barrel re-export |
-| 3 | Add `eslint-plugin-boundaries` or similar | Enforces feature isolation at lint time. Prevents cross-feature imports. |
-| 4 | Co-locate test `__mocks__/` with features | `post.mocks.ts` in `api/` is good. Add `__tests__/` or `*.test.ts` files co-located with each module. |
-| 5 | Add `README.md` per feature | Documents feature boundaries, public API, and dependencies for onboarding. |
-| 6 | Move `.module.scss.d.ts` to `.gitignore` | Auto-generated files create merge conflicts. Regenerate on `dev`/`build`. |
-| 7 | Use `as const satisfies` for config objects | `ENDPOINTS`, `APP`, `ENV` use `as const` but could benefit from `satisfies` for type-safe extension. |
-| 8 | Extract shared `api/` types | Consider `shared/types/api.types.ts` for pagination, list responses, error shapes. |
-
-### 5.3 ✅ Best Practices — What's Done Right
-
-| # | Practice | Implementation |
-|---|----------|----------------|
-| 1 | **Dot-notation file naming** | Consistent across `*.service.ts`, `*.queries.ts`, `*.store.ts`, `*.config.ts`, `*.page.tsx`, `*.layout.tsx` |
-| 2 | **DTO → Model mapping** | `post.dto.ts` + `post.mapper.ts` + `post.model.ts` — clean separation of API contracts from UI models |
-| 3 | **Query key factory** | `post.keys.ts` — prevents key collision and enables scoped invalidation |
-| 4 | **Lazy route loading** | `lazyRouteComponent()` with dynamic imports through barrel files |
-| 5 | **Provider composition** | Clean provider nesting in `app-providers.tsx`: Sentry → I18n → Suspense → Query → Router |
-| 6 | **HTTP client builder pattern** | `client-builder.ts` abstracts Axios, enabling multiple API instances with shared configuration |
-| 7 | **SCSS architecture** | `abstracts/` (functions, mixins, variables) · `base/` (reset, common) · `root/` (tokens, palette, theme) follows ITCSS-inspired layering |
-| 8 | **Global error handling** | Centralized error handler with Sentry integration, status-based toast messages, ValiError detection |
-| 9 | **i18n namespace isolation** | Per-feature namespaces (`post`, `auth`, `validation`, `common`) with lazy namespace loading in route loaders |
-| 10 | **Typed SCSS modules** | `typed-scss-modules` for compile-time CSS class validation |
-
----
-
-## 6. Optimal Refactored Directory Tree
-
-The following represents the target state that fully adheres to Feature-Based Architecture:
-
-```
-src/
-├── app/                              # Application shell — initialization, providers, infra
-│   ├── http/
-│   │   ├── base-instance.ts          # Axios instance factory
-│   │   ├── client-builder.ts         # Generic HTTP client wrapper
-│   │   ├── query-error-handler.ts          # Global error handler (no queryClient export)
-│   │   ├── interceptors.ts           # Request/response interceptors
-│   │   └── refresh-token.ts          # Token refresh queue logic
-│   ├── lang/
-│   │   ├── i18n.ts            # i18next initialization
-│   │   └── i18n.types.ts             # ← RENAMED from i18n.types.ts
-│   ├── monitoring/
-│   │   ├── sentry-router-integration.tsx
-│   │   ├── sentry-user-sync.ts
-│   │   └── sentry.ts
-│   ├── providers/
-│   │   ├── app-providers.tsx
-│   │   ├── i18n-provider.tsx
-│   │   ├── query-client.ts           # ← NEW: queryClient factory extracted here
-│   │   ├── query-provider.tsx
-│   │   ├── router-provider.tsx
-│   │   └── sentry-provider.tsx
-│   ├── test/
-│   │   ├── handlers.ts
-│   │   ├── server.ts
-│   │   └── setup.ts
-│   ├── main.scss
-│   └── main.tsx
-│
-├── assets/                           # Static assets — no logic
-│   ├── fonts/
-│   │   ├── imperial-script/
-│   │   ├── nunito/
-│   │   └── pf-square-sans-pro/
-│   ├── images/
-│   │   ├── juan.webp
-│   │   ├── logout.webp
-│   │   ├── notfound.svg
-│   │   └── sima-negative.svg
-│   └── styles/
-│       ├── abstracts/
-│       ├── base/
-│       └── root/
-│
-├── features/                         # Feature modules — self-contained domains
-│   ├── auth/                         # ← MERGED: login + shared/store/auth + auth endpoints
-│   │   ├── api/
-│   │   │   ├── auth.keys.ts
-│   │   │   ├── auth.service.ts
-│   │   │   └── auth.endpoints.ts     # ← MOVED from shared/config/endpoints (AUTH section)
-│   │   ├── domain/
-│   │   │   ├── auth.dto.ts
-│   │   │   ├── auth.model.ts
-│   │   │   └── auth.mapper.ts
+│   │   │   ├── auth.layout.tsx
+│   │   │   ├── auth.module.scss
+│   │   │   └── index.ts
+│   │   ├── error/
+│   │   │   ├── error.layout.tsx
+│   │   │   └── index.ts
+│   │   └── public/
+│   │       ├── ui/                            # ← Flattened structure
+│   │       │   ├── header.tsx
+│   │       │   ├── header.module.scss
+│   │       │   ├── footer.tsx
+│   │       │   ├── footer.module.scss
+│   │       │   ├── sidebar.tsx
+│   │       │   ├── sidebar.module.scss
+│   │       │   ├── sidebar-item.tsx
+│   │       │   ├── sidebar-item.module.scss
+│   │       │   └── index.ts
+│   │       ├── public.layout.tsx
+│   │       ├── public.module.scss
+│   │       ├── public.types.ts
+│   │       └── index.ts
+│   │
+│   ├── routes/
+│   │   ├── __root.tsx
+│   │   ├── index.tsx
+│   │   └── $locale/
+│   │       ├── route.tsx
+│   │       ├── auth/
+│   │       │   ├── route.tsx
+│   │       │   └── login/
+│   │       │       └── index.tsx
+│   │       └── _public/
+│   │           ├── route.tsx
+│   │           ├── index.tsx
+│   │           └── post/
+│   │               ├── index.tsx
+│   │               ├── create/
+│   │               │   └── index.tsx
+│   │               └── $postId/
+│   │                   └── index.tsx
+│   │
+│   ├── shared/
+│   │   ├── api/                               # ← NEW: Shared API utilities
+│   │   │   ├── types.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── config/
+│   │   │   ├── app.config.ts
+│   │   │   ├── env.config.ts
+│   │   │   ├── endpoints.config.ts
+│   │   │   ├── i18n.config.ts
+│   │   │   └── index.ts
+│   │   │
 │   │   ├── hooks/
-│   │   │   └── use-auth.ts
-│   │   ├── pages/
-│   │   │   ├── login.page.tsx
-│   │   │   └── login.page.test.tsx
+│   │   │   ├── use-online-status.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── lib/                               # ← Populated
+│   │   │   ├── http/                          # ← Moved from app/http
+│   │   │   │   ├── base-instance.ts
+│   │   │   │   ├── client-builder.ts
+│   │   │   │   ├── interceptors.ts
+│   │   │   │   ├── refresh-token.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── i18n/                          # ← Moved from app/core
+│   │   │   │   ├── i18n.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── query/                         # ← Moved from app/core
+│   │   │   │   ├── query-error-handler.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── sentry/                        # ← Moved from app/core
+│   │   │   │   ├── sentry.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── auth/                          # ← NEW: Unified auth management
+│   │   │   │   ├── auth-manager.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── cookie.ts                      # ← Moved from utils
+│   │   │   ├── logger.ts                      # ← Moved from utils
+│   │   │   ├── form-data.ts                   # ← Renamed from object-to-form-data
+│   │   │   └── index.ts
+│   │   │
 │   │   ├── store/
-│   │   │   └── auth.store.ts         # ← MOVED from shared/store/
+│   │   │   ├── auth.store.ts
+│   │   │   ├── ui.store.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── types/                             # ← Populated
+│   │   │   ├── common.types.ts
+│   │   │   ├── api.types.ts
+│   │   │   └── index.ts
+│   │   │
+│   │   └── ui/
+│   │       ├── button/
+│   │       │   ├── button.tsx
+│   │       │   ├── button.types.ts
+│   │       │   ├── button.module.scss
+│   │       │   ├── button.test.tsx            # ← Added tests
+│   │       │   ├── button.stories.tsx         # ← Added Storybook
+│   │       │   └── index.ts
+│   │       ├── content-wrapper/
+│   │       │   ├── content-wrapper.tsx
+│   │       │   ├── content-wrapper.module.scss
+│   │       │   └── index.ts
+│   │       ├── error-fallback/
+│   │       │   ├── error-fallback.tsx
+│   │       │   ├── error-fallback.module.scss
+│   │       │   └── index.ts
+│   │       ├── form/
+│   │       │   ├── form.tsx
+│   │       │   ├── form.types.ts
+│   │       │   └── index.ts
+│   │       ├── form-field/
+│   │       │   ├── form-field.tsx
+│   │       │   ├── form-field.types.ts
+│   │       │   ├── form-field.module.scss
+│   │       │   └── index.ts
+│   │       ├── grid/
+│   │       │   ├── grid.tsx
+│   │       │   ├── grid.types.ts
+│   │       │   ├── grid.module.scss
+│   │       │   └── index.ts
+│   │       ├── input/
+│   │       │   ├── input.tsx
+│   │       │   ├── input.types.ts
+│   │       │   ├── input.module.scss
+│   │       │   └── index.ts
+│   │       ├── loader/
+│   │       │   ├── loader.tsx
+│   │       │   ├── loader.test.tsx
+│   │       │   ├── loader.module.scss
+│   │       │   └── index.ts
+│   │       ├── modal/
+│   │       │   ├── modal.tsx
+│   │       │   ├── modal.module.scss
+│   │       │   └── index.ts
+│   │       ├── select/
+│   │       │   ├── select.tsx
+│   │       │   ├── select.types.ts
+│   │       │   ├── select.module.scss
+│   │       │   └── index.ts
+│   │       ├── table/
+│   │       │   ├── table.tsx
+│   │       │   ├── table.types.ts
+│   │       │   ├── table.module.scss
+│   │       │   └── index.ts
+│   │       ├── table-actions/
+│   │       │   ├── table-actions.tsx
+│   │       │   ├── table-actions.module.scss
+│   │       │   └── index.ts
+│   │       └── index.ts
+│   │
+│   ├── testing/
+│   │   ├── setup.ts
+│   │   ├── server.ts
+│   │   ├── handlers.ts
 │   │   └── index.ts
 │   │
-│   ├── home/
-│   │   ├── pages/
-│   │   │   ├── home.page.tsx
-│   │   │   └── home.page.test.tsx    # ← NEW: test coverage needed
-│   │   └── index.ts
-│   │
-│   └── post/
-│       ├── api/
-│       │   ├── post.endpoints.ts     # ← MOVED from shared/config/endpoints (POSTS section)
-│       │   ├── post.keys.ts
-│       │   ├── post.mocks.ts
-│       │   ├── post.mutations.ts
-│       │   ├── post.queries.ts
-│       │   └── post.service.ts
-│       ├── domain/
-│       │   ├── post.dto.ts
-│       │   ├── post.mapper.ts
-│       │   └── post.model.ts         # Pure types only
-│       ├── hooks/
-│       │   └── use-post-form-schema.ts  # ← MOVED from domain/post.schema.ts
-│       ├── pages/
-│       │   ├── post-detail.page.tsx
-│       │   ├── post-detail.page.test.tsx
-│       │   ├── post.page.tsx
-│       │   └── post.page.test.tsx
-│       ├── ui/
-│       │   └── post-item/
-│       │       ├── post-item.tsx      # ← RENAMED from post-item.tsx
-│       │       └── post-item.module.scss
-│       └── index.ts
+│   └── assets/
+│       ├── fonts/
+│       ├── images/
+│       └── styles/
 │
-├── layouts/                          # Layout shells — presentation only
-│   ├── auth/
-│   │   ├── auth.layout.tsx
-│   │   └── auth.module.scss
-│   ├── error/
-│   │   ├── error.layout.tsx
-│   │   └── error.module.scss         # ← NEW: missing styles
-│   ├── public/
-│   │   ├── footer/
-│   │   │   ├── footer.tsx
-│   │   │   ├── footer.types.ts       # ← SPLIT from public.types.ts
-│   │   │   └── footer.module.scss
-│   │   ├── header/
-│   │   │   ├── header.tsx
-│   │   │   └── header.module.scss
-│   │   ├── sidebar/
-│   │   │   ├── sidebar.tsx
-│   │   │   ├── sidebar.types.ts      # ← SPLIT from public.types.ts
-│   │   │   └── sidebar.module.scss
-│   │   ├── sidebar-item/
-│   │   │   ├── sidebar-item.tsx
-│   │   │   ├── sidebar-item.types.ts # ← SPLIT from public.types.ts
-│   │   │   └── sidebar-item.module.scss
-│   │   ├── public.layout.tsx
-│   │   └── public.module.scss
-│   └── root/
-│       ├── root.layout.tsx
-│       └── root.layout.test.tsx
-│
-├── routes/                           # TanStack Router file-based routes — thin glue only
-│   ├── $locale/
-│   │   ├── _public/
-│   │   │   ├── index.tsx
-│   │   │   ├── post/
-│   │   │   │   ├── $postId/
-│   │   │   │   │   └── index.tsx
-│   │   │   │   ├── create/
-│   │   │   │   │   └── index.tsx
-│   │   │   │   └── index.tsx
-│   │   │   └── route.tsx
-│   │   ├── auth/
-│   │   │   ├── login/
-│   │   │   │   └── index.tsx
-│   │   │   └── route.tsx
-│   │   └── route.tsx
-│   ├── __root.tsx
-│   ├── index.tsx
-│   └── routeTree.gen.ts              # Auto-generated — should be in .gitignore
-│
-└── shared/                           # Genuinely shared utilities — zero domain logic
-    ├── config/
-    │   ├── app.config.ts
-    │   ├── endpoints.config.ts       # Only COMMON endpoints remain
-    │   └── env.config.ts
-    ├── constants/                    # ← NEW
-    │   └── regex.ts
-    ├── hooks/
-    │   └── use-online-status.ts
-    ├── lib/                          # ← NEW: third-party wrappers
-    │   └── axios/
-    │       └── client-builder.ts     # Optional: extract if shared across multiple modules
-    ├── store/
-    │   └── ui.store.ts               # Only truly shared UI state
-    ├── types/                        # ← NEW: shared generic types
-    │   ├── api.types.ts              # Pagination, ApiResponse<T>, etc.
-    │   └── utility.types.ts
-    ├── ui/
-    │   ├── button/
-    │   │   ├── index.ts              # ← NEW per-component barrel
-    │   │   ├── button.tsx
-    │   │   ├── button.types.ts
-    │   │   └── button.module.scss
-    │   ├── content-wrapper/
-    │   │   ├── index.ts
-    │   │   ├── content-wrapper.tsx
-    │   │   └── content-wrapper.module.scss
-    │   ├── error-fallback/           # ← RENAMED from error/
-    │   │   ├── index.ts
-    │   │   ├── error-fallback.tsx
-    │   │   └── error-fallback.module.scss
-    │   ├── form/
-    │   │   ├── index.ts
-    │   │   ├── form.tsx
-    │   │   └── form.types.ts
-    │   ├── form-field/
-    │   │   ├── index.ts
-    │   │   ├── form-field.tsx
-    │   │   ├── form-field.types.ts
-    │   │   └── form-field.module.scss
-    │   ├── grid/
-    │   │   ├── index.ts
-    │   │   ├── grid.tsx
-    │   │   ├── grid.types.ts
-    │   │   └── grid.module.scss
-    │   ├── index.ts                  # Root barrel — re-exports from sub-barrels
-    │   ├── input/
-    │   │   ├── index.ts
-    │   │   ├── input.tsx
-    │   │   ├── input.types.ts
-    │   │   └── input.module.scss
-    │   ├── loader/
-    │   │   ├── index.ts
-    │   │   ├── loader.tsx
-    │   │   ├── loader.test.tsx
-    │   │   └── loader.module.scss
-    │   ├── modal/
-    │   │   ├── index.ts
-    │   │   ├── modal.tsx
-    │   │   └── modal.module.scss
-    │   ├── select/
-    │   │   ├── index.ts
-    │   │   ├── select.tsx
-    │   │   ├── select.types.ts
-    │   │   └── select.module.scss
-    │   ├── table/
-    │   │   ├── index.ts
-    │   │   ├── table.tsx
-    │   │   ├── table.types.ts
-    │   │   └── table.module.scss
-    │   └── table-actions/
-    │       ├── index.ts
-    │       ├── table-actions.tsx
-    │       └── table-actions.module.scss
-    └── utils/
-        ├── cookie.ts
-        ├── logger.ts
-        └── object-to-form-data.ts
+├── .gitignore                                 # ← Add dist/, routeTree.gen.ts
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── vitest.config.ts                           # ← NEW: Separate test config
+└── README.md                                  # ← Document architecture
 ```
 
 ---
 
-## Summary of Violations by Severity
+## 8. Action Plan (Prioritized)
 
-| Severity | Count | Key Issues |
-|----------|-------|------------|
-| 🔴 Critical | 4 | Auth fragmentation, filename typo, queryClient misplacement, React hook in domain |
-| 🟠 High | 4 | Missing component barrels, hardcoded auth, string template bug, relative imports |
-| 🟡 Medium | 6 | Type file monoliths, missing test coverage, login not a real feature, committed generated files |
-| 🔵 Low | 5 | Missing path aliases, missing constants dir, no boundary lint rules, co-location improvements |
+### Phase 1: Critical Fixes (Week 1)
 
-**Overall Feature-Based Architecture Compliance: ~55%**
+1. **Move `app/http/` → `shared/lib/http/`**
+   - Update all imports from `@app/http/*` to `@shared/lib/http`
+   - Run `pnpm tsc` to verify no broken imports
 
-The `post` feature is the gold standard in this codebase. If every feature followed its pattern (api → domain → pages → ui with barrel exports), the architecture score would be significantly higher. The most impactful single change is consolidating the `auth` domain into a proper feature module.
+2. **Move `app/core/` → `shared/lib/`**
+   - Split into `shared/lib/i18n/`, `shared/lib/query/`, `shared/lib/sentry/`
+   - Update app providers to import from new locations
+
+3. **Flatten `layouts/public/` subcomponents**
+   - Move `sidebar-item/`, `header/`, `footer/`, `sidebar/` into `layouts/public/ui/`
+   - Update imports in `public.layout.tsx`
+
+4. **Consolidate authentication state**
+   - Create `shared/lib/auth/auth-manager.ts`
+   - Refactor `login.page.tsx` to use unified auth manager
+   - Remove duplicate token logic
+
+5. **Fix empty `post-item.tsx`**
+   - Implement or delete `src/features/post/ui/post-item/post-item.tsx`
+
+### Phase 2: Structural Improvements (Week 2)
+
+6. **Complete `login` feature structure**
+   - Add `api/`, `domain/` layers
+   - Implement real authentication flow (or mark as demo)
+
+7. **Refactor `home` feature**
+   - Rename to `dashboard`
+   - Add business logic or move to `pages/` directory
+
+8. **Add barrel files**
+   - `shared/config/index.ts`
+   - `shared/store/index.ts`
+   - `features/post/api/index.ts`
+   - `features/post/domain/index.ts`
+
+9. **Add error boundaries per feature**
+   - Create `features/post/ui/post-error-boundary.tsx`
+   - Create `features/auth/ui/auth-error-boundary.tsx`
+
+### Phase 3: Developer Experience (Week 3)
+
+10. **Add Storybook**
+    - Install Storybook
+    - Add `.stories.tsx` for all `shared/ui/` components
+
+11. **Add API contract tests**
+    - Create `features/post/test/post.contract.test.ts`
+    - Validate MSW responses match schemas
+
+12. **Implement route-based code splitting**
+    - Add `lazy()` imports for feature pages
+    - Update `vite.config.ts` manual chunks
+
+13. **Add TypeScript strict null checks**
+    - Enable `strictNullChecks` in `tsconfig.json`
+    - Fix resulting type errors
+
+### Phase 4: Documentation & Tooling (Week 4)
+
+14. **Add architecture documentation**
+    - Create `docs/ARCHITECTURE.md`
+    - Document feature structure
+    - Add ADRs (Architecture Decision Records)
+
+15. **Add circular dependency linting**
+    - Install `madge`
+    - Add `pnpm circular-check` script
+
+16. **Add bundle analysis**
+    - Document how to use `rollup-plugin-visualizer`
+    - Set bundle size budgets
+
+17. **Security improvements**
+    - Add `Secure` flag to cookies
+    - Document HttpOnly requirement (server-side)
+    - Add CSP headers (if applicable)
+
+---
+
+## 9. Final Verdict
+
+### Strengths
+
+1. ✅ **Solid foundation:** The `post` feature demonstrates strong understanding of FSD principles
+2. ✅ **Modern tooling:** React 19, TanStack stack, Valibot—excellent choices
+3. ✅ **Type safety emphasis:** Runtime validation with Valibot is a best practice
+4. ✅ **Testing infrastructure:** MSW, Vitest, Testing Library configured correctly
+5. ✅ **Internationalization:** i18next properly structured with namespace separation
+
+### Weaknesses
+
+1. ❌ **Incomplete features:** `home` and `login` lack proper structure
+2. ❌ **Layer boundary violations:** `app/` layer contains infrastructure code
+3. ❌ **Inconsistent patterns:** Mixed testing locations, missing barrel files
+4. ❌ **Authentication chaos:** Multiple auth state management mechanisms
+5. ❌ **Security issues:** Fake authentication, insecure cookies
+
+### Compliance Score Breakdown
+
+| Category | Score | Weight | Weighted Score |
+|----------|-------|--------|----------------|
+| Naming & Placement | 7/10 | 20% | 1.4 |
+| Feature Structure | 6/10 | 30% | 1.8 |
+| Separation of Concerns | 5/10 | 20% | 1.0 |
+| Developer Experience | 7/10 | 15% | 1.05 |
+| Testing | 8/10 | 10% | 0.8 |
+| Security | 4/10 | 5% | 0.2 |
+| **Total** | **6.25/10** | **100%** | **6.25** |
+
+---
+
+## 10. Conclusion
+
+The codebase shows **promising architecture foundations** but requires **systematic refactoring** to achieve true Feature-Based Architecture compliance. The primary issues stem from:
+
+1. **Incomplete feature implementations** (only `post` is fully structured)
+2. **Misplaced infrastructure code** (`app/` layer overreach)
+3. **Inconsistent patterns** (testing, barrel files, naming)
+
+**Recommendation:** Follow the 4-phase action plan to incrementally improve the architecture without disrupting active development. Prioritize Phase 1 (critical fixes) before adding new features.
+
+**Estimated Effort:**
+- Phase 1 (Critical): 2-3 days
+- Phase 2 (Structural): 3-4 days
+- Phase 3 (DX): 4-5 days
+- Phase 4 (Documentation): 2-3 days
+
+**Total:** ~2.5 weeks for full compliance
+
+---
+
+**Reviewed by:** Claude (Strict Software Architect Mode)
+**Date:** 2026-04-08
+**Next Review:** After Phase 1 completion

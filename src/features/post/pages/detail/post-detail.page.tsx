@@ -7,8 +7,8 @@ import {
 } from '@features/post';
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
+import { logger } from '@shared/lib/logger.ts';
 import { Button, ContentWrapper, Form, FormField, Input } from '@shared/ui';
-import { logger } from '@shared/utils/logger';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';

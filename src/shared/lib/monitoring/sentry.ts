@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react';
 import { ENV } from '@shared/config/env.config.ts';
-import { logger } from '@shared/utils/logger.ts';
+import { logger } from '@shared/lib/logger.ts';
 
 /**
  * Initialize Sentry for error tracking and performance monitoring

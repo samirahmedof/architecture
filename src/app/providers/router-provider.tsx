@@ -1,4 +1,4 @@
-import i18n from '@app/core/i18n.ts';
+import i18n from '@shared/lib/i18n/i18n.ts';
 import type { QueryClient } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import type { ReactNode } from 'react';

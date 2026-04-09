@@ -1,6 +1,6 @@
+import { queryClient } from '@shared/lib/query-error-handler.ts';
 import { QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
-import { queryClient } from '../core/query-error-handler.ts';
 
 interface QueryProviderProps {
   children: ReactNode;

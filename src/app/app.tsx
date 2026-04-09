@@ -1,19 +1,13 @@
 import { QueryProvider } from '@app/providers/query-provider.tsx';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
-import type { QueryClient } from '@tanstack/react-query';
-import type { ReactNode } from 'react';
+import { queryClient } from '@shared/lib/query-error-handler.ts';
 import { StrictMode, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nProvider } from './i18n-provider.tsx';
-import { AppRouterProvider } from './router-provider.tsx';
-import { SentryProvider } from './sentry-provider.tsx';
+import { I18nProvider } from './providers/i18n-provider.tsx';
+import { AppRouterProvider } from './providers/router-provider.tsx';
+import { SentryProvider } from './providers/sentry-provider.tsx';
 
-interface AppProvidersProps {
-  queryClient: QueryClient;
-  children?: ReactNode;
-}
-
-export const AppProviders = ({ queryClient }: AppProvidersProps) => {
+export const App = () => {
   const { t } = useTranslation(NAMESPACES.COMMON);
 
   return (

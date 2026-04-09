@@ -1,4 +1,4 @@
-import { initSentry } from '@app/core/sentry.ts';
+import { initSentry } from '@shared/lib/monitoring/sentry.ts';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 

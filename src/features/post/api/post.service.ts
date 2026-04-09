@@ -1,4 +1,3 @@
-import { api } from '@app/http/base-instance.ts';
 import { PostDtoSchema } from '@features/post/domain/post.dto.ts';
 import {
   toPostCreateModel,
@@ -11,6 +10,7 @@ import type {
   PostUpdateModel,
 } from '@features/post/domain/post.model.ts';
 import { ENDPOINTS } from '@shared/config/endpoints.config';
+import { api } from '@shared/lib/http/base-instance.ts';
 import * as v from 'valibot';
 
 export const postService = {
