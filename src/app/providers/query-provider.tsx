@@ -1,4 +1,4 @@
-import { queryClient } from '@shared/lib/query-error-handler.ts';
+import { queryClient } from '@app/query-client.ts';
 import { QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 

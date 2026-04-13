@@ -1,38 +1,30 @@
-import { PostDtoSchema } from '@features/post/domain/post.dto.ts';
-import {
-  toPostCreateModel,
-  toPostModel,
-  toPostUpdateModel,
-} from '@features/post/domain/post.mapper.ts';
-import type {
-  PostCreateModel,
-  PostModel,
-  PostUpdateModel,
-} from '@features/post/domain/post.model.ts';
-import { ENDPOINTS } from '@shared/config/endpoints.config';
 import { api } from '@shared/lib/http/base-instance.ts';
 import * as v from 'valibot';
+import { PostDtoSchema } from '../model/post.dto.ts';
+import { toPostCreateModel, toPostModel, toPostUpdateModel } from '../model/post.mapper.ts';
+import type { PostCreateModel, PostTypes, PostUpdateModel } from '../model/post.types.ts';
+import { POST_ENDPOINTS } from './post.endpoints.ts';
 
 export const postService = {
-  getAll: async (): Promise<PostModel[]> => {
-    const dtos = await api.get(ENDPOINTS.POSTS.LIST, v.array(PostDtoSchema));
+  getAll: async (): Promise<PostTypes[]> => {
+    const dtos = await api.get(POST_ENDPOINTS.LIST, v.array(PostDtoSchema));
     return dtos.map(toPostModel);
   },
 
-  getById: async (id: number): Promise<PostModel> => {
-    const dto = await api.get(ENDPOINTS.POSTS.BY_ID(id), PostDtoSchema);
+  getById: async (id: number): Promise<PostTypes> => {
+    const dto = await api.get(POST_ENDPOINTS.BY_ID(id), PostDtoSchema);
     return toPostModel(dto);
   },
 
-  create: async (data: PostCreateModel): Promise<PostModel> => {
+  create: async (data: PostCreateModel): Promise<PostTypes> => {
     const payload = toPostCreateModel(data);
-    const dto = await api.post(ENDPOINTS.POSTS.LIST, payload, PostDtoSchema);
+    const dto = await api.post(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
     return toPostModel(dto);
   },
 
-  update: async (data: PostUpdateModel): Promise<PostModel> => {
+  update: async (data: PostUpdateModel): Promise<PostTypes> => {
     const payload = toPostUpdateModel(data);
-    const dto = await api.post(ENDPOINTS.POSTS.LIST, payload, PostDtoSchema);
+    const dto = await api.post(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
     return toPostModel(dto);
   },
 };

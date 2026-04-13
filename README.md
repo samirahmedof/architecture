@@ -65,7 +65,7 @@ src/
 │   │   ├── model/                          ← RENAMED from domain/
 │   │   │   ├── post.dto.ts
 │   │   │   ├── post.mapper.ts
-│   │   │   ├── post.model.ts
+│   │   │   ├── post.types.ts
 │   │   │   └── post.schema.ts
 │   │   ├── ui/                             ← STAYS
 │   │   │   └── post-item/

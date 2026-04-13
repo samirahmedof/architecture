@@ -1,3 +1,3 @@
-import { postHandlers } from '@features/post/test/post.handlers.ts';
+import type { HttpHandler } from 'msw';
 
-export const handlers = [...postHandlers];
+export const handlers: HttpHandler[] = [];

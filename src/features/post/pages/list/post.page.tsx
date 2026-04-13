@@ -1,4 +1,4 @@
-import { type PostModel, postQueries } from '@features/post';
+import { type PostTypes, postQueries } from '@features/post';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { logger } from '@shared/lib/logger.ts';
 import { type ColumnType, Table, TableActions } from '@shared/ui';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 const PostPage = () => {
   const { t } = useTranslation(NAMESPACES.POST);
 
-  const columns: ColumnType<PostModel>[] = [
+  const columns: ColumnType<PostTypes>[] = [
     {
       key: 'name',
       title: t('title'),

@@ -1,4 +1,4 @@
-import type { PostDto } from '../domain/post.dto.ts';
+import type { PostDto } from '../model/post.dto.ts';
 
 // Fixed test fixtures
 export const mockPosts: PostDto[] = [

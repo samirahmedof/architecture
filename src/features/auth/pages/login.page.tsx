@@ -1,8 +1,8 @@
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
-import { cookieUtils } from '@shared/lib/cookie.ts';
 import { Button } from '@shared/ui';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import { cookieUtils } from '../lib/cookie.ts';
 
 const LoginPage = () => {
   const router = useRouter();

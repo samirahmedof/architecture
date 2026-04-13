@@ -217,7 +217,7 @@ src/features/post/
 ├── domain/
 │   ├── post.dto.ts
 │   ├── post.mapper.ts
-│   ├── post.model.ts
+│   ├── post.types.ts
 │   └── post.schema.ts
 ├── pages/
 │   ├── post.page.tsx
@@ -335,7 +335,7 @@ Features import only from:
 **Example from `post.page.tsx:1-6`:**
 
 ```typescript
-import { type PostModel, postQueries } from '@features/post';
+import { type PostTypes, postQueries } from '@features/post';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { type ColumnType, Table, TableActions } from '@shared/ui';
 import { logger } from '@shared/utils/logger.ts';
@@ -461,7 +461,7 @@ return dtos.map(toPostModel);
 export type PostDto = v.InferOutput<typeof PostDtoSchema>;
 
 // Mapper signature becomes type-safe
-export const toPostModel = (dto: PostDto): PostModel => { /* ... */ };
+export const toPostModel = (dto: PostDto): PostTypes => { /* ... */ };
 ```
 
 #### ❌ **5. Barrel File Export Inconsistency**
@@ -571,7 +571,7 @@ export const Route = createFileRoute('/$locale/_public/post/$postId/')({
 
 ```
 ✅ Kebab-case: post-detail.page.tsx, sidebar-item.tsx
-✅ PascalCase: PostModel, LoginPage (types/components)
+✅ PascalCase: PostTypes, LoginPage (types/components)
 ⚠️ Inconsistent: post.page.tsx vs. PostPage component name
 ```
 
@@ -780,7 +780,7 @@ ARCHİTECTURE-V4/
 │   │   │   │   ├── post.queries.ts
 │   │   │   │   └── index.ts
 │   │   │   ├── domain/
-│   │   │   │   ├── post.model.ts
+│   │   │   │   ├── post.types.ts
 │   │   │   │   ├── post.schema.ts
 │   │   │   │   ├── post.dto.ts
 │   │   │   │   ├── post.mapper.ts

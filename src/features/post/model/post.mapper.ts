@@ -1,11 +1,7 @@
-import type { PostDto } from '@features/post/domain/post.dto.ts';
-import type {
-  PostCreateModel,
-  PostModel,
-  PostUpdateModel,
-} from '@features/post/domain/post.model.ts';
+import type { PostDto } from './post.dto.ts';
+import type { PostCreateModel, PostTypes, PostUpdateModel } from './post.types.ts';
 
-export const toPostModel = (dto: PostDto): PostModel => {
+export const toPostModel = (dto: PostDto): PostTypes => {
   return {
     id: dto.id,
     title: dto.title.toUpperCase(),

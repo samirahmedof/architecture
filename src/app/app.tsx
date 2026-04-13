@@ -1,6 +1,6 @@
 import { QueryProvider } from '@app/providers/query-provider.tsx';
+import { queryClient } from '@app/query-client.ts';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
-import { queryClient } from '@shared/lib/query-error-handler.ts';
 import { StrictMode, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { I18nProvider } from './providers/i18n-provider.tsx';
