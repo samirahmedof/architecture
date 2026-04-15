@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm up *)",
+      "Bash(pnpm why *)",
+      "WebFetch(domain:vite.dev)",
+      "Bash(node -e \"const v=require\\('vite/package.json'\\); console.log\\(v.version\\)\")",
+      "Bash(node -e \"const p=require.resolve\\('vite'\\); console.log\\(p\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm vitest *)",
+      "Bash(pnpm remove *)",
+      "Bash(pnpm add *)"
+    ]
+  }
+}

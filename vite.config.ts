@@ -1,10 +1,9 @@
 import path from 'node:path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -19,7 +18,6 @@ export default defineConfig(({ mode }) => {
         quoteStyle: 'single',
       }),
       react(),
-      tsconfigPaths(),
       !isDev &&
         visualizer({
           filename: 'stats.html',
@@ -47,32 +45,33 @@ export default defineConfig(({ mode }) => {
         }),
     ],
     resolve: {
+      tsconfigPaths: true,
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
     },
     build: {
-      target: 'es2022',
-      minify: 'esbuild',
+      // target: 'es2022',
+      minify: 'oxc',
       sourcemap: true,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('/node_modules/react/') || id.includes('/node_modules/react-dom/')) {
-                return 'react-core';
-              }
-              if (id.includes('@tanstack')) {
-                return 'tanstack-vendor';
-              }
-              if (id.includes('axios') || id.includes('zustand') || id.includes('dayjs')) {
-                return 'utils-vendor';
-              }
-              return 'vendor';
-            }
-          },
-        },
-      },
+      // rolldownOptions: {
+      //   output: {
+      //     manualChunks(id) {
+      //       if (id.includes('node_modules')) {
+      //         if (id.includes('/node_modules/react/') || id.includes('/node_modules/react-dom/')) {
+      //           return 'react-core';
+      //         }
+      //         if (id.includes('@tanstack')) {
+      //           return 'tanstack-vendor';
+      //         }
+      //         if (id.includes('axios') || id.includes('zustand') || id.includes('dayjs')) {
+      //           return 'utils-vendor';
+      //         }
+      //         return 'vendor';
+      //       }
+      //     },
+      //   },
+      // },
     },
     css: {
       preprocessorOptions: {
@@ -82,17 +81,6 @@ export default defineConfig(({ mode }) => {
         },
       },
       devSourcemap: true,
-    },
-    test: {
-      globals: true,
-      environment: 'happy-dom',
-      setupFiles: './src/testing/setup.ts',
-      css: true,
-      include: ['src/**/*.{test,spec}.{ts,tsx}'],
-      coverage: {
-        provider: 'v8',
-        reporter: ['text', 'json', 'html'],
-      },
     },
     server: {
       port: 3000,
