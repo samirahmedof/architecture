@@ -18,7 +18,9 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "size": "size-limit",
+    "size:why": "size-limit --why"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -48,6 +50,8 @@
     "@biomejs/biome": "^2.4.12",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
+    "@size-limit/preset-app": "^12.1.0",
+    "@tanstack/react-query-devtools": "^5.99.0",
     "@tanstack/react-router-devtools": "^1.166.13",
     "@tanstack/router-plugin": "^1.167.22",
     "@testing-library/jest-dom": "^6.9.1",
@@ -70,9 +74,11 @@
     "prettier-plugin-css-order": "^2.2.0",
     "rollup-plugin-visualizer": "^7.0.1",
     "sass-embedded": "^1.99.0",
+    "size-limit": "^12.1.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "~5.9.3",
     "vite": "^8.0.8",
+    "vite-plugin-checker": "^0.13.0",
     "vitest": "^4.1.4"
   },
   "lint-staged": {
@@ -87,5 +93,25 @@
     "commitizen": {
       "path": "node_modules/cz-git"
     }
-  }
+  },
+  "size-limit": [
+    {
+      "name": "App entry (JS, gzip)",
+      "path": "dist/assets/index-*.js",
+      "limit": "275 KB",
+      "gzip": true
+    },
+    {
+      "name": "Total JS (gzip)",
+      "path": "dist/assets/*.js",
+      "limit": "320 KB",
+      "gzip": true
+    },
+    {
+      "name": "Total CSS (gzip)",
+      "path": "dist/assets/*.css",
+      "limit": "10 KB",
+      "gzip": true
+    }
+  ]
 }

@@ -4,6 +4,7 @@ import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import checker from 'vite-plugin-checker';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -18,6 +19,10 @@ export default defineConfig(({ mode }) => {
         quoteStyle: 'single',
       }),
       react(),
+      checker({
+        typescript: true,
+        overlay: { initialIsOpen: false },
+      }),
       !isDev &&
         visualizer({
           filename: 'stats.html',
