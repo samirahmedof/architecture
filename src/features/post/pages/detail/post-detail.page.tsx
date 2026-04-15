@@ -19,7 +19,7 @@ const PostDetailPage = () => {
   const { t } = useTranslation(NAMESPACES.POST);
   const params = useParams({ strict: false });
   const isEditMode = !!params.postId;
-  const postId = params.postId ? Number(params.postId) : undefined;
+  const postId = params.postId ? params.postId : undefined;
   const createMutation = useCreatePostMutation();
   const updateMutation = useUpdatePostMutation();
   const schema = usePostFormSchema();

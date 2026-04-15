@@ -24,7 +24,7 @@ export const postService = {
 
   update: async (data: PostUpdateModel): Promise<PostTypes> => {
     const payload = toPostUpdateModel(data);
-    const dto = await api.post(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
+    const dto = await api.put(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
     return toPostModel(dto);
   },
 };

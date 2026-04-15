@@ -31,7 +31,15 @@ export const createHttpClient = (http: AxiosInstance) => {
       const response = await http.put(url, body, config);
       return v.parse(schema, response.data);
     },
-
+    patch: async <TInput, TOutput>(
+      url: string,
+      body: TInput,
+      schema: v.BaseSchema<unknown, TOutput, v.BaseIssue<unknown>>,
+      config?: AxiosRequestConfig,
+    ) => {
+      const response = await http.patch(url, body, config);
+      return v.parse(schema, response.data);
+    },
     delete: async <TOutput>(
       url: string,
       schema: v.BaseSchema<unknown, TOutput, v.BaseIssue<unknown>>,

@@ -57,7 +57,7 @@ export const refreshTokenLogic = async (
     processQueue(null, newAccessToken);
 
     if (!originalRequest.headers) originalRequest.headers = {};
-    originalRequest.headers.Authorization = `Bearer {newAccessToken}`;
+    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
     return instance(originalRequest);
   } catch (error) {

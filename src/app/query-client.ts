@@ -98,7 +98,7 @@ export const queryClient = new QueryClient({
 
   defaultOptions: {
     queries: {
-      retry: false,
+      retry: 1,
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60,
     },
