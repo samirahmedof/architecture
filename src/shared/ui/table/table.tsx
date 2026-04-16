@@ -1,5 +1,7 @@
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import s from './table.module.scss';
 import type { TableProps } from './table.types.ts';
 
@@ -9,9 +11,11 @@ export const Table = <T extends object>({
   rowKey,
   isLoading,
   onRowClick,
-  emptyText = 'Məlumat tapılmadı',
+  emptyText,
   className,
 }: TableProps<T>) => {
+  const { t } = useTranslation(NAMESPACES.COMMON);
+  const fallbackEmpty = emptyText ?? t('table.empty');
   const isEmpty = !isLoading && (!data || data.length === 0);
   return (
     <div className={clsx(s.wrapper, className)}>
@@ -60,7 +64,7 @@ export const Table = <T extends object>({
         )}
       </table>
 
-      {isEmpty && <div className={s.empty}>{emptyText}</div>}
+      {isEmpty && <div className={s.empty}>{fallbackEmpty}</div>}
     </div>
   );
 };

@@ -2,11 +2,11 @@ import { DEFAULT_LANGUAGE } from '@shared/config/i18n.config.ts';
 import { useParams } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { House, NotepadText, Table } from 'lucide-react';
-import type { SidebarMenuItem, SidebarProps } from '../public.types.ts';
-import SidebarItem from '../sidebar-item/sidebar-item.tsx';
+import { SidebarItem } from '../sidebar-item/sidebar-item.tsx';
 import s from './sidebar.module.scss';
+import type { SidebarMenuItem, SidebarProps } from './sidebar.types.ts';
 
-const Sidebar = ({ isOpen }: SidebarProps) => {
+export const Sidebar = ({ isOpen }: SidebarProps) => {
   const items: SidebarMenuItem[] = [
     {
       id: 1,
@@ -52,5 +52,3 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
     </aside>
   );
 };
-
-export default Sidebar;

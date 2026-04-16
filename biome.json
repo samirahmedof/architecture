@@ -42,6 +42,7 @@
         "useBiomeIgnoreFolder": "error"
       },
       "a11y": {
+        "recommended": true,
         "noSvgWithoutTitle": "off"
       }
     }

@@ -1,7 +1,7 @@
 import type { PostDto } from './post.dto.ts';
-import type { PostCreateModel, PostTypes, PostUpdateModel } from './post.types.ts';
+import type { PostCreateModel, PostModel, PostUpdateModel } from './post.types.ts';
 
-export const toPostModel = (dto: PostDto): PostTypes => {
+export const toPostModel = (dto: PostDto): PostModel => {
   return {
     id: dto.id,
     title: dto.title.toUpperCase(),

@@ -1,12 +1,7 @@
-import type { Language } from '@shared/config/i18n.config.ts';
 import type { LucideIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 
 export type SidebarProps = ComponentProps<'aside'> & {
-  isOpen: boolean;
-};
-
-export type FooterProps = ComponentProps<'footer'> & {
   isOpen: boolean;
 };
 
@@ -23,8 +18,4 @@ export type SidebarMenuItem = {
   icon: LucideIcon;
   exact?: boolean;
   submenu?: SubmenuItem[];
-};
-
-export type SidebarItemProps = Omit<SidebarMenuItem, 'id'> & {
-  locale: Language;
 };

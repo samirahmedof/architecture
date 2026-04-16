@@ -9,10 +9,9 @@ import { toast } from 'sonner';
 import { Footer } from './footer/footer.tsx';
 import { Header } from './header/header.tsx';
 import s from './public.module.scss';
-import Sidebar from './sidebar/sidebar.tsx';
+import { Sidebar } from './sidebar/sidebar.tsx';
 
-//change network error logic
-const PublicLayout = () => {
+export const PublicLayout = () => {
   const { t } = useTranslation(NAMESPACES.COMMON);
   const isSidebarOpen = useUiStore((state) => state.isSidebarOpen);
   const isOnline = useOnlineStatus();
@@ -47,5 +46,3 @@ const PublicLayout = () => {
     </div>
   );
 };
-
-export default PublicLayout;

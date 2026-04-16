@@ -24,7 +24,19 @@
       "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\('root deprecated:',j.deprecated||'NO'\\);for\\(const v of Object.keys\\(j.versions\\)\\){if\\(j.versions[v].deprecated\\) console.log\\(v,'=>',j.versions[v].deprecated\\)}}\\)\")",
       "WebSearch",
       "Bash(curl -s -H \"User-Agent: Mozilla/5.0\" https://www.npmjs.com/package/@vitejs/plugin-react-oxc)",
-      "Bash(grep -i -o -E \"deprecat[a-z]*[^<]{0,300}\")"
+      "Bash(grep -i -o -E \"deprecat[a-z]*[^<]{0,300}\")",
+      "Bash(wc -l public/locales/en/*.json)",
+      "WebFetch(domain:feature-sliced.design)",
+      "WebFetch(domain:dev.to)",
+      "Bash(rm -v src/features/auth/lib/cookie.ts)",
+      "Bash(rmdir src/features/auth/lib)",
+      "Bash(mkdir -p src/shared/lib/i18n/locales/az src/shared/lib/i18n/locales/en src/shared/lib/i18n/locales/ru)",
+      "Bash(mv public/locales/az/*.json src/shared/lib/i18n/locales/az/)",
+      "Bash(mv public/locales/en/*.json src/shared/lib/i18n/locales/en/)",
+      "Bash(mv public/locales/ru/*.json src/shared/lib/i18n/locales/ru/)",
+      "Bash(rmdir public/locales/az public/locales/en public/locales/ru public/locales)",
+      "Bash(pnpm tsc *)",
+      "Bash(pnpm css-types:build)"
     ]
   }
 }

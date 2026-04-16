@@ -2,10 +2,11 @@ import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-import type { SidebarItemProps, SubmenuItem } from '../public.types.ts';
+import type { SubmenuItem } from '../sidebar/sidebar.types.ts';
 import s from './sidebar-item.module.scss';
+import type { SidebarItemProps } from './sidebar-item.types.ts';
 
-const SidebarItem = ({
+export const SidebarItem = ({
   name,
   link,
   icon: Icon,
@@ -67,5 +68,3 @@ const SidebarItem = ({
     </li>
   );
 };
-
-export default SidebarItem;

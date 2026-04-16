@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "sideEffects": false,
   "scripts": {
     "dev": "pnpm css-types:build && vite",
     "build": "pnpm css-types:build && tsc && vite build",
@@ -34,7 +33,6 @@
     "clsx": "^2.1.1",
     "i18next": "^26.0.4",
     "i18next-browser-languagedetector": "^8.2.1",
-    "i18next-http-backend": "^3.0.4",
     "lucide-react": "^1.8.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",

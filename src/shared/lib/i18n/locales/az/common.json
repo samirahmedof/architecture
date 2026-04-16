@@ -43,5 +43,11 @@
     "online": "İnternet bağlantısı bərpa olundu",
     "banner": "İnternet bağlantısı kəsilib. Məlumatlarınız yadda saxlanılmaya bilər."
   },
-  "loadingTranslations": "Tərcümələr yüklənir..."
+  "loadingTranslations": "Tərcümələr yüklənir...",
+  "placeholders": {
+    "select": "Seçin..."
+  },
+  "table": {
+    "empty": "Məlumat tapılmadı"
+  }
 }

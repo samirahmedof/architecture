@@ -2,27 +2,27 @@ import { api } from '@shared/lib/http/base-instance.ts';
 import * as v from 'valibot';
 import { PostDtoSchema } from '../model/post.dto.ts';
 import { toPostCreateModel, toPostModel, toPostUpdateModel } from '../model/post.mapper.ts';
-import type { PostCreateModel, PostTypes, PostUpdateModel } from '../model/post.types.ts';
+import type { PostCreateModel, PostModel, PostUpdateModel } from '../model/post.types.ts';
 import { POST_ENDPOINTS } from './post.endpoints.ts';
 
 export const postService = {
-  getAll: async (): Promise<PostTypes[]> => {
+  getAll: async (): Promise<PostModel[]> => {
     const dtos = await api.get(POST_ENDPOINTS.LIST, v.array(PostDtoSchema));
     return dtos.map(toPostModel);
   },
 
-  getById: async (id: number): Promise<PostTypes> => {
+  getById: async (id: number): Promise<PostModel> => {
     const dto = await api.get(POST_ENDPOINTS.BY_ID(id), PostDtoSchema);
     return toPostModel(dto);
   },
 
-  create: async (data: PostCreateModel): Promise<PostTypes> => {
+  create: async (data: PostCreateModel): Promise<PostModel> => {
     const payload = toPostCreateModel(data);
     const dto = await api.post(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
     return toPostModel(dto);
   },
 
-  update: async (data: PostUpdateModel): Promise<PostTypes> => {
+  update: async (data: PostUpdateModel): Promise<PostModel> => {
     const payload = toPostUpdateModel(data);
     const dto = await api.put(POST_ENDPOINTS.LIST, payload, PostDtoSchema);
     return toPostModel(dto);

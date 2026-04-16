@@ -1,8 +1,8 @@
 import 'i18next';
-import type auth from '@locales/az/auth.json';
-import type common from '@locales/az/common.json';
-import type post from '@locales/az/post.json';
-import type validation from '@locales/az/validation.json';
+import type auth from '@shared/lib/i18n/locales/az/auth.json';
+import type common from '@shared/lib/i18n/locales/az/common.json';
+import type post from '@shared/lib/i18n/locales/az/post.json';
+import type validation from '@shared/lib/i18n/locales/az/validation.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {

@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      // target: 'es2022',
+      target: 'es2022',
       minify: 'oxc',
       sourcemap: true,
       // rolldownOptions: {

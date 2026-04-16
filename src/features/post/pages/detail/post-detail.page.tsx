@@ -1,10 +1,3 @@
-import {
-  type PostCreateModel,
-  postQueries,
-  useCreatePostMutation,
-  usePostFormSchema,
-  useUpdatePostMutation,
-} from '@features/post';
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { logger } from '@shared/lib/logger.ts';
@@ -14,6 +7,10 @@ import { useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
+import { useCreatePostMutation, useUpdatePostMutation } from '../../api/post.mutations.ts';
+import { postQueries } from '../../api/post.queries.ts';
+import { usePostFormSchema } from '../../model/post.schema.ts';
+import type { PostCreateModel } from '../../model/post.types.ts';
 
 const PostDetailPage = () => {
   const { t } = useTranslation(NAMESPACES.POST);

@@ -1,13 +1,15 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
+import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import clsx from 'clsx';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import s from './select.module.scss';
 import type { BaseSelectProps } from './select.types.ts';
 
 export const Select = ({
   options,
-  placeholder = 'Seçin...',
+  placeholder,
   label,
   error,
   className,
@@ -15,7 +17,8 @@ export const Select = ({
   small,
   ...props
 }: BaseSelectProps) => {
-  // add dynamic id
+  const { t } = useTranslation(NAMESPACES.COMMON);
+  const fallbackPlaceholder = placeholder ?? t('placeholders.select');
   const selectId = useId();
   return (
     <div className={clsx(s.container, className)}>
@@ -27,7 +30,7 @@ export const Select = ({
 
       <SelectPrimitive.Root disabled={disabled} {...props}>
         <SelectPrimitive.Trigger className={clsx(s.trigger, error && s.error, small && s.small)}>
-          <SelectPrimitive.Value placeholder={placeholder} />
+          <SelectPrimitive.Value placeholder={fallbackPlaceholder} />
           <SelectPrimitive.Icon className={s.icon}>
             <ChevronDown size={16} />
           </SelectPrimitive.Icon>

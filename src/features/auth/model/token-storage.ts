@@ -1,6 +1,6 @@
 const TOKEN_KEY = 'sima_auth_token';
 
-export const cookieUtils = {
+export const tokenStorage = {
   getToken: (): string | null => {
     const match = document.cookie.match(new RegExp(`(^| )${TOKEN_KEY}=([^;]+)`));
     return match?.[2] ?? null;
@@ -15,6 +15,6 @@ export const cookieUtils = {
   },
 
   isAuthenticated: () => {
-    return !!cookieUtils.getToken();
+    return !!tokenStorage.getToken();
   },
 };

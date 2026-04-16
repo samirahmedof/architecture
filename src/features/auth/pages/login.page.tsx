@@ -2,14 +2,14 @@ import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { Button } from '@shared/ui';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { cookieUtils } from '../lib/cookie.ts';
+import { tokenStorage } from '../model/token-storage.ts';
 
 const LoginPage = () => {
   const router = useRouter();
 
   const handleFakeLogin = () => {
     const fakeToken = 'eyJhGciOiJIUzI1Ni...';
-    cookieUtils.setToken(fakeToken);
+    tokenStorage.setToken(fakeToken);
     router.navigate({ to: '/' }); // və ya search.redirect
   };
   const { t } = useTranslation(NAMESPACES.AUTH);

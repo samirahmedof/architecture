@@ -43,5 +43,11 @@
     "online": "Internet connection has been restored",
     "banner": "Internet connection is lost. Your data might not be saved."
   },
-  "loadingTranslations": "Loading translations..."
+  "loadingTranslations": "Loading translations...",
+  "placeholders": {
+    "select": "Select..."
+  },
+  "table": {
+    "empty": "No data found"
+  }
 }

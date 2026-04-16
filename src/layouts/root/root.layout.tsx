@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react';
 import { ENV } from '@shared/config/env.config.ts';
 import { addSentryBreadcrumb, syncSentryUser } from '@shared/lib/monitoring/sentry.ts';
 import { useAuthStore } from '@shared/store/auth.store.ts';
-import { Loader, MainErrorFallback } from '@shared/ui';
+import { ErrorFallback, Loader } from '@shared/ui';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Outlet, useRouterState } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
@@ -10,7 +10,7 @@ import { Suspense, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Toaster } from 'sonner';
 
-const RootLayout = () => {
+export const RootLayout = () => {
   const routerState = useRouterState();
   const { pathname, search, hash } = routerState.location;
   useEffect(() => {
@@ -34,7 +34,7 @@ const RootLayout = () => {
         {({ reset }) => (
           <ErrorBoundary
             onReset={reset}
-            FallbackComponent={MainErrorFallback}
+            FallbackComponent={ErrorFallback}
             onError={(error, info) => {
               Sentry.captureException(error, {
                 extra: { componentStack: info.componentStack },
@@ -52,4 +52,3 @@ const RootLayout = () => {
     </>
   );
 };
-export default RootLayout;

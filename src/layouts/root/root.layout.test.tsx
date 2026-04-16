@@ -1,19 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import type { JSX } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import RootLayout from './root.layout.tsx';
+import { RootLayout } from './root.layout.tsx';
 
-vi.mock('@app/monitoring', () => ({
-  useSentryRouterTracking: vi.fn(),
+vi.mock('@shared/lib/monitoring/sentry.ts', () => ({
+  addSentryBreadcrumb: vi.fn(),
   syncSentryUser: vi.fn(),
+  captureException: vi.fn(),
+}));
+
+vi.mock('@shared/store/auth.store.ts', () => ({
+  useAuthStore: (selector: (state: { accessToken: string | null }) => unknown) =>
+    selector({ accessToken: null }),
 }));
 
 vi.mock('@shared/ui', () => ({
   Loader: () => <div>loader</div>,
-  MainErrorFallback: () => <div>error</div>,
+  ErrorFallback: () => <div>error</div>,
 }));
 
-vi.mock('@shared/config', () => ({
+vi.mock('@shared/config/env.config.ts', () => ({
   ENV: { IS_DEV: false },
 }));
 

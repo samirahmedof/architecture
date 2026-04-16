@@ -1,6 +1,6 @@
-import { postKeys } from '@features/post/api/post.keys.ts';
-import { postService } from '@features/post/api/post.service.ts';
 import { queryOptions } from '@tanstack/react-query';
+import { postKeys } from './post.keys.ts';
+import { postService } from './post.service.ts';
 
 export const postQueries = {
   list: () =>

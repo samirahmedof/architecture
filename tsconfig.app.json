@@ -25,7 +25,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@locales/*": ["public/locales/*"],
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"],
       "@features/*": ["src/features/*"],
