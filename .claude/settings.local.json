@@ -36,7 +36,10 @@
       "Bash(mv public/locales/ru/*.json src/shared/lib/i18n/locales/ru/)",
       "Bash(rmdir public/locales/az public/locales/en public/locales/ru public/locales)",
       "Bash(pnpm tsc *)",
-      "Bash(pnpm css-types:build)"
+      "Bash(pnpm css-types:build)",
+      "WebFetch(domain:www.jsdocs.io)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm test *)"
     ]
   }
 }

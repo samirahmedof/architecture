@@ -1,74 +1,35 @@
 import { ENDPOINTS } from '@shared/config/endpoints.config.ts';
 import { ENV } from '@shared/config/env.config.ts';
 import { useAuthStore } from '@shared/store/auth.store.ts';
-import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
+import ky, { type BeforeRetryHook, isHTTPError } from 'ky';
 
-// make it dynamic
-const refreshClient = axios.create({
-  baseURL: ENV.BASE_URL,
-  withCredentials: true,
-  headers: { 'Content-Type': 'application/json' },
-});
+let refreshPromise: Promise<string> | null = null;
 
-let isRefreshing = false;
-let failedQueue: Array<{
-  resolve: (token: string) => void;
-  reject: (error: unknown) => void;
-}> = [];
-
-const processQueue = (error: unknown, token: string | null = null) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      if (token) prom.resolve(token);
-    }
-  });
-  failedQueue = [];
+const performRefresh = async (): Promise<string> => {
+  const data = await ky
+    .post(ENDPOINTS.AUTH.REFRESH, {
+      baseUrl: ENV.BASE_URL,
+      credentials: 'include',
+      retry: { limit: 0 },
+    })
+    .json<{ accessToken: string }>();
+  useAuthStore.getState().setAccessToken(data.accessToken);
+  return data.accessToken;
 };
 
-export const refreshTokenLogic = async (
-  originalRequest: AxiosRequestConfig,
-  instance: AxiosInstance,
-) => {
-  if (isRefreshing) {
-    return new Promise<string>((resolve, reject) => {
-      failedQueue.push({ resolve, reject });
-    })
-      .then((token) => {
-        if (!originalRequest.headers) originalRequest.headers = {};
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return instance(originalRequest);
-      })
-      .catch((err) => Promise.reject(err));
+export const refreshTokenHook: BeforeRetryHook = async ({ request, error, retryCount }) => {
+  if (!isHTTPError(error) || error.response.status !== 401 || retryCount > 1) {
+    return;
   }
-
-  // TODO: remove @ts-expect-error
-  // @ts-expect-error
-  originalRequest._retry = true;
-  isRefreshing = true;
-
   try {
-    const { data } = await refreshClient.post(ENDPOINTS.AUTH.REFRESH);
-    const newAccessToken = data.accessToken;
-
-    useAuthStore.getState().setAccessToken(newAccessToken);
-
-    processQueue(null, newAccessToken);
-
-    if (!originalRequest.headers) originalRequest.headers = {};
-    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-    return instance(originalRequest);
-  } catch (error) {
-    processQueue(error, null);
+    refreshPromise ??= performRefresh();
+    const newToken = await refreshPromise;
+    request.headers.set('Authorization', `Bearer ${newToken}`);
+  } catch (refreshErr) {
     useAuthStore.getState().clearAuth();
-
     window.location.href = '/';
-    // TODO: correct path?
-
-    return Promise.reject(error);
+    throw refreshErr;
   } finally {
-    isRefreshing = false;
+    refreshPromise = null;
   }
 };
