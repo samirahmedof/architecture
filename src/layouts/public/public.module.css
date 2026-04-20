@@ -1,0 +1,23 @@
+.layout {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-standard);
+  margin-left: 0;
+  min-height: calc(100vh - var(--layout-header-height));
+  padding: rem(110) rem(20) 0;
+  will-change: margin-left;
+}
+
+/*
+ * Same pattern as footer: react to the sibling sidebar's data-state.
+ * The previous version needed `!important` to win specificity wars — now
+ * the sibling-combinator selector has naturally higher specificity than
+ * the bare `.layout` rule, so the override wins without any layer help.
+ */
+:global(aside[data-state='open']) ~ .layout {
+  margin-left: var(--layout-sidebar-width);
+}
+
+.network {
+  color: var(--brand-error);
+}

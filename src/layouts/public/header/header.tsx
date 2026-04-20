@@ -7,7 +7,7 @@ import { Col, Row, Select } from '@shared/ui';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import s from './header.module.scss';
+import s from './header.module.css';
 
 export const Header = () => {
   const { t } = useTranslation(NAMESPACES.COMMON);

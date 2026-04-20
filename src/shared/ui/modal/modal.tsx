@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import type React from 'react';
-import styles from './modal.module.scss';
+import styles from './modal.module.css';
 
 interface ModalProps {
   isOpen: boolean;

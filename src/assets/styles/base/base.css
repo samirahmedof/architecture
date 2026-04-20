@@ -1,0 +1,35 @@
+/*
+ * Base element styles — the design layer applied to html/body.
+ * Reads from token custom properties (must load AFTER tokens, see index.css).
+ */
+html {
+  font-size: 100%;
+  scrollbar-color: var(--brand-primary) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--brand-primary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--brand-primary);
+  }
+}
+
+body {
+  background-color: var(--bg-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-weight: 400;
+  line-height: 1.5;
+  font-feature-settings: 'ss03';
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}

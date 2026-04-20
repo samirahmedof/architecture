@@ -1,0 +1,17 @@
+/*
+ * Global stylesheet entry — the only file imported by the app root.
+ * Source-order cascade: tokens → reset → base → font-face → utilities.
+ * Component .module.css files are imported lazily by their TSX consumers.
+ */
+@import './tokens/media.css';
+@import './tokens/color.css';
+@import './tokens/layout.css';
+@import './tokens/typography.css';
+@import './tokens/elevation.css';
+@import './tokens/motion.css';
+
+@import './base/reset.css';
+@import './base/base.css';
+@import './base/font-face.css';
+
+@import './utilities.css';

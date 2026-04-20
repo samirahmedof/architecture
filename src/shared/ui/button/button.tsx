@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Loader2 } from 'lucide-react'; // Icon
 import React, { type ButtonHTMLAttributes, type ReactNode } from 'react';
-import styles from './button.module.scss';
+import styles from './button.module.css';
 
 // TODO: change button cmp
 // Buttonun qəbul edəcəyi proplar

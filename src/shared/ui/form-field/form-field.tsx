@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import s from './form-field.module.scss';
+import s from './form-field.module.css';
 import type { FormFieldProps } from './form-field.types.ts';
 
 export const FormField = ({ name, label, children }: FormFieldProps) => {

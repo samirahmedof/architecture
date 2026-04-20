@@ -1,0 +1,119 @@
+/*
+ * COLOR TOKENS — single file, three logical sections kept inline:
+ *
+ *   1. Primitives — raw values. Don't reference these directly in components.
+ *   2. Semantic   — intent-based aliases. This is the team's API surface.
+ *   3. Components — per-component color overrides. Add new component sections here.
+ *
+ * Theme switching: add `[data-theme='dark'] { ... }` block at the bottom and
+ * override the SEMANTIC tokens only — primitives stay stable.
+ */
+/* ─── 1. PRIMITIVES ──────────────────────────────────────────────── */
+:root {
+  --white: #fff;
+  --black: #030305;
+
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f2f3;
+  --gray-200: #e8e9ea;
+  --gray-300: #d8d9da;
+  --gray-400: #b4b5b6;
+  --gray-500: #949596;
+  --gray-600: #6c6d6e;
+  --gray-700: #59595a;
+  --gray-800: #3a3b3c;
+  --gray-900: #1a1b1b;
+
+  --blue-50: #eef2ff;
+  --blue-100: #e0e7ff;
+  --blue-200: #c7d2fe;
+  --blue-300: #506690;
+  --blue-400: #6366f1;
+  --blue-500: #4361ee;
+  --blue-600: #3b3f5c;
+  --blue-700: #202939;
+  --blue-800: #0e1726;
+  --blue-900: #020617;
+
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-300: #fca5a5;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-300: #86efac;
+  --green-400: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #166534;
+  --green-900: #14532d;
+}
+
+/* ─── 2. SEMANTIC ────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --brand-primary: var(--blue-500);
+  --brand-primary-dark: var(--blue-600);
+  --brand-error: var(--red-500);
+
+  --bg-body: var(--gray-100);
+  --bg-surface: var(--white);
+
+  --text-main: var(--blue-800);
+  --text-muted: var(--gray-500);
+  --text-inverse: var(--white);
+
+  --border-default: var(--gray-300);
+  --border-active: var(--brand-primary);
+  --border-error: var(--brand-error);
+
+  --action-main: var(--brand-primary);
+}
+
+/* ─── 3. COMPONENT OVERRIDES ─────────────────────────────────────── */
+:root {
+  /* input */
+  --input-border: var(--border-default);
+  --input-border-focus: var(--blue-700);
+  --input-color: var(--blue-600);
+  --input-bg-hover: var(--gray-50);
+  --input-color-disabled: var(--gray-300);
+  --input-placeholder-color: var(--gray-300);
+
+  /* table */
+  --table-border: var(--border-default);
+  --table-text-color: var(--text-main);
+  --table-text-color-empty: var(--brand-primary-dark);
+  --table-row-bg-hover: var(--gray-50);
+  --table-row-bg-active: var(--gray-200);
+  --table-head-bg: var(--gray-300);
+  --table-head-text-color: var(--brand-primary-dark);
+  --table-action-default-color: var(--gray-500);
+  --table-action-edit-color: var(--blue-500);
+  --table-action-delete-color: var(--red-500);
+  --table-action-view-color: var(--green-700);
+
+  /* header */
+  --header-navbar-bg: var(--blue-800);
+  --header-icon-color: var(--white);
+  --header-sub-bg: var(--gray-50);
+  --header-toggle-icon-color: var(--blue-600);
+
+  /* sidebar */
+  --sidebar-border: var(--border-default);
+  --sidebar-item-color: var(--blue-300);
+  --sidebar-item-color-hover: var(--black);
+  --sidebar-item-bg-hover: var(--gray-300);
+  --sidebar-item-sub-color: var(--gray-700);
+  --sidebar-item-sub-dot-bg: var(--gray-400);
+}

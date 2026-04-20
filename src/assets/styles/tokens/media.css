@@ -1,0 +1,20 @@
+/*
+ * @custom-media — single source of truth for breakpoints & motion queries.
+ *
+ * IMPORTANT: LightningCSS resolves @custom-media at BUILD time, per file.
+ * Definitions don't propagate across CSS Module files on their own.
+ * The Vite plugin `prependCustomMedia` in vite.config.ts injects this file's
+ * @custom-media lines into every CSS file before LightningCSS transforms it,
+ * so adding a new @custom-media here makes it instantly available everywhere.
+ */
+@custom-media --bp-xs (min-width: 375px);
+@custom-media --bp-sm (min-width: 576px);
+@custom-media --bp-md (min-width: 768px);
+@custom-media --bp-lg (min-width: 992px);
+@custom-media --bp-xl (min-width: 1200px);
+@custom-media --bp-xxl (min-width: 1400px);
+
+@custom-media --motion-ok (prefers-reduced-motion: no-preference);
+@custom-media --motion-reduce (prefers-reduced-motion: reduce);
+@custom-media --hover-able (hover: hover) and (pointer: fine);
+@custom-media --dark (prefers-color-scheme: dark);

@@ -1,0 +1,149 @@
+/*
+ * Container — single max-width custom property cascades through breakpoints.
+ * Replaces the SCSS @each loop that emitted 6 selectors.
+ */
+.container {
+  --container-max-width: 100%;
+
+  margin-inline: auto;
+  padding-inline: calc(var(--grid-gutter) / 2);
+  width: 100%;
+  max-width: var(--container-max-width);
+}
+
+@media (--bp-xs) {
+  .container:not(.fluid) {
+    --container-max-width: calc(375px - var(--grid-gutter));
+  }
+}
+@media (--bp-sm) {
+  .container:not(.fluid) {
+    --container-max-width: calc(576px - var(--grid-gutter));
+  }
+}
+@media (--bp-md) {
+  .container:not(.fluid) {
+    --container-max-width: calc(768px - var(--grid-gutter));
+  }
+}
+@media (--bp-lg) {
+  .container:not(.fluid) {
+    --container-max-width: calc(992px - var(--grid-gutter));
+  }
+}
+@media (--bp-xl) {
+  .container:not(.fluid) {
+    --container-max-width: calc(1200px - var(--grid-gutter));
+  }
+}
+@media (--bp-xxl) {
+  .container:not(.fluid) {
+    --container-max-width: calc(1400px - var(--grid-gutter));
+  }
+}
+
+.fluid {
+  --container-max-width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gutter);
+  width: 100%;
+
+  &.alignStart {
+    align-items: start;
+  }
+  &.alignCenter {
+    align-items: center;
+  }
+  &.alignEnd {
+    align-items: end;
+  }
+}
+
+/*
+ * Column — span and offset are driven entirely by inline custom properties
+ * set from the consumer (`<Col span={6} md={4} />`). The SCSS version
+ * generated 168 named classes (12 base + 6 breakpoints × 12 spans + 6 × 11 offsets).
+ * Native CSS reduces this to one rule per breakpoint via the custom-property cascade.
+ */
+.col {
+  grid-column: span var(--col-span, var(--grid-columns));
+
+  &.auto {
+    grid-column: auto;
+  }
+}
+
+@media (--bp-xs) {
+  .col {
+    grid-column-start: var(--col-xs-start, auto);
+    grid-column-end: span var(--col-xs, var(--col-span, var(--grid-columns)));
+  }
+}
+@media (--bp-sm) {
+  .col {
+    grid-column-start: var(--col-sm-start, var(--col-xs-start, auto));
+    grid-column-end: span var(--col-sm, var(--col-xs, var(--col-span, var(--grid-columns))));
+  }
+}
+@media (--bp-md) {
+  .col {
+    grid-column-start: var(--col-md-start, var(--col-sm-start, var(--col-xs-start, auto)));
+    grid-column-end: span
+      var(--col-md, var(--col-sm, var(--col-xs, var(--col-span, var(--grid-columns)))));
+  }
+}
+@media (--bp-lg) {
+  .col {
+    grid-column-start: var(
+      --col-lg-start,
+      var(--col-md-start, var(--col-sm-start, var(--col-xs-start, auto)))
+    );
+    grid-column-end: span
+      var(
+        --col-lg,
+        var(--col-md, var(--col-sm, var(--col-xs, var(--col-span, var(--grid-columns)))))
+      );
+  }
+}
+@media (--bp-xl) {
+  .col {
+    grid-column-start: var(
+      --col-xl-start,
+      var(--col-lg-start, var(--col-md-start, var(--col-sm-start, var(--col-xs-start, auto))))
+    );
+    grid-column-end: span
+      var(
+        --col-xl,
+        var(
+          --col-lg,
+          var(--col-md, var(--col-sm, var(--col-xs, var(--col-span, var(--grid-columns)))))
+        )
+      );
+  }
+}
+@media (--bp-xxl) {
+  .col {
+    grid-column-start: var(
+      --col-xxl-start,
+      var(
+        --col-xl-start,
+        var(--col-lg-start, var(--col-md-start, var(--col-sm-start, var(--col-xs-start, auto))))
+      )
+    );
+    grid-column-end: span
+      var(
+        --col-xxl,
+        var(
+          --col-xl,
+          var(
+            --col-lg,
+            var(--col-md, var(--col-sm, var(--col-xs, var(--col-span, var(--grid-columns)))))
+          )
+        )
+      );
+  }
+}

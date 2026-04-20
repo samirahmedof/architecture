@@ -2,7 +2,7 @@ import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import s from './table.module.scss';
+import s from './table.module.css';
 import type { TableProps } from './table.types.ts';
 
 export const Table = <T extends object>({

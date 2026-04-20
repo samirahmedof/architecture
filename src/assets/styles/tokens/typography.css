@@ -1,0 +1,17 @@
+/*
+ * TYPOGRAPHY TOKENS — text scale + font families.
+ * @font-face declarations live in base/font-face.css (side-effect rules, not tokens).
+ */
+:root {
+  --font-main: 'NunitoSans', sans-serif;
+  --font-secondary: 'PFSquareSansPro', sans-serif;
+  --font-fancy: 'Imperial Script', cursive;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+}

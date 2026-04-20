@@ -39,7 +39,31 @@
       "Bash(pnpm css-types:build)",
       "WebFetch(domain:www.jsdocs.io)",
       "Bash(pnpm install *)",
-      "Bash(pnpm test *)"
+      "Bash(pnpm test *)",
+      "Bash(curl -s https://registry.npmjs.org/lightningcss/latest)",
+      "Bash(grep -r \"\\\\$[a-z]\" \"e:/front-end/ARCHİTECTURE-V3/src\" --include=\"*.scss\")",
+      "Bash(grep -o '\\\\$[a-z-]*')",
+      "Bash(curl -s https://registry.npmjs.org/vite/latest)",
+      "Bash(grep -r '\\\\\\\\$' \"e:/front-end/ARCHİTECTURE-V3/src\" --include=\"*.scss\")",
+      "WebFetch(domain:lightningcss.dev)",
+      "WebFetch(domain:web.dev)",
+      "WebFetch(domain:caniuse.com)",
+      "Bash(rm -f src/app/main.scss src/assets/styles/abstracts/_variables.scss src/assets/styles/abstracts/_functions.scss src/assets/styles/abstracts/_mixins.scss src/assets/styles/abstracts/index.scss src/assets/styles/root/_palette.scss src/assets/styles/root/_theme.scss src/assets/styles/root/_tokens.scss src/assets/styles/root/_sizes.scss src/assets/styles/root/_fonts.scss src/assets/styles/root/index.scss src/assets/styles/base/_reset.scss src/assets/styles/base/_font-faces.scss src/assets/styles/base/_common.scss src/assets/styles/base/index.scss src/shared/ui/button/button.module.scss src/shared/ui/input/input.module.scss src/shared/ui/modal/modal.module.scss src/shared/ui/table/table.module.scss src/shared/ui/select/select.module.scss src/shared/ui/form-field/form-field.module.scss src/shared/ui/loader/loader.module.scss src/shared/ui/grid/grid.module.scss src/shared/ui/content-wrapper/content-wrapper.module.scss src/shared/ui/error-fallback/error-fallback.module.scss src/shared/ui/table-actions/table-actions.module.scss src/layouts/public/header/header.module.scss src/layouts/public/sidebar/sidebar.module.scss src/layouts/public/sidebar-item/sidebar-item.module.scss src/layouts/public/footer/footer.module.scss src/layouts/public/public.module.scss src/layouts/auth/auth.module.scss src/features/post/ui/post-item/post-item.module.scss)",
+      "Bash(rmdir src/assets/styles/abstracts src/assets/styles/root)",
+      "Bash(pnpm exec *)",
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(echo \"EXIT $?\")",
+      "Bash(node -e ' *)",
+      "Bash(rm -f src/assets/styles/shared.module.css)",
+      "Bash(grep -r \"composes:\" src/)",
+      "Bash(grep -r \"shared.module.css\" src/)",
+      "Bash(grep -v \"^0$\")",
+      "Bash(pnpm biome *)",
+      "Bash(rm -f src/assets/styles/reset.css src/assets/styles/utilities.css)",
+      "Bash(rm -rf dist)",
+      "Bash(grep -oE \"url\\\\\\\\\\(\\\\\"[^\\\\\"]*woff2\\\\\"\\\\\\\\\\)\" dist/assets/index-*.css)",
+      "Bash(rm -rf src/assets/styles/tokens src/assets/styles/base src/assets/styles/utilities.css)",
+      "Bash(xargs grep *)"
     ]
   }
 }

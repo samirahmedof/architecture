@@ -1,9 +1,8 @@
 import { Link } from '@tanstack/react-router';
-import clsx from 'clsx';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import type { SubmenuItem } from '../sidebar/sidebar.types.ts';
-import s from './sidebar-item.module.scss';
+import s from './sidebar-item.module.css';
 import type { SidebarItemProps } from './sidebar-item.types.ts';
 
 export const SidebarItem = ({
@@ -34,9 +33,10 @@ export const SidebarItem = ({
       ) : (
         <>
           <button
-            className={clsx(s.link, isOpen && s.open)}
+            className={s.link}
             onClick={() => setIsOpen(!isOpen)}
             type="button"
+            aria-expanded={isOpen}
           >
             <div className={s.text}>
               <Icon className={s.icon} />

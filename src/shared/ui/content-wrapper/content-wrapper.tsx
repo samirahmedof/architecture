@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import s from './content-wrapper.module.scss';
+import s from './content-wrapper.module.css';
 
 export type ContentWrapperProps = {
   children: ReactNode;

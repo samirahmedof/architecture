@@ -1,0 +1,19 @@
+.footer {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-standard);
+  margin-top: rem(20);
+  margin-left: 0;
+  font-size: var(--text-sm);
+  letter-spacing: 1px;
+  will-change: margin-left;
+}
+
+/*
+ * Cross-component reactivity: when the sidebar (a previous DOM sibling
+ * outside this module) is open, push the footer right. Replaces the
+ * `clsx(s.footer, isOpen && s.open)` JS plumbing.
+ */
+:global(aside[data-state='open']) ~ .footer {
+  margin-left: var(--layout-sidebar-width);
+}

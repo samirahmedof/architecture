@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-standard);
+  /* Per-instance ramp color — variants override only this one custom property. */
+  --action-color: var(--table-action-default-color);
+
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  width: 2rem;
+  height: 2rem;
+  color: var(--action-color);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--action-color) 20%, transparent);
+    color: var(--action-color);
+  }
+}
+
+.edit {
+  --action-color: var(--table-action-edit-color);
+}
+
+.del {
+  --action-color: var(--table-action-delete-color);
+}
+
+.view {
+  --action-color: var(--table-action-view-color);
+}

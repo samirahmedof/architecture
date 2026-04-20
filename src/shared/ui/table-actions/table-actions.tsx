@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import s from './table-actions.module.scss';
+import s from './table-actions.module.css';
 
 export type ActionButtonProps = {
   onClick?: () => void;

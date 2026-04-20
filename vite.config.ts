@@ -1,10 +1,74 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
+import browserslist from 'browserslist';
+import { browserslistToTargets } from 'lightningcss';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import checker from 'vite-plugin-checker';
+
+/*
+ * LightningCSS resolves @custom-media at BUILD time and PER FILE — defs in
+ * one CSS file are not visible from another. CSS Modules (`*.module.css`) are
+ * each their own LightningCSS unit, so a global `@custom-media --bp-md` def
+ * in tokens/media.css is invisible inside grid.module.css.
+ *
+ * This plugin reads tokens/media.css once and prepends its `@custom-media`
+ * lines to every CSS file that references one — single source of truth, zero
+ * duplication in source. Stripped from output by LightningCSS, so bundle size
+ * is byte-identical to literal media queries.
+ */
+const customMediaPath = path.resolve(__dirname, 'src/assets/styles/tokens/media.css');
+
+function prependCustomMedia(): Plugin {
+  let defs = '';
+  return {
+    name: 'prepend-custom-media',
+    enforce: 'pre',
+    buildStart() {
+      const raw = fs.readFileSync(customMediaPath, 'utf8');
+      defs = raw
+        .split('\n')
+        .filter((l) => /^\s*@custom-media\s/.test(l))
+        .join('\n');
+      this.addWatchFile(customMediaPath);
+    },
+    transform(code, id) {
+      const cleanId = id.split('?')[0];
+      // Only module CSS files need the prepend. Global stylesheets reach
+      // @custom-media defs through index.css's @import chain — prepending
+      // there would push subsequent @imports past a rule and break the
+      // "@import must precede all rules" CSS constraint.
+      if (!cleanId.endsWith('.module.css')) return null;
+      if (!/@media\s*\(\s*--/.test(code)) return null;
+      return { code: `${defs}\n${code}`, map: null };
+    },
+  };
+}
+
+/*
+ * `rem(N)` build-time helper — restores the SCSS ergonomic.
+ * Author CSS:  font-size: rem(14);   →   Bundle:  font-size: 0.875rem;
+ * Build-time only; output is byte-identical to hand-written rem values.
+ */
+function remHelper(): Plugin {
+  return {
+    name: 'css-rem-helper',
+    enforce: 'pre',
+    transform(code, id) {
+      const cleanId = id.split('?')[0];
+      if (!cleanId.endsWith('.css')) return null;
+      if (!/\brem\(\s*-?\d/.test(code)) return null;
+      const out = code.replace(/\brem\(\s*(-?\d+(?:\.\d+)?)\s*\)/g, (_, n) => {
+        const v = Number(n) / 16;
+        return v === 0 ? '0' : `${v}rem`;
+      });
+      return { code: out, map: null };
+    },
+  };
+}
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -23,6 +87,8 @@ export default defineConfig(({ mode }) => {
         typescript: true,
         overlay: { initialIsOpen: false },
       }),
+      prependCustomMedia(),
+      remHelper(),
       !isDev &&
         visualizer({
           filename: 'stats.html',
@@ -30,7 +96,6 @@ export default defineConfig(({ mode }) => {
           gzipSize: true,
           brotliSize: true,
         }),
-      // Sentry plugin for source maps and release tracking (production only)
       isProd &&
         sentryVitePlugin({
           org: process.env.SENTRY_ORG,
@@ -43,9 +108,7 @@ export default defineConfig(({ mode }) => {
           },
           release: {
             name: process.env.SENTRY_RELEASE || `app@${Date.now()}`,
-            setCommits: {
-              auto: true,
-            },
+            setCommits: { auto: true },
           },
         }),
     ],
@@ -58,31 +121,20 @@ export default defineConfig(({ mode }) => {
     build: {
       target: 'es2022',
       minify: 'oxc',
+      cssMinify: 'lightningcss',
       sourcemap: true,
-      // rolldownOptions: {
-      //   output: {
-      //     manualChunks(id) {
-      //       if (id.includes('node_modules')) {
-      //         if (id.includes('/node_modules/react/') || id.includes('/node_modules/react-dom/')) {
-      //           return 'react-core';
-      //         }
-      //         if (id.includes('@tanstack')) {
-      //           return 'tanstack-vendor';
-      //         }
-      //         if (id.includes('axios') || id.includes('zustand') || id.includes('dayjs')) {
-      //           return 'utils-vendor';
-      //         }
-      //         return 'vendor';
-      //       }
-      //     },
-      //   },
-      // },
     },
     css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          loadPaths: [path.resolve(__dirname, 'src')],
+      transformer: 'lightningcss',
+      lightningcss: {
+        targets: browserslistToTargets(
+          browserslist('>= 0.5%, last 2 versions, Firefox ESR, not dead'),
+        ),
+        drafts: {
+          customMedia: true,
+        },
+        cssModules: {
+          pattern: '[name]__[local]__[hash]',
         },
       },
       devSourcemap: true,

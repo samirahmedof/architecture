@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: var(--space-md);
+  border: 1px solid var(--red-200);
+  border-radius: var(--radius-md);
+  background-color: var(--red-50);
+  padding: var(--space-xxl);
+  color: var(--red-700);
+  text-align: center;
+}
+
+.title {
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+  font-size: var(--text-2xl);
+}
+
+.message {
+  opacity: 0.8;
+  margin-bottom: var(--space-md);
+  max-width: rem(500);
+  font-size: var(--text-md);
+  font-family: monospace;
+}

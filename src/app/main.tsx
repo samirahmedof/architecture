@@ -3,7 +3,7 @@ import { AppRouterProvider } from '@app/router-provider.tsx';
 import { initSentry } from '@shared/lib/monitoring/sentry.ts';
 import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import './main.scss';
+import '../assets/styles/index.css';
 
 initSentry();
 

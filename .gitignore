@@ -29,7 +29,7 @@ dist-ssr
 .env.production
 .env.local
 *.env
-**/*.module.scss.d.ts
+**/*.module.css.d.ts
 .tanstack
 src/routes/routeTree.gen.ts
 

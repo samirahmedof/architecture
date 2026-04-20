@@ -2,13 +2,12 @@ import { NAMESPACES } from '@shared/config/i18n.config.ts';
 import { useOnlineStatus } from '@shared/hooks/use-online-status.ts';
 import { useUiStore } from '@shared/store/ui.store.ts';
 import { Outlet } from '@tanstack/react-router';
-import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { Footer } from './footer/footer.tsx';
 import { Header } from './header/header.tsx';
-import s from './public.module.scss';
+import s from './public.module.css';
 import { Sidebar } from './sidebar/sidebar.tsx';
 
 export const PublicLayout = () => {
@@ -38,11 +37,10 @@ export const PublicLayout = () => {
       <Header />
       {!isOnline && <div className={s.network}>{t('network.banner')}</div>}
       <Sidebar isOpen={isSidebarOpen} />
-      <main className={clsx(s.layout, isSidebarOpen && s.open)}>
+      <main className={s.layout}>
         <Outlet />
       </main>
-
-      <Footer isOpen={isSidebarOpen} />
+      <Footer />
     </div>
   );
 };

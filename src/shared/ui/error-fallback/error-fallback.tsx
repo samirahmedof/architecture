@@ -3,7 +3,7 @@ import { AlertTriangle } from 'lucide-react';
 import type { FallbackProps } from 'react-error-boundary';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../button/button.tsx';
-import styles from './error-fallback.module.scss';
+import styles from './error-fallback.module.css';
 
 export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { t } = useTranslation(NAMESPACES.COMMON);

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import s from './select.module.scss';
+import s from './select.module.css';
 import type { BaseSelectProps } from './select.types.ts';
 
 export const Select = ({

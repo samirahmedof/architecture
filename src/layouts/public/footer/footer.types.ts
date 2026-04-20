@@ -1,5 +1,3 @@
 import type { ComponentProps } from 'react';
 
-export type FooterProps = ComponentProps<'footer'> & {
-  isOpen: boolean;
-};
+export type FooterProps = ComponentProps<'footer'>;
