@@ -9,6 +9,13 @@
   --header-toggle-icon-color: var(--blue-600);
 }
 
+:root[data-theme='dark'] {
+  --header-navbar-bg: var(--black);
+  --header-icon-color: var(--gray-100);
+  --header-sub-bg: var(--blue-800);
+  --header-toggle-icon-color: var(--gray-100);
+}
+
 .header {
   position: fixed;
   top: 0;

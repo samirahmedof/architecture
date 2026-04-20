@@ -13,11 +13,21 @@
   --table-head-text-color: var(--brand-primary-dark);
 }
 
+:root[data-theme='dark'] {
+  --table-border: var(--blue-700);
+  --table-text-color: var(--gray-100);
+  --table-text-color-empty: var(--gray-500);
+  --table-row-bg-hover: var(--blue-700);
+  --table-row-bg-active: var(--blue-600);
+  --table-head-bg: var(--blue-800);
+  --table-head-text-color: var(--gray-100);
+}
+
 .wrapper {
   position: relative;
   border: 1px solid var(--table-border);
   border-radius: var(--radius-md);
-  background: var(--white);
+  background: var(--bg-surface);
   width: 100%;
   overflow-x: auto;
 }

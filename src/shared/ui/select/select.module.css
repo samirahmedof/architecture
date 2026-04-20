@@ -5,7 +5,7 @@
 }
 
 .label {
-  color: var(--gray-700);
+  color: var(--text-main);
   font-weight: 500;
   font-size: var(--text-md);
 }
@@ -27,7 +27,7 @@
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--form-control-border);
   border-radius: var(--radius-sm);
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   padding: var(--space-sm);
   line-height: 1;
   user-select: none;
@@ -65,7 +65,7 @@
   z-index: var(--z-tooltip);
   box-shadow: var(--shadow-strong);
   border-radius: var(--radius-sm);
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   overflow: hidden;
   color: var(--form-control-color);
 }
@@ -96,7 +96,7 @@
   &[data-state='checked'] {
     outline: none;
     background-color: var(--brand-primary);
-    color: var(--white);
+    color: var(--text-inverse);
   }
 }
 
@@ -105,7 +105,7 @@
   justify-content: center;
   align-items: center;
   cursor: default;
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   height: rem(25);
   color: var(--brand-primary);
 }

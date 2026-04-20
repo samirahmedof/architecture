@@ -17,3 +17,4 @@ export * from './select/select.types.ts';
 export * from './table/table.tsx';
 export * from './table/table.types.ts';
 export * from './table-actions/table-actions.tsx';
+export * from './theme-toggle/theme-toggle.tsx';

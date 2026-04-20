@@ -3,7 +3,7 @@ import logo from '@assets/images/sima-negative.svg';
 import { DEFAULT_LANGUAGE, type Language, NAMESPACES } from '@shared/config/i18n.config.ts';
 import { logger } from '@shared/lib/logger.ts';
 import { useUiStore } from '@shared/store/ui.store.ts';
-import { Col, Row, Select } from '@shared/ui';
+import { Col, Row, Select, ThemeToggle } from '@shared/ui';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { LogOut, Menu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -46,6 +46,9 @@ export const Header = () => {
           </Col>
           <Col sm={4}>
             <ul className={s.items}>
+              <li>
+                <ThemeToggle />
+              </li>
               <li>
                 <button className={s.avatar} type="button">
                   <img src={avatar} alt="avatar" />

@@ -11,6 +11,15 @@
   --sidebar-item-sub-dot-bg: var(--gray-400);
 }
 
+:root[data-theme='dark'] {
+  --sidebar-border: var(--blue-700);
+  --sidebar-item-color: var(--gray-400);
+  --sidebar-item-color-hover: var(--white);
+  --sidebar-item-bg-hover: var(--blue-700);
+  --sidebar-item-sub-color: var(--gray-500);
+  --sidebar-item-sub-dot-bg: var(--gray-600);
+}
+
 /*
  * Sidebar uses a single `data-state="open" | "closed"` attribute as its
  * source of truth. Layout-level siblings (.layout, .footer) react to it via

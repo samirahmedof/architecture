@@ -4,11 +4,13 @@ import { devtools, persist } from 'zustand/middleware';
 
 const storeName = `ui-storage-${APP.NAME}`;
 
+export type ThemePreference = 'light' | 'dark' | 'system';
+
 interface UiState {
   isSidebarOpen: boolean;
-  theme: 'light' | 'dark';
+  theme: ThemePreference;
   toggleSidebar: () => void;
-  setTheme: (theme: 'light' | 'dark') => void;
+  setTheme: (theme: ThemePreference) => void;
 }
 
 export const useUiStore = create<UiState>()(
@@ -16,13 +18,16 @@ export const useUiStore = create<UiState>()(
     persist(
       (set) => ({
         isSidebarOpen: true,
-        theme: 'light',
+        theme: 'system',
         toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
         setTheme: (theme) => set({ theme }),
       }),
       {
         name: storeName,
-        // partialize: (state) => ({ isSidebarOpen: state.isSidebarOpen }),
+        partialize: (state) => ({
+          isSidebarOpen: state.isSidebarOpen,
+          theme: state.theme,
+        }),
       },
     ),
   ),

@@ -6,7 +6,7 @@
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--form-control-border);
   border-radius: var(--radius-sm);
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   padding: var(--space-sm);
   width: 100%;
   color: var(--form-control-color);
@@ -35,7 +35,7 @@
   &:disabled {
     cursor: not-allowed;
     box-shadow: none;
-    background-color: var(--gray-50);
+    background-color: var(--form-control-bg-hover);
     color: var(--form-control-color-disabled);
   }
 

@@ -94,3 +94,32 @@
   --form-control-bg-hover: var(--gray-50);
   --form-control-placeholder: var(--gray-300);
 }
+
+/* ─── 3. DARK THEME ──────────────────────────────────────────────── */
+/*
+ * Dark theme overrides only the SEMANTIC layer — primitives stay stable so
+ * the team can trust `--blue-500` to mean a single colour everywhere.
+ * `color-scheme: dark` flips native form controls, scrollbars, and
+ * focus rings to their dark variants.
+ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg-body: var(--blue-900);
+  --bg-surface: var(--blue-800);
+
+  --text-main: var(--gray-100);
+  --text-muted: var(--gray-500);
+  --text-inverse: var(--blue-900);
+
+  --border-default: var(--blue-700);
+  --border-active: var(--brand-primary);
+  --border-error: var(--brand-error);
+
+  --form-control-border: var(--blue-700);
+  --form-control-border-focus: var(--blue-400);
+  --form-control-color: var(--gray-100);
+  --form-control-color-disabled: var(--gray-700);
+  --form-control-bg-hover: var(--blue-700);
+  --form-control-placeholder: var(--gray-600);
+}

@@ -11,6 +11,21 @@
       type="font/woff2"
       crossorigin
     />
+    <script>
+      // Anti-FOUC theme bootstrap. Runs synchronously before paint.
+      // Storage key MUST match `storeName` in src/shared/store/ui.store.ts.
+      (function () {
+        try {
+          var raw = localStorage.getItem('ui-storage-Architecture');
+          var pref = raw ? JSON.parse(raw).state.theme : 'system';
+          var dark =
+            pref === 'dark' ||
+            (pref === 'system' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {}
+      })();
+    </script>
     <title>architecture-v3</title>
   </head>
   <body>
