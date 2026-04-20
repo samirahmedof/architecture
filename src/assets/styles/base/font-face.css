@@ -1,24 +1,44 @@
 /*
- * @font-face declarations — paths are RELATIVE to this file's location
+ * @font-face declarations. Paths are RELATIVE to this file's location
  * (src/assets/styles/base/font-face.css → ../../fonts/...).
+ *
+ * Audit (2026-04-20): Only NunitoSans is referenced via --font-main in
+ * base.css. PFSquareSansPro and Imperial Script tokens were defined but
+ * never consumed — entire families dropped. Weights audited against
+ * `font-weight:` usage in CSS Modules: 400 (body), 500, 600 are used
+ * directly; 700 retained for native <b>/<strong> defaults. Weights 100,
+ * 300, 800, 900 dropped — browser synthesises if ever needed.
+ *
+ * MIGRATION TODO — variable font:
+ *   NunitoSans ships as a variable font. Replacing the four static files
+ *   below with `NunitoSans-VariableFont_YTLC,opsz,wdth,wght.woff2` (~120 KB)
+ *   loads one file instead of four, and unlocks every weight 200–1000.
+ *   Steps:
+ *     1. Drop the variable .woff2 into src/assets/fonts/nunito/
+ *     2. Replace the 4 @font-face blocks below with one:
+ *          @font-face {
+ *            font-family: 'NunitoSans';
+ *            font-weight: 200 1000;
+ *            font-style: normal;
+ *            font-display: swap;
+ *            src: url('../../fonts/nunito/NunitoSans-VariableFont.woff2')
+ *                 format('woff2-variations');
+ *          }
+ *     3. Update the preload <link> in index.html to point at the new file
+ *        and change `as="font" type="font/woff2"` only (crossorigin stays).
  */
 @font-face {
   font-style: normal;
-  font-weight: 100;
-  src: url('../../fonts/nunito/NunitoSans-ExtraLight.woff2') format('woff2');
-  font-family: 'NunitoSans';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/nunito/NunitoSans-Light.woff2') format('woff2');
-  font-family: 'NunitoSans';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
   font-weight: 400;
+  src: url('../../fonts/nunito/NunitoSans-Regular.woff2') format('woff2');
+  font-family: 'NunitoSans';
+  font-display: swap;
+}
+@font-face {
+  font-style: normal;
+  font-weight: 500;
+  /* No 500-weight static file shipped — browser synthesises from 400/600.
+     Variable-font migration above eliminates this gap. */
   src: url('../../fonts/nunito/NunitoSans-Regular.woff2') format('woff2');
   font-family: 'NunitoSans';
   font-display: swap;
@@ -35,70 +55,5 @@
   font-weight: 700;
   src: url('../../fonts/nunito/NunitoSans-Bold.woff2') format('woff2');
   font-family: 'NunitoSans';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 800;
-  src: url('../../fonts/nunito/NunitoSans-ExtraBold.woff2') format('woff2');
-  font-family: 'NunitoSans';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 900;
-  src: url('../../fonts/nunito/NunitoSans-Black.woff2') format('woff2');
-  font-family: 'NunitoSans';
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 100;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-Thin.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-Light.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-Regular.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 500;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-Medium.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 700;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-Bold.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-weight: 900;
-  src: url('../../fonts/pf-square-sans-pro/PFSquareSansPro-XBlack.woff2') format('woff2');
-  font-family: 'PFSquareSansPro';
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../fonts/imperial-script/ImperialScript-Regular.woff2') format('woff2');
-  font-family: 'Imperial Script';
   font-display: swap;
 }

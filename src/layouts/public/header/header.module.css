@@ -1,3 +1,14 @@
+/*
+ * Component-local tokens. `:root` is not transformed by CSS Modules, so these
+ * are global once header.module.css is loaded by the Header component.
+ */
+:root {
+  --header-navbar-bg: var(--blue-800);
+  --header-icon-color: var(--white);
+  --header-sub-bg: var(--gray-50);
+  --header-toggle-icon-color: var(--blue-600);
+}
+
 .header {
   position: fixed;
   top: 0;

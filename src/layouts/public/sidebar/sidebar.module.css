@@ -1,4 +1,17 @@
 /*
+ * Component-local tokens — also consumed by sidebar-item.module.css, which is
+ * always rendered inside Sidebar. `:root` is not transformed by CSS Modules.
+ */
+:root {
+  --sidebar-border: var(--border-default);
+  --sidebar-item-color: var(--blue-300);
+  --sidebar-item-color-hover: var(--black);
+  --sidebar-item-bg-hover: var(--gray-300);
+  --sidebar-item-sub-color: var(--gray-700);
+  --sidebar-item-sub-dot-bg: var(--gray-400);
+}
+
+/*
  * Sidebar uses a single `data-state="open" | "closed"` attribute as its
  * source of truth. Layout-level siblings (.layout, .footer) react to it via
  * the sibling combinator + :global() — see public.module.css and footer.module.css.

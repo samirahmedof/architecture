@@ -1,9 +1,12 @@
 /*
- * COLOR TOKENS — single file, three logical sections kept inline:
+ * COLOR TOKENS — two logical sections:
  *
  *   1. Primitives — raw values. Don't reference these directly in components.
  *   2. Semantic   — intent-based aliases. This is the team's API surface.
- *   3. Components — per-component color overrides. Add new component sections here.
+ *
+ * Component-specific tokens (input, table, header, sidebar, etc.) live with
+ * their owning component's .module.css. Tokens here must be reusable across
+ * features; if a token applies to exactly one component, it doesn't belong here.
  *
  * Theme switching: add `[data-theme='dark'] { ... }` block at the bottom and
  * override the SEMANTIC tokens only — primitives stay stable.
@@ -78,42 +81,16 @@
   --border-error: var(--brand-error);
 
   --action-main: var(--brand-primary);
-}
 
-/* ─── 3. COMPONENT OVERRIDES ─────────────────────────────────────── */
-:root {
-  /* input */
-  --input-border: var(--border-default);
-  --input-border-focus: var(--blue-700);
-  --input-color: var(--blue-600);
-  --input-bg-hover: var(--gray-50);
-  --input-color-disabled: var(--gray-300);
-  --input-placeholder-color: var(--gray-300);
-
-  /* table */
-  --table-border: var(--border-default);
-  --table-text-color: var(--text-main);
-  --table-text-color-empty: var(--brand-primary-dark);
-  --table-row-bg-hover: var(--gray-50);
-  --table-row-bg-active: var(--gray-200);
-  --table-head-bg: var(--gray-300);
-  --table-head-text-color: var(--brand-primary-dark);
-  --table-action-default-color: var(--gray-500);
-  --table-action-edit-color: var(--blue-500);
-  --table-action-delete-color: var(--red-500);
-  --table-action-view-color: var(--green-700);
-
-  /* header */
-  --header-navbar-bg: var(--blue-800);
-  --header-icon-color: var(--white);
-  --header-sub-bg: var(--gray-50);
-  --header-toggle-icon-color: var(--blue-600);
-
-  /* sidebar */
-  --sidebar-border: var(--border-default);
-  --sidebar-item-color: var(--blue-300);
-  --sidebar-item-color-hover: var(--black);
-  --sidebar-item-bg-hover: var(--gray-300);
-  --sidebar-item-sub-color: var(--gray-700);
-  --sidebar-item-sub-dot-bg: var(--gray-400);
+  /*
+   * Form-control semantics — shared by Input, Select, and any future
+   * text-control component. Live here (not in input.module.css) because
+   * multiple components depend on the same visual contract.
+   */
+  --form-control-border: var(--border-default);
+  --form-control-border-focus: var(--blue-700);
+  --form-control-color: var(--blue-600);
+  --form-control-color-disabled: var(--gray-300);
+  --form-control-bg-hover: var(--gray-50);
+  --form-control-placeholder: var(--gray-300);
 }

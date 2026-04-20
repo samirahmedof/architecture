@@ -1,3 +1,18 @@
+/*
+ * Component-local tokens. `:root` is not transformed by CSS Modules.
+ * `--table-action-*` lives with table-actions.module.css; only colors used by
+ * the Table chrome itself are declared here.
+ */
+:root {
+  --table-border: var(--border-default);
+  --table-text-color: var(--text-main);
+  --table-text-color-empty: var(--brand-primary-dark);
+  --table-row-bg-hover: var(--gray-50);
+  --table-row-bg-active: var(--gray-200);
+  --table-head-bg: var(--gray-300);
+  --table-head-text-color: var(--brand-primary-dark);
+}
+
 .wrapper {
   position: relative;
   border: 1px solid var(--table-border);

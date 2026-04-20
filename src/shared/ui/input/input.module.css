@@ -4,24 +4,24 @@
   transition-timing-function: var(--ease-standard);
   display: block;
   box-shadow: var(--shadow-soft);
-  border: 1px solid var(--input-border);
+  border: 1px solid var(--form-control-border);
   border-radius: var(--radius-sm);
   background-color: var(--white);
   padding: var(--space-sm);
   width: 100%;
-  color: var(--input-color);
+  color: var(--form-control-color);
   font-family: inherit;
   font-size: var(--text-md);
   line-height: 1;
 
   &:hover:not(:disabled) {
-    background-color: var(--input-bg-hover);
+    background-color: var(--form-control-bg-hover);
   }
 
   &:focus-visible,
   &:focus {
     outline: none;
-    border-color: var(--input-border-focus);
+    border-color: var(--form-control-border-focus);
     box-shadow:
       0 0 0 2px var(--bg-surface),
       0 0 0 4px rgb(from var(--brand-primary) r g b / 40%);
@@ -29,14 +29,14 @@
 
   &::placeholder {
     opacity: 1;
-    color: var(--input-placeholder-color);
+    color: var(--form-control-placeholder);
   }
 
   &:disabled {
     cursor: not-allowed;
     box-shadow: none;
     background-color: var(--gray-50);
-    color: var(--input-color-disabled);
+    color: var(--form-control-color-disabled);
   }
 
   &.error {
