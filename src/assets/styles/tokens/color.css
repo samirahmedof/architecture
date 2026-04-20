@@ -65,20 +65,43 @@
 :root {
   color-scheme: light;
 
+  /* Brand / status */
   --brand-primary: var(--blue-500);
   --brand-primary-dark: var(--blue-600);
   --brand-error: var(--red-500);
+  --brand-success: var(--green-700);
 
+  /* Surfaces in normal flow */
   --bg-body: var(--gray-100);
   --bg-surface: var(--white);
+  --bg-surface-hover: var(--gray-50);
+  --bg-surface-active: var(--gray-200);
+  --bg-surface-strong: var(--gray-300);
 
+  /* Inverse chrome (dark UI bars on light theme; flips in dark theme) */
+  --bg-inverse: var(--blue-800);
+  --bg-inverse-soft: var(--gray-50);
+  --text-on-inverse: var(--white);
+  --text-on-inverse-soft: var(--blue-600);
+
+  /* Text */
   --text-main: var(--blue-800);
   --text-muted: var(--gray-500);
+  --text-strong: var(--black);
   --text-inverse: var(--white);
 
+  /* Borders */
   --border-default: var(--gray-300);
   --border-active: var(--brand-primary);
   --border-error: var(--brand-error);
+
+  /* Subtle status surfaces (banners, error-fallback cards, etc.) */
+  --bg-error-subtle: var(--red-50);
+  --border-error-subtle: var(--red-200);
+  --text-error-strong: var(--red-700);
+
+  /* Decorative */
+  --icon-muted-bg: var(--gray-400);
 
   --action-main: var(--brand-primary);
 
@@ -105,16 +128,33 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
+  --brand-success: var(--green-400);
+
   --bg-body: var(--blue-900);
   --bg-surface: var(--blue-800);
+  --bg-surface-hover: var(--blue-700);
+  --bg-surface-active: var(--blue-600);
+  --bg-surface-strong: var(--blue-800);
+
+  --bg-inverse: var(--black);
+  --bg-inverse-soft: var(--blue-800);
+  --text-on-inverse: var(--gray-100);
+  --text-on-inverse-soft: var(--gray-100);
 
   --text-main: var(--gray-100);
   --text-muted: var(--gray-500);
+  --text-strong: var(--white);
   --text-inverse: var(--blue-900);
 
   --border-default: var(--blue-700);
   --border-active: var(--brand-primary);
   --border-error: var(--brand-error);
+
+  --bg-error-subtle: var(--red-900);
+  --border-error-subtle: var(--red-700);
+  --text-error-strong: var(--red-300);
+
+  --icon-muted-bg: var(--gray-600);
 
   --form-control-border: var(--blue-700);
   --form-control-border-focus: var(--blue-400);

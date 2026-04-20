@@ -40,7 +40,7 @@
   }
 
   &.error {
-    border-color: var(--red-500);
+    border-color: var(--border-error);
 
     &:focus-visible,
     &:focus {
@@ -51,7 +51,7 @@
   }
 
   &.small {
-    padding: var(--space-xxs);
+    padding: var(--space-2xs);
     font-size: var(--text-sm);
   }
 }

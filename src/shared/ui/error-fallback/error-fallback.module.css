@@ -4,11 +4,11 @@
   align-items: center;
   flex-direction: column;
   margin: var(--space-md);
-  border: 1px solid var(--red-200);
+  border: 1px solid var(--border-error-subtle);
   border-radius: var(--radius-md);
-  background-color: var(--red-50);
-  padding: var(--space-xxl);
-  color: var(--red-700);
+  background-color: var(--bg-error-subtle);
+  padding: var(--space-2xl);
+  color: var(--text-error-strong);
   text-align: center;
 }
 

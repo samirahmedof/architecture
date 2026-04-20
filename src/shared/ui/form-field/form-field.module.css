@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xxs);
+  gap: var(--space-2xs);
   width: 100%;
 
   /* :has() — when an input child is in error state, mark the label red without JS */
@@ -17,7 +17,7 @@
 }
 
 .label {
-  color: var(--gray-700);
+  color: var(--text-main);
   font-weight: 500;
   font-size: var(--text-md);
   transition: color var(--duration-base) var(--ease-standard);

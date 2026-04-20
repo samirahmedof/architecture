@@ -1,31 +1,6 @@
-/*
- * Component-local tokens. `:root` is not transformed by CSS Modules.
- * `--table-action-*` lives with table-actions.module.css; only colors used by
- * the Table chrome itself are declared here.
- */
-:root {
-  --table-border: var(--border-default);
-  --table-text-color: var(--text-main);
-  --table-text-color-empty: var(--brand-primary-dark);
-  --table-row-bg-hover: var(--gray-50);
-  --table-row-bg-active: var(--gray-200);
-  --table-head-bg: var(--gray-300);
-  --table-head-text-color: var(--brand-primary-dark);
-}
-
-:root[data-theme='dark'] {
-  --table-border: var(--blue-700);
-  --table-text-color: var(--gray-100);
-  --table-text-color-empty: var(--gray-500);
-  --table-row-bg-hover: var(--blue-700);
-  --table-row-bg-active: var(--blue-600);
-  --table-head-bg: var(--blue-800);
-  --table-head-text-color: var(--gray-100);
-}
-
 .wrapper {
   position: relative;
-  border: 1px solid var(--table-border);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   background: var(--bg-surface);
   width: 100%;
@@ -35,7 +10,7 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  color: var(--table-text-color);
+  color: var(--text-main);
   font-size: var(--text-md);
   text-align: left;
 
@@ -43,14 +18,14 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: var(--table-head-bg);
+    background-color: var(--bg-surface-strong);
     user-select: none;
 
     & th {
       transition: background-color var(--duration-base) var(--ease-standard);
-      border-bottom: 1px solid var(--table-border);
+      border-bottom: 1px solid var(--border-default);
       padding: var(--space-sm) var(--space-md);
-      color: var(--table-head-text-color);
+      color: var(--text-main);
       font-weight: 600;
       white-space: nowrap;
     }
@@ -59,14 +34,14 @@
   & tbody {
     & tr {
       transition: background-color var(--duration-base) var(--ease-standard);
-      border-bottom: 1px solid var(--table-border);
+      border-bottom: 1px solid var(--border-default);
 
       &:last-child {
         border-bottom: none;
       }
 
       &:hover {
-        background-color: var(--table-row-bg-hover);
+        background-color: var(--bg-surface-hover);
       }
     }
 
@@ -81,7 +56,7 @@
   cursor: pointer;
 
   &:active {
-    background-color: var(--table-row-bg-active);
+    background-color: var(--bg-surface-active);
   }
 }
 
@@ -91,8 +66,8 @@
 }
 
 .empty {
-  padding: var(--space-xxl);
-  color: var(--table-text-color-empty);
+  padding: var(--space-2xl);
+  color: var(--text-muted);
   font-size: var(--text-md);
   text-align: center;
 }

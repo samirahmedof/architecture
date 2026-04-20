@@ -1,14 +1,3 @@
-/*
- * Component-local tokens. `:root` is not transformed by CSS Modules, so these
- * are global once this module is loaded.
- */
-:root {
-  --table-action-default-color: var(--gray-500);
-  --table-action-edit-color: var(--blue-500);
-  --table-action-delete-color: var(--red-500);
-  --table-action-view-color: var(--green-700);
-}
-
 .wrapper {
   display: flex;
   justify-content: center;
@@ -24,7 +13,7 @@
   transition-duration: var(--duration-base);
   transition-timing-function: var(--ease-standard);
   /* Per-instance ramp color — variants override only this one custom property. */
-  --action-color: var(--table-action-default-color);
+  --action-color: var(--text-muted);
 
   cursor: pointer;
   border: none;
@@ -41,13 +30,13 @@
 }
 
 .edit {
-  --action-color: var(--table-action-edit-color);
+  --action-color: var(--brand-primary);
 }
 
 .del {
-  --action-color: var(--table-action-delete-color);
+  --action-color: var(--brand-error);
 }
 
 .view {
-  --action-color: var(--table-action-view-color);
+  --action-color: var(--brand-success);
 }

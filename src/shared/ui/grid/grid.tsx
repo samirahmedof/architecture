@@ -33,12 +33,11 @@ export const Row = ({ children, className, align, ...props }: RowProps) => {
  */
 type ColCssVars = CSSProperties & {
   '--col-span'?: number | string;
-  '--col-xs'?: number | string;
   '--col-sm'?: number | string;
   '--col-md'?: number | string;
   '--col-lg'?: number | string;
   '--col-xl'?: number | string;
-  '--col-xxl'?: number | string;
+  '--col-2xl'?: number | string;
 };
 
 export const Col = ({
@@ -60,7 +59,7 @@ export const Col = ({
   if (md !== undefined) cssVars['--col-md'] = md;
   if (lg !== undefined) cssVars['--col-lg'] = lg;
   if (xl !== undefined) cssVars['--col-xl'] = xl;
-  if (xxl !== undefined) cssVars['--col-xxl'] = xxl;
+  if (xxl !== undefined) cssVars['--col-2xl'] = xxl;
 
   return (
     <div className={clsx(s.col, auto && s.auto, className)} style={cssVars} {...props}>

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xxs);
+  gap: var(--space-2xs);
 }
 
 .label {
@@ -11,7 +11,7 @@
 }
 
 .errorMessage {
-  color: var(--red-500);
+  color: var(--brand-error);
   font-size: var(--text-xs);
 }
 
@@ -33,7 +33,7 @@
   user-select: none;
 
   &.small {
-    padding: var(--space-xxs);
+    padding: var(--space-2xs);
   }
 
   &:hover {
@@ -79,7 +79,7 @@
   position: relative;
   align-items: center;
   cursor: pointer;
-  border-radius: var(--radius-xxs);
+  border-radius: var(--radius-2xs);
   padding: 0 rem(35) 0 rem(25);
   height: rem(25);
   color: var(--text-main);

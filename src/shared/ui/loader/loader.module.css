@@ -1,3 +1,5 @@
+@import '../../../assets/styles/tokens/media.css';
+
 .container {
   display: flex;
   position: fixed;
@@ -19,7 +21,7 @@
   box-sizing: border-box;
   border-width: 3px 2px;
   border-style: solid;
-  border-color: var(--brand-primary) transparent var(--white) transparent;
+  border-color: var(--brand-primary) transparent var(--text-on-inverse) transparent;
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
@@ -35,7 +37,7 @@
     left: 0;
     transform: translate(-10px, 19px) rotate(-35deg);
     border: 10px solid transparent;
-    border-bottom-color: var(--white);
+    border-bottom-color: var(--text-on-inverse);
     content: '';
   }
 

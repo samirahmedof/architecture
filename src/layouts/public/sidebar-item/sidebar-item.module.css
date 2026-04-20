@@ -1,6 +1,6 @@
 .item {
-  margin-bottom: var(--space-xxs);
-  color: var(--sidebar-item-color);
+  margin-bottom: var(--space-2xs);
+  color: var(--text-muted);
   font-size: var(--text-sm);
   user-select: none;
 }
@@ -47,12 +47,12 @@
   &[aria-expanded='true'],
   &:hover {
     box-shadow: var(--shadow-soft);
-    background-color: var(--white);
-    color: var(--sidebar-item-color-hover);
+    background-color: var(--bg-surface);
+    color: var(--text-strong);
   }
 
   &:hover {
-    background-color: var(--sidebar-item-bg-hover);
+    background-color: var(--bg-surface-strong);
   }
 
   &.active {
@@ -72,7 +72,7 @@
   position: relative;
   justify-content: space-between;
   padding: var(--space-xs) var(--space-sm) var(--space-xs) var(--space-lg);
-  color: var(--sidebar-item-sub-color);
+  color: var(--text-main);
 
   &::before {
     transition: background-color var(--duration-base) var(--ease-standard);
@@ -80,7 +80,7 @@
     top: 15px;
     left: 15px;
     border-radius: var(--radius-full);
-    background-color: var(--sidebar-item-sub-dot-bg);
+    background-color: var(--icon-muted-bg);
     width: 3px;
     height: 3px;
     content: '';

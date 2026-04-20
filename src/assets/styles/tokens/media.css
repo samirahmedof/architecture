@@ -12,7 +12,7 @@
 @custom-media --bp-md (min-width: 768px);
 @custom-media --bp-lg (min-width: 992px);
 @custom-media --bp-xl (min-width: 1200px);
-@custom-media --bp-xxl (min-width: 1400px);
+@custom-media --bp-2xl (min-width: 1400px);
 
 @custom-media --motion-ok (prefers-reduced-motion: no-preference);
 @custom-media --motion-reduce (prefers-reduced-motion: reduce);

@@ -63,7 +63,10 @@
       "Bash(rm -rf dist)",
       "Bash(grep -oE \"url\\\\\\\\\\(\\\\\"[^\\\\\"]*woff2\\\\\"\\\\\\\\\\)\" dist/assets/index-*.css)",
       "Bash(rm -rf src/assets/styles/tokens src/assets/styles/base src/assets/styles/utilities.css)",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(node scripts/check-css-tokens.mjs)",
+      "Bash(node scripts/check-css-tokens.mjs src/shared/ui/grid/grid.module.css src/shared/ui/content-wrapper/content-wrapper.module.css)",
+      "Bash(pnpm lint:css-tokens)"
     ]
   }
 }

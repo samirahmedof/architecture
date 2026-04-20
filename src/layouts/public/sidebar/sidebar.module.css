@@ -1,26 +1,4 @@
 /*
- * Component-local tokens — also consumed by sidebar-item.module.css, which is
- * always rendered inside Sidebar. `:root` is not transformed by CSS Modules.
- */
-:root {
-  --sidebar-border: var(--border-default);
-  --sidebar-item-color: var(--blue-300);
-  --sidebar-item-color-hover: var(--black);
-  --sidebar-item-bg-hover: var(--gray-300);
-  --sidebar-item-sub-color: var(--gray-700);
-  --sidebar-item-sub-dot-bg: var(--gray-400);
-}
-
-:root[data-theme='dark'] {
-  --sidebar-border: var(--blue-700);
-  --sidebar-item-color: var(--gray-400);
-  --sidebar-item-color-hover: var(--white);
-  --sidebar-item-bg-hover: var(--blue-700);
-  --sidebar-item-sub-color: var(--gray-500);
-  --sidebar-item-sub-dot-bg: var(--gray-600);
-}
-
-/*
  * Sidebar uses a single `data-state="open" | "closed"` attribute as its
  * source of truth. Layout-level siblings (.layout, .footer) react to it via
  * the sibling combinator + :global() — see public.module.css and footer.module.css.
@@ -34,7 +12,7 @@
   top: var(--layout-sidebar-spacing);
   left: 0;
   transform: translateX(-100%);
-  border-right: 1px solid var(--sidebar-border);
+  border-right: 1px solid var(--border-default);
   padding: rem(20) rem(15);
   width: var(--layout-sidebar-width);
   height: calc(100vh - var(--layout-sidebar-spacing));
