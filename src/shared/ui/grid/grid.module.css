@@ -1,6 +1,17 @@
 @import '../../../assets/styles/tokens/media.css';
 
 /*
+ * Grid-system tokens live on both .container and .row so either can be used
+ * standalone (Row+Col without an outer Container, which the header and home
+ * page do). `:where()` keeps specificity at 0 so consumers can still override
+ * per-instance if needed.
+ */
+:where(.container, .row) {
+  --grid-columns: 12;
+  --grid-gutter: var(--space-lg);
+}
+
+/*
  * Container — single max-width custom property cascades through breakpoints.
  */
 .container {

@@ -1,0 +1,17 @@
+/*
+ * Form-control semantic tokens — shared by Input, Select, and any future
+ * text-control primitive. Co-located with form-field because these tokens
+ * describe the visual contract of form primitives specifically, not a
+ * design-system-wide concern.
+ *
+ * Imported from index.css so tokens are available globally but grouped
+ * with their consumers in the repo.
+ */
+:root {
+  --form-control-border: light-dark(var(--gray-300), var(--blue-700));
+  --form-control-border-focus: light-dark(var(--blue-700), var(--blue-400));
+  --form-control-color: light-dark(var(--blue-600), var(--gray-100));
+  --form-control-color-disabled: light-dark(var(--gray-300), var(--gray-700));
+  --form-control-bg-hover: light-dark(var(--gray-50), var(--blue-700));
+  --form-control-placeholder: light-dark(var(--gray-300), var(--gray-600));
+}

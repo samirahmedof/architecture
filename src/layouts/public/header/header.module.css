@@ -17,7 +17,7 @@
 
   & img {
     display: block;
-    width: rem(100);
+    width: 6.25rem;
   }
 }
 
@@ -38,8 +38,8 @@
 
   & img {
     border-radius: var(--radius-xs);
-    width: rem(28);
-    height: rem(28);
+    width: 1.75rem;
+    height: 1.75rem;
     object-fit: cover;
   }
 }

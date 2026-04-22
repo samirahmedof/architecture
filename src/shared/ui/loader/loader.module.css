@@ -17,7 +17,7 @@
 .loader {
   display: inline-block;
   position: relative;
-  animation: 1s rotate linear infinite;
+  animation: rotate var(--duration-long) linear infinite;
   box-sizing: border-box;
   border-width: 3px 2px;
   border-style: solid;

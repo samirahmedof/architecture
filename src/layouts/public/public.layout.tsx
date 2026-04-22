@@ -33,7 +33,7 @@ export const PublicLayout = () => {
     }
   }, [isOnline, t]);
   return (
-    <div>
+    <div className={s.root} data-sidebar-open={isSidebarOpen}>
       <Header />
       {!isOnline && <div className={s.network}>{t('network.banner')}</div>}
       <Sidebar isOpen={isSidebarOpen} />

@@ -13,7 +13,7 @@ export const Footer = () => {
       <Container fluid>
         <Row>
           <Col sm={8}>{t('footer.copy', { year: date, project: projectName })}</Col>
-          <Col sm={4} className="text-right">
+          <Col sm={4} className={s.company}>
             {t('footer.company')}
           </Col>
         </Row>

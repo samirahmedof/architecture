@@ -18,7 +18,7 @@
   background-color: var(--bg-surface);
   padding: var(--space-lg);
   width: 90%;
-  max-width: rem(500);
+  max-width: 31.25rem;
   max-height: 85vh;
   &:focus {
     outline: none;
@@ -27,7 +27,7 @@
 
 .title {
   margin: 0 0 var(--space-xs);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   font-size: var(--text-xl);
 }
 

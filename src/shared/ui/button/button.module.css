@@ -8,7 +8,7 @@
   border-radius: var(--radius-sm);
   padding: 0 var(--space-md);
   height: 2.5rem;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   font-size: var(--text-md);
   transition:
     background-color var(--duration-base) var(--ease-standard),

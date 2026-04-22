@@ -24,7 +24,7 @@
   color: var(--action-color);
 
   &:hover {
-    background-color: color-mix(in srgb, var(--action-color) 20%, transparent);
+    background-color: oklch(from var(--action-color) l c h / 20%);
     color: var(--action-color);
   }
 }

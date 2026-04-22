@@ -6,7 +6,7 @@
 
 .label {
   color: var(--text-main);
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   font-size: var(--text-md);
 }
 
@@ -44,7 +44,7 @@
     outline: 2px solid transparent;
     box-shadow:
       0 0 0 2px var(--bg-surface),
-      0 0 0 4px rgb(from var(--brand-primary) r g b / 40%);
+      0 0 0 4px oklch(from var(--brand-primary) l c h / 40%);
     border-color: var(--brand-primary);
   }
 
@@ -80,8 +80,8 @@
   align-items: center;
   cursor: pointer;
   border-radius: var(--radius-2xs);
-  padding: 0 rem(35) 0 rem(25);
-  height: rem(25);
+  padding: 0 2.1875rem 0 1.5625rem;
+  height: 1.5625rem;
   color: var(--text-main);
   font-size: var(--text-md);
   line-height: 1;
@@ -106,7 +106,7 @@
   align-items: center;
   cursor: default;
   background-color: var(--bg-surface);
-  height: rem(25);
+  height: 1.5625rem;
   color: var(--brand-primary);
 }
 

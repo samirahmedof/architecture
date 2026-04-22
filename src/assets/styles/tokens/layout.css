@@ -1,6 +1,11 @@
 /*
- * LAYOUT TOKENS — space, radius, layout dimensions, grid.
+ * LAYOUT TOKENS — space + radius scales (design-system scope).
  * Density modes (`[data-density='compact']`) override the relevant tokens here.
+ *
+ * Component-layout dimensions (sidebar width, header height, grid columns)
+ * live with their owning modules:
+ *   - sidebar width/spacing, header height  → public.module.css
+ *   - grid columns/gutter                   → grid.module.css
  */
 :root {
   --space-2xs: 0.25rem;
@@ -19,14 +24,6 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
-
-  --layout-sidebar-width: 15rem;
-  --layout-sidebar-spacing: 6rem;
-  --layout-content-max-width: 1200px;
-  --layout-header-height: 50px;
-
-  --grid-columns: 12;
-  --grid-gutter: var(--space-lg);
 }
 
 [data-density='compact'] {

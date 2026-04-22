@@ -2,10 +2,10 @@
  * Global stylesheet entry — the only file imported by the app root.
  *
  * Cascade is declared via @layer (lowest → highest priority below).
- * Component CSS Modules stay UNLAYERED so they automatically beat utilities
- * when colocated with markup, while utilities still beat base/reset globally.
+ * Component CSS Modules stay UNLAYERED so they automatically beat the
+ * layered globals.
  */
-@layer reset, tokens, base, utilities;
+@layer tokens, base;
 
 @import './tokens/media.css';
 
@@ -15,8 +15,8 @@
 @import './tokens/elevation.css' layer(tokens);
 @import './tokens/motion.css' layer(tokens);
 
-@import './base/reset.css' layer(reset);
 @import './base/base.css' layer(base);
 @import './base/font-face.css';
 
-@import './utilities.css' layer(utilities);
+/* Component-scoped shared tokens (colocated with their consumers). */
+@import '../../shared/ui/form-field/form-control.tokens.css' layer(tokens);

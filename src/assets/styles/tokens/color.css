@@ -4,13 +4,15 @@
  *   1. Primitives — raw values. Don't reference these directly in components.
  *   2. Semantic   — intent-based aliases. This is the team's API surface.
  *
+ * Dark theme uses `light-dark()` so every semantic token has ONE definition.
+ * `color-scheme` is set on :root (respects prefers-color-scheme by default)
+ * and pinned per [data-theme] attribute when the user forces a theme.
+ *
  * Component-specific tokens (input, table, header, sidebar, etc.) live with
  * their owning component's .module.css. Tokens here must be reusable across
  * features; if a token applies to exactly one component, it doesn't belong here.
- *
- * Theme switching: add `[data-theme='dark'] { ... }` block at the bottom and
- * override the SEMANTIC tokens only — primitives stay stable.
  */
+
 /* ─── 1. PRIMITIVES ──────────────────────────────────────────────── */
 :root {
   --white: #fff;
@@ -62,104 +64,65 @@
 }
 
 /* ─── 2. SEMANTIC ────────────────────────────────────────────────── */
+/*
+ * Single definition per token using light-dark(). The effective value
+ * depends on `color-scheme`, which is pinned by the [data-theme] overrides
+ * below. Primitives stay stable — only semantic aliases flip.
+ */
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 
   /* Brand / status */
   --brand-primary: var(--blue-500);
   --brand-primary-dark: var(--blue-600);
   --brand-error: var(--red-500);
-  --brand-success: var(--green-700);
+  --brand-success: light-dark(var(--green-700), var(--green-400));
 
   /* Surfaces in normal flow */
-  --bg-body: var(--gray-100);
-  --bg-surface: var(--white);
-  --bg-surface-hover: var(--gray-50);
-  --bg-surface-active: var(--gray-200);
-  --bg-surface-strong: var(--gray-300);
+  --bg-body: light-dark(var(--gray-100), var(--blue-900));
+  --bg-surface: light-dark(var(--white), var(--blue-800));
+  --bg-surface-hover: light-dark(var(--gray-50), var(--blue-700));
+  --bg-surface-active: light-dark(var(--gray-200), var(--blue-600));
+  --bg-surface-strong: light-dark(var(--gray-300), var(--blue-800));
 
   /* Inverse chrome (dark UI bars on light theme; flips in dark theme) */
-  --bg-inverse: var(--blue-800);
-  --bg-inverse-soft: var(--gray-50);
-  --text-on-inverse: var(--white);
-  --text-on-inverse-soft: var(--blue-600);
+  --bg-inverse: light-dark(var(--blue-800), var(--black));
+  --bg-inverse-soft: light-dark(var(--gray-50), var(--blue-800));
+  --text-on-inverse: light-dark(var(--white), var(--gray-100));
+  --text-on-inverse-soft: light-dark(var(--blue-600), var(--gray-100));
 
   /* Text */
-  --text-main: var(--blue-800);
+  --text-main: light-dark(var(--blue-800), var(--gray-100));
   --text-muted: var(--gray-500);
-  --text-strong: var(--black);
-  --text-inverse: var(--white);
+  --text-strong: light-dark(var(--black), var(--white));
+  --text-inverse: light-dark(var(--white), var(--blue-900));
 
   /* Borders */
-  --border-default: var(--gray-300);
+  --border-default: light-dark(var(--gray-300), var(--blue-700));
   --border-active: var(--brand-primary);
   --border-error: var(--brand-error);
 
   /* Subtle status surfaces (banners, error-fallback cards, etc.) */
-  --bg-error-subtle: var(--red-50);
-  --border-error-subtle: var(--red-200);
-  --text-error-strong: var(--red-700);
+  --bg-error-subtle: light-dark(var(--red-50), var(--red-900));
+  --border-error-subtle: light-dark(var(--red-200), var(--red-700));
+  --text-error-strong: light-dark(var(--red-700), var(--red-300));
 
   /* Decorative */
-  --icon-muted-bg: var(--gray-400);
+  --icon-muted-bg: light-dark(var(--gray-400), var(--gray-600));
 
   --action-main: var(--brand-primary);
-
-  /*
-   * Form-control semantics — shared by Input, Select, and any future
-   * text-control component. Live here (not in input.module.css) because
-   * multiple components depend on the same visual contract.
-   */
-  --form-control-border: var(--border-default);
-  --form-control-border-focus: var(--blue-700);
-  --form-control-color: var(--blue-600);
-  --form-control-color-disabled: var(--gray-300);
-  --form-control-bg-hover: var(--gray-50);
-  --form-control-placeholder: var(--gray-300);
 }
 
-/* ─── 3. DARK THEME ──────────────────────────────────────────────── */
+/* ─── 3. THEME PINS ──────────────────────────────────────────────── */
 /*
- * Dark theme overrides only the SEMANTIC layer — primitives stay stable so
- * the team can trust `--blue-500` to mean a single colour everywhere.
- * `color-scheme: dark` flips native form controls, scrollbars, and
- * focus rings to their dark variants.
+ * [data-theme] attribute (set by the anti-FOUC script in index.html and by
+ * the theme store at runtime) pins color-scheme, which drives light-dark().
+ * When no attribute is set, :root's `color-scheme: light dark` lets the
+ * browser follow prefers-color-scheme.
  */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
 :root[data-theme='dark'] {
   color-scheme: dark;
-
-  --brand-success: var(--green-400);
-
-  --bg-body: var(--blue-900);
-  --bg-surface: var(--blue-800);
-  --bg-surface-hover: var(--blue-700);
-  --bg-surface-active: var(--blue-600);
-  --bg-surface-strong: var(--blue-800);
-
-  --bg-inverse: var(--black);
-  --bg-inverse-soft: var(--blue-800);
-  --text-on-inverse: var(--gray-100);
-  --text-on-inverse-soft: var(--gray-100);
-
-  --text-main: var(--gray-100);
-  --text-muted: var(--gray-500);
-  --text-strong: var(--white);
-  --text-inverse: var(--blue-900);
-
-  --border-default: var(--blue-700);
-  --border-active: var(--brand-primary);
-  --border-error: var(--brand-error);
-
-  --bg-error-subtle: var(--red-900);
-  --border-error-subtle: var(--red-700);
-  --text-error-strong: var(--red-300);
-
-  --icon-muted-bg: var(--gray-600);
-
-  --form-control-border: var(--blue-700);
-  --form-control-border-focus: var(--blue-400);
-  --form-control-color: var(--gray-100);
-  --form-control-color-disabled: var(--gray-700);
-  --form-control-bg-hover: var(--blue-700);
-  --form-control-placeholder: var(--gray-600);
 }

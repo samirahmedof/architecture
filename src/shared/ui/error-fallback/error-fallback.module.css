@@ -14,14 +14,14 @@
 
 .title {
   margin-bottom: var(--space-xs);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   font-size: var(--text-2xl);
 }
 
 .message {
   opacity: 0.8;
   margin-bottom: var(--space-md);
-  max-width: rem(500);
+  max-width: 31.25rem;
   font-size: var(--text-md);
   font-family: monospace;
 }

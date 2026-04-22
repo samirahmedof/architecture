@@ -5,30 +5,8 @@ import react from '@vitejs/plugin-react';
 import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
-
-/*
- * `rem(N)` build-time helper — restores the SCSS ergonomic.
- * Author CSS:  font-size: rem(14);   →   Bundle:  font-size: 0.875rem;
- * Build-time only; output is byte-identical to hand-written rem values.
- */
-function remHelper(): Plugin {
-  return {
-    name: 'css-rem-helper',
-    enforce: 'pre',
-    transform(code, id) {
-      const cleanId = id.split('?')[0];
-      if (!cleanId.endsWith('.css')) return null;
-      if (!/\brem\(\s*-?\d/.test(code)) return null;
-      const out = code.replace(/\brem\(\s*(-?\d+(?:\.\d+)?)\s*\)/g, (_, n) => {
-        const v = Number(n) / 16;
-        return v === 0 ? '0' : `${v}rem`;
-      });
-      return { code: out, map: null };
-    },
-  };
-}
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -47,7 +25,6 @@ export default defineConfig(({ mode }) => {
         typescript: true,
         overlay: { initialIsOpen: false },
       }),
-      remHelper(),
       !isDev &&
         visualizer({
           filename: 'stats.html',

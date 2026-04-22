@@ -13,7 +13,7 @@
   left: 0;
   transform: translateX(-100%);
   border-right: 1px solid var(--border-default);
-  padding: rem(20) rem(15);
+  padding: 1.25rem 0.9375rem;
   width: var(--layout-sidebar-width);
   height: calc(100vh - var(--layout-sidebar-spacing));
   will-change: transform;

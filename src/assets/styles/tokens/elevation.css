@@ -7,12 +7,12 @@
   --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
   --shadow-strong: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
 
-  --z-base: 1;
-  --z-dropdown: 1000;
-  --z-sticky: 1010;
-  --z-header: 1020;
-  --z-overlay: 2000;
-  --z-modal: 3000;
-  --z-toast: 4000;
-  --z-tooltip: 5000;
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
 }
