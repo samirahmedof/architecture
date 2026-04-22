@@ -18,7 +18,7 @@ const LoginPage = () => {
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>{t('login.title')}</h1>
-      <Button variant="primary" onClick={handleFakeLogin}>
+      <Button variant='primary' onClick={handleFakeLogin}>
         {t('login.button')}
       </Button>
     </div>

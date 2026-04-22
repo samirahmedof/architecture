@@ -15,7 +15,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
       <h2 className={styles.title}>{t('error.unexpected')}</h2>
       <p className={styles.message}>{message}</p>
 
-      <Button variant="danger" onClick={resetErrorBoundary}>
+      <Button variant='danger' onClick={resetErrorBoundary}>
         {t('actions.retry')}
       </Button>
     </div>

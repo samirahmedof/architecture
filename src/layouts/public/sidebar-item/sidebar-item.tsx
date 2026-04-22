@@ -35,7 +35,7 @@ export const SidebarItem = ({
           <button
             className={s.link}
             onClick={() => setIsOpen(!isOpen)}
-            type="button"
+            type='button'
             aria-expanded={isOpen}
           >
             <div className={s.text}>

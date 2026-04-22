@@ -26,7 +26,7 @@ export const Modal = ({ isOpen, onOpenChange, title, children, trigger }: ModalP
           <div>{children}</div>
 
           <Dialog.Close asChild>
-            <button className={styles.closeBtn} aria-label="Close" type="button">
+            <button className={styles.closeBtn} aria-label='Close' type='button'>
               <X size={20} />
             </button>
           </Dialog.Close>

@@ -63,7 +63,7 @@ const PostDetailPage = () => {
   return (
     <ContentWrapper>
       <Form methods={methods} onSubmit={onSubmit} className={styles.form}>
-        <FormField name="title" label={t('title')}>
+        <FormField name='title' label={t('title')}>
           <Input
             placeholder={t('placeholders.title')}
             {...methods.register('title')}
@@ -71,7 +71,7 @@ const PostDetailPage = () => {
           />
         </FormField>
 
-        <FormField name="description" label={t('description')}>
+        <FormField name='description' label={t('description')}>
           <Input
             placeholder={t('placeholders.description')}
             {...methods.register('description')}
@@ -79,7 +79,7 @@ const PostDetailPage = () => {
           />
         </FormField>
 
-        <Button type="submit" isLoading={updateMutation.isPending || createMutation.isPending}>
+        <Button type='submit' isLoading={updateMutation.isPending || createMutation.isPending}>
           {t('actions.submit')}
         </Button>
       </Form>

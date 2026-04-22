@@ -36,11 +36,11 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.navbar}>
-        <Row align="center">
+        <Row align='center'>
           <Col sm={8}>
             <div className={s.logo}>
               <Link to={'/$locale'} params={{ locale: locale || DEFAULT_LANGUAGE }}>
-                <img src={logo} alt="logo" />
+                <img src={logo} alt='logo' />
               </Link>
             </div>
           </Col>
@@ -50,12 +50,12 @@ export const Header = () => {
                 <ThemeToggle />
               </li>
               <li>
-                <button className={s.avatar} type="button">
-                  <img src={avatar} alt="avatar" />
+                <button className={s.avatar} type='button'>
+                  <img src={avatar} alt='avatar' />
                 </button>
               </li>
               <li>
-                <button className={s.logout} type="button" onClick={logout}>
+                <button className={s.logout} type='button' onClick={logout}>
                   <LogOut />
                 </button>
               </li>
@@ -64,7 +64,7 @@ export const Header = () => {
         </Row>
       </div>
       <div className={s.sub}>
-        <button className={s.toggle} onClick={toggleSidebar} type="button">
+        <button className={s.toggle} onClick={toggleSidebar} type='button'>
           <Menu />
         </button>
         <div>

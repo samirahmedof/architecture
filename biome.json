@@ -49,7 +49,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.test.tsx", "**/*.spec.tsx", "**/*.test.ts"],
+      "includes": ["**/*.test.tsx", "**/*.spec.tsx", "**/*.test.ts", "**/*.spec.ts"],
       "linter": {
         "rules": {
           "suspicious": {
@@ -78,7 +78,7 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "jsxQuoteStyle": "double",
+      "jsxQuoteStyle": "single",
       "semicolons": "always",
       "arrowParentheses": "always",
       "trailingCommas": "all"

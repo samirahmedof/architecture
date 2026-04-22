@@ -33,7 +33,7 @@ export const QueryProvider = ({ children }: QueryProviderProps) => (
   <QueryClientProvider client={queryClient}>
     {children}
     {import.meta.env.DEV && (
-      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+      <ReactQueryDevtools initialIsOpen={false} buttonPosition='bottom-left' />
     )}
   </QueryClientProvider>
 );

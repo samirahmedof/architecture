@@ -24,7 +24,7 @@ const ActionBtn = ({ onClick, icon, variant, title }: ActionButtonProps) => {
 
   return (
     <button
-      type="button"
+      type='button'
       className={clsx(s.button, s[variant])}
       onClick={(e) => {
         e.stopPropagation();
@@ -45,20 +45,20 @@ export const TableActions = ({ onEdit, onDelete, onView, children }: TableAction
       <ActionBtn
         onClick={onView}
         icon={<Eye size={18} />}
-        variant="view"
+        variant='view'
         title={t('actions.view')}
       />
       <ActionBtn
         onClick={onEdit}
         icon={<Pencil size={18} />}
-        variant="edit"
+        variant='edit'
         title={t('actions.edit')}
       />
       {children}
       <ActionBtn
         onClick={onDelete}
         icon={<Trash2 size={18} />}
-        variant="del"
+        variant='del'
         title={t('actions.delete')}
       />
     </div>

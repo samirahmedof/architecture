@@ -47,7 +47,7 @@ export const RootLayout = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
-      <Toaster position="top-right" richColors closeButton />
+      <Toaster position='top-right' richColors closeButton />
       {ENV.IS_DEV && <TanStackRouterDevtools />}
     </>
   );
