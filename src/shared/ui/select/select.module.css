@@ -42,9 +42,7 @@
 
   &:focus-visible {
     outline: 2px solid transparent;
-    box-shadow:
-      0 0 0 2px var(--bg-surface),
-      0 0 0 4px oklch(from var(--brand-primary) l c h / 40%);
+    box-shadow: var(--focus-ring);
     border-color: var(--brand-primary);
   }
 
@@ -80,8 +78,9 @@
   align-items: center;
   cursor: pointer;
   border-radius: var(--radius-2xs);
-  padding: 0 2.1875rem 0 1.5625rem;
-  height: 1.5625rem;
+  padding-block: var(--select-item-padding-block);
+  padding-inline: var(--select-item-padding-inline-start) var(--select-item-padding-inline-end);
+  block-size: var(--control-height-sm);
   color: var(--text-main);
   font-size: var(--text-md);
   line-height: 1;
@@ -106,7 +105,7 @@
   align-items: center;
   cursor: default;
   background-color: var(--bg-surface);
-  height: 1.5625rem;
+  block-size: var(--control-height-sm);
   color: var(--brand-primary);
 }
 

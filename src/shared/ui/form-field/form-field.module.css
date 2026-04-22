@@ -24,7 +24,7 @@
 }
 
 .error {
-  min-height: 1.125rem;
+  min-block-size: var(--form-error-min-block-size);
   color: var(--brand-error);
   font-size: var(--text-xs);
 }

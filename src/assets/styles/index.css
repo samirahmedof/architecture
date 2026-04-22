@@ -14,9 +14,7 @@
 @import './tokens/typography.css' layer(tokens);
 @import './tokens/elevation.css' layer(tokens);
 @import './tokens/motion.css' layer(tokens);
+@import './tokens/form-control.css' layer(tokens);
 
 @import './base/base.css' layer(base);
 @import './base/font-face.css';
-
-/* Component-scoped shared tokens (colocated with their consumers). */
-@import '../../shared/ui/form-field/form-control.tokens.css' layer(tokens);

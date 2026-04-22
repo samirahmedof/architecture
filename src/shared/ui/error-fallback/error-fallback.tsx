@@ -11,7 +11,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
 
   return (
     <div className={styles.container}>
-      <AlertTriangle size={48} strokeWidth={1.5} style={{ marginBottom: 15 }} />
+      <AlertTriangle size={48} strokeWidth={1.5} className={styles.icon} />
       <h2 className={styles.title}>{t('error.unexpected')}</h2>
       <p className={styles.message}>{message}</p>
 

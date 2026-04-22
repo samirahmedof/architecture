@@ -15,6 +15,7 @@ export const createProjectRouter = () =>
     defaultPreload: 'intent',
     defaultPendingMs: 300,
     defaultPendingMinMs: 500,
+    defaultViewTransition: true,
     context: {
       queryClient: undefined as unknown as QueryClient,
       i18n,

@@ -24,6 +24,17 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
+
+  /* Component-dimension tokens (shared across multiple primitives). */
+  --control-height-md: 2.5rem;
+  --control-height-sm: 1.5625rem;
+
+  --modal-max-inline-size-md: 31.25rem;
+  --form-error-min-block-size: 1.125rem;
+
+  --select-item-padding-block: 0;
+  --select-item-padding-inline-start: 1.5625rem;
+  --select-item-padding-inline-end: 2.1875rem;
 }
 
 [data-density='compact'] {

@@ -18,7 +18,8 @@
     "coverage": "vitest run --coverage",
     "size": "size-limit",
     "size:why": "size-limit --why",
-    "lint:css-tokens": "node scripts/check-css-tokens.mjs"
+    "lint:css-tokens": "node scripts/check-css-tokens.mjs",
+    "types:css": "vite-css-modules"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -59,9 +60,9 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
+    "browserslist": "^4.24.5",
     "commitizen": "^4.3.1",
     "cz-git": "^1.12.0",
-    "browserslist": "^4.24.5",
     "happy-dom": "20.9.0",
     "husky": "^9.1.7",
     "lightningcss": "^1.32.0",
@@ -71,6 +72,7 @@
     "size-limit": "^12.1.0",
     "typescript": "~5.9.3",
     "vite": "^8.0.8",
+    "vite-css-modules": "^1.15.0",
     "vite-plugin-checker": "^0.13.0",
     "vitest": "^4.1.4"
   },

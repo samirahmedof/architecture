@@ -22,9 +22,7 @@
   &:focus {
     outline: none;
     border-color: var(--form-control-border-focus);
-    box-shadow:
-      0 0 0 2px var(--bg-surface),
-      0 0 0 4px oklch(from var(--brand-primary) l c h / 40%);
+    box-shadow: var(--focus-ring);
   }
 
   &::placeholder {
@@ -44,9 +42,7 @@
 
     &:focus-visible,
     &:focus {
-      box-shadow:
-        0 0 0 2px var(--bg-surface),
-        0 0 0 4px oklch(from var(--brand-error) l c h / 40%);
+      box-shadow: var(--focus-ring-error);
     }
   }
 

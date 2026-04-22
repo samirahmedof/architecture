@@ -26,7 +26,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {/* Loading olanda fırlanan icon göstər */}
-        {isLoading && <Loader2 className="animate-spin" size={16} />}
+        {isLoading && <Loader2 className={styles.spinner} size={16} />}
 
         {/* Loading yoxdursa və icon varsa göstər */}
         {!isLoading && icon && <span>{icon}</span>}

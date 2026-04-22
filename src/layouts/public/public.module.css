@@ -7,7 +7,9 @@
 .root {
   --layout-sidebar-width: 15rem;
   --layout-sidebar-spacing: 6rem;
-  --layout-header-height: 50px;
+  --layout-header-height: 3.125rem;
+  --layout-main-padding-block-start: calc(var(--layout-header-height) + var(--space-2xl));
+  --layout-main-padding-inline: var(--space-md);
   --sidebar-offset: 0;
 
   &[data-sidebar-open='true'] {
@@ -19,9 +21,9 @@
   transition-property: background-color, border-color, color, box-shadow, transform, opacity;
   transition-duration: var(--duration-base);
   transition-timing-function: var(--ease-standard);
-  margin-left: var(--sidebar-offset);
-  min-height: calc(100vh - var(--layout-header-height));
-  padding: 6.875rem 1.25rem 0;
+  margin-inline-start: var(--sidebar-offset);
+  min-block-size: calc(100vh - var(--layout-header-height));
+  padding: var(--layout-main-padding-block-start) var(--layout-main-padding-inline) 0;
   will-change: margin-left;
 }
 

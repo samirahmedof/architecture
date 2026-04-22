@@ -9,17 +9,27 @@
   align-items: center;
   z-index: var(--z-tooltip);
   backdrop-filter: blur(2px);
-  background-color: rgb(140 140 140 / 90%);
+  background-color: var(--bg-overlay-strong);
   width: 100%;
   height: 100vh;
 }
 
 .loader {
+  /* Visual-tuning constants scoped to this spinner shape. */
+  --loader-border-block: 3px;
+  --loader-border-inline: 2px;
+  --loader-arrow-offset-x: -10px;
+  --loader-arrow-offset-y: 19px;
+  --loader-arrow-after-x: 32px;
+  --loader-arrow-after-y: 3px;
+  --loader-arrow-rotation: -35deg;
+  --loader-arrow-border-width: 10px;
+
   display: inline-block;
   position: relative;
   animation: rotate var(--duration-long) linear infinite;
   box-sizing: border-box;
-  border-width: 3px 2px;
+  border-width: var(--loader-border-block) var(--loader-border-inline);
   border-style: solid;
   border-color: var(--brand-primary) transparent var(--text-on-inverse) transparent;
   border-radius: 50%;
@@ -35,14 +45,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(-10px, 19px) rotate(-35deg);
-    border: 10px solid transparent;
+    transform: translate(var(--loader-arrow-offset-x), var(--loader-arrow-offset-y))
+      rotate(var(--loader-arrow-rotation));
+    border: var(--loader-arrow-border-width) solid transparent;
     border-bottom-color: var(--text-on-inverse);
     content: '';
   }
 
   &::after {
-    transform: translate(32px, 3px) rotate(-35deg);
+    transform: translate(var(--loader-arrow-after-x), var(--loader-arrow-after-y))
+      rotate(var(--loader-arrow-rotation));
     border-color: var(--brand-primary) transparent transparent transparent;
   }
 }

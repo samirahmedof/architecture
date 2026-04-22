@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+.icon {
+  margin-block-end: var(--space-md);
+}
+
 .title {
   margin-bottom: var(--space-xs);
   font-weight: var(--weight-semibold);
@@ -20,8 +24,8 @@
 
 .message {
   opacity: 0.8;
-  margin-bottom: var(--space-md);
-  max-width: 31.25rem;
+  margin-block-end: var(--space-md);
+  max-inline-size: var(--modal-max-inline-size-md);
   font-size: var(--text-md);
   font-family: monospace;
 }

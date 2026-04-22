@@ -72,7 +72,27 @@
       "Bash(npx browserslist *)",
       "Bash(npx vite *)",
       "Bash(node -e \"const fs=require\\('fs'\\); const css=fs.readFileSync\\('dist/assets/ui-A5r8RANr.css','utf8'\\); const idx=css.indexOf\\('grid-column'\\); console.log\\(css.slice\\(Math.max\\(0,idx-200\\), idx+1500\\)\\);\")",
-      "Bash(node -e \"const fs=require\\('fs'\\); const css=fs.readFileSync\\('dist/assets/ui-A5r8RANr.css','utf8'\\); const idx=css.indexOf\\('col__Oh'\\); console.log\\(css.slice\\(idx, idx+1800\\)\\);\")"
+      "Bash(node -e \"const fs=require\\('fs'\\); const css=fs.readFileSync\\('dist/assets/ui-A5r8RANr.css','utf8'\\); const idx=css.indexOf\\('col__Oh'\\); console.log\\(css.slice\\(idx, idx+1800\\)\\);\")",
+      "Bash(grep -v \":0$\")",
+      "Bash(npm list *)",
+      "Bash(grep -r \"rgb\\\\|#[0-9a-f]\\\\{3,6\\\\}\" /e/front-end/ARCHİTECTURE-V3/src --include=\"*.module.css\")",
+      "Bash(pnpm size:why)",
+      "Bash(grep -rn \"createElement.*style\\\\|insertRule\\\\|stylesheet\\\\|css\\\\`\" /e/front-end/ARCHİTECTURE-V3/src --include=\"*.ts\" --include=\"*.tsx\")",
+      "Bash(awk '{print $1}')",
+      "Bash(sed 's/:.*//g')",
+      "Bash(npm view *)",
+      "Bash(sort grep *)",
+      "Read(//e/front-end/ARCHİTECTURE-V3/**)",
+      "WebFetch(domain:tanstack.com)",
+      "WebFetch(domain:www.smashingmagazine.com)",
+      "WebFetch(domain:sarahmhigley.com)",
+      "WebFetch(domain:stylelint.io)",
+      "WebFetch(domain:medium.com)",
+      "Bash(git mv *)",
+      "Bash(cat)",
+      "Bash(node scripts/check-css-tokens.mjs /tmp/test-rgb.module.css)",
+      "Bash(echo \"---exit: $?---\")",
+      "Bash(rm /tmp/test-rgb.module.css)"
     ]
   }
 }

@@ -111,6 +111,16 @@
   --icon-muted-bg: light-dark(var(--gray-400), var(--gray-600));
 
   --action-main: var(--brand-primary);
+
+  /* Overlay dimming (scrim behind modals, blocking loader) */
+  --bg-overlay: light-dark(rgb(0 0 0 / 40%), rgb(0 0 0 / 60%));
+  --bg-overlay-strong: light-dark(rgb(140 140 140 / 90%), rgb(20 20 20 / 85%));
+
+  /* Focus ring — inner gap (surface-colored) + outer brand ring at 40% alpha.
+   * Apply as `box-shadow: var(--focus-ring)` on any keyboard-focusable element. */
+  --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px oklch(from var(--brand-primary) l c h / 40%);
+  --focus-ring-error:
+    0 0 0 2px var(--bg-surface), 0 0 0 4px oklch(from var(--brand-error) l c h / 40%);
 }
 
 /* ─── 3. THEME PINS ──────────────────────────────────────────────── */

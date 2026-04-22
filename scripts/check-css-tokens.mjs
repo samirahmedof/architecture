@@ -7,7 +7,8 @@
  *   1. no-primitive-in-component
  *        Forbid direct use of primitive color tokens (--gray-*, --blue-*, etc.)
  *        outside src/assets/styles/tokens/. Components must consume SEMANTIC
- *        tokens so dark theme + future repaletting work.
+ *        tokens so dark theme + future repaletting work. Token files live
+ *        exclusively under src/assets/styles/tokens/.
  *
  *   2. no-raw-hex
  *        Forbid raw hex colors (#fff, #abcdef) in *.module.css files.
@@ -30,6 +31,13 @@
  *        Modules must scope styles via a class — raw `a { }` or `body { }`
  *        leaks globally and beats the `base` layer silently.
  *
+ *   7. no-raw-color-function
+ *        Forbid rgb()/rgba()/hsl()/hsla()/hwb()/lab()/lch() literals in
+ *        *.module.css files. Standardized on oklch — all colors must come
+ *        from semantic tokens. The only allowed color functions inside
+ *        modules are oklch(), color-mix(in oklch, ...), and the relative-
+ *        color form oklch(from var(--token) l c h / alpha).
+ *
  * Usage:
  *   node scripts/check-css-tokens.mjs <file1.css> <file2.css> ...
  *   (no args → scans all *.css under src/)
@@ -40,9 +48,8 @@ import { argv, exit } from 'node:process';
 import { glob } from 'node:fs/promises';
 
 const TOKEN_DIR = `src${sep}assets${sep}styles${sep}tokens${sep}`;
-/* Token files: either under the global tokens/ dir or named *.tokens.css
- * (component-scoped shared tokens, e.g. form-control.tokens.css). */
-const isTokenFile = (file) => file.includes(TOKEN_DIR) || file.endsWith('.tokens.css');
+/* Token files live under the global tokens/ dir. */
+const isTokenFile = (file) => file.includes(TOKEN_DIR);
 const isModuleFile = (file) => file.endsWith('.module.css');
 
 /* Rule 1 — primitive tokens outside tokens/. */
@@ -62,6 +69,9 @@ const DURATION_RE = /\b\d+(?:\.\d+)?m?s\b/g;
 const SRGB_MIX_RE = /color-mix\(\s*in\s+srgb\b/g;
 /* Rule 5b — rgb(from …). */
 const RGB_FROM_RE = /\brgb\(\s*from\b/g;
+
+/* Rule 7 — legacy color functions in modules. Any of rgb/rgba/hsl/hsla/hwb/lab/lch. */
+const LEGACY_COLOR_FN_RE = /(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch)\s*\(/g;
 
 /* Rule 6 — top-level element selector. Line starts with an HTML tag name
  * immediately followed by comma/brace/whitespace+brace; no leading `&` or `.`.
@@ -86,6 +96,8 @@ const categoryMessage = {
     'rgb(from …) is banned. Use oklch(from var(--token) l c h / alpha) for opacity variants.',
   'no-top-level-element-selector':
     'Top-level element selectors leak globally from .module.css. Scope through a class (or nest inside one).',
+  'no-raw-color-function':
+    'Legacy color functions (rgb/rgba/hsl/hsla/hwb/lab/lch) are banned in *.module.css. Use a semantic token, or — for opacity variants — oklch(from var(--token) l c h / alpha).',
 };
 
 const collectFiles = async (args) => {
@@ -173,6 +185,15 @@ for (const file of files) {
     /* Rule 5b — rgb(from …). */
     for (const m of scanLine.matchAll(RGB_FROM_RE)) {
       pushViolation(file, i + 1, m.index + 1, 'no-rgb-from', m[0], line.trim());
+    }
+
+    /* Rule 7 — legacy color functions. rgb(from …) is already covered by 5b,
+     * so skip any rgb( preceded by `from` keyword. Any other occurrence of
+     * rgba/hsl/hsla/hwb/lab/lch/rgb( is a violation. */
+    for (const m of scanLine.matchAll(LEGACY_COLOR_FN_RE)) {
+      const after = scanLine.slice(m.index + m[0].length).trimStart();
+      if (after.startsWith('from')) continue; /* relative color syntax — handled by 5b */
+      pushViolation(file, i + 1, m.index + 1, 'no-raw-color-function', m[0].trim(), line.trim());
     }
 
     /* Rule 6 — top-level element selector. Only match when the trimmed line

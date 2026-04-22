@@ -6,6 +6,7 @@ import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import { patchCssModules } from 'vite-css-modules';
 import checker from 'vite-plugin-checker';
 
 export default defineConfig(({ mode }) => {
@@ -14,6 +15,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
+      patchCssModules({ generateSourceTypes: true, declarationMap: true }),
       tanstackRouter({
         routesDirectory: './src/routes',
         generatedRouteTree: './src/routes/routeTree.gen.ts',

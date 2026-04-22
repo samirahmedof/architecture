@@ -11,6 +11,7 @@ import { useCreatePostMutation, useUpdatePostMutation } from '../../api/post.mut
 import { postQueries } from '../../api/post.queries.ts';
 import { usePostFormSchema } from '../../model/post.schema.ts';
 import type { PostCreateModel } from '../../model/post.types.ts';
+import styles from './post-detail.module.css';
 
 const PostDetailPage = () => {
   const { t } = useTranslation(NAMESPACES.POST);
@@ -61,7 +62,7 @@ const PostDetailPage = () => {
 
   return (
     <ContentWrapper>
-      <Form methods={methods} onSubmit={onSubmit} className="space-y-4">
+      <Form methods={methods} onSubmit={onSubmit} className={styles.form}>
         <FormField name="title" label={t('title')}>
           <Input
             placeholder={t('placeholders.title')}

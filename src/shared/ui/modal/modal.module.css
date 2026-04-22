@@ -3,7 +3,7 @@
   z-index: var(--z-overlay);
   animation: fadeIn var(--duration-base) var(--ease-out);
   inset: 0;
-  background-color: rgb(0 0 0 / 40%);
+  background-color: var(--bg-overlay);
 }
 
 .content {
@@ -18,8 +18,8 @@
   background-color: var(--bg-surface);
   padding: var(--space-lg);
   width: 90%;
-  max-width: 31.25rem;
-  max-height: 85vh;
+  max-inline-size: var(--modal-max-inline-size-md);
+  max-block-size: 85vh;
   &:focus {
     outline: none;
   }

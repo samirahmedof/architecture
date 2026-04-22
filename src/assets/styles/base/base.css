@@ -64,11 +64,26 @@ html {
 
 body {
   background-color: var(--bg-body);
-  min-height: 100vh;
+  min-block-size: 100vh;
   color: var(--text-main);
   font-family: var(--font-main);
   font-weight: var(--weight-regular);
+  font-synthesis: none;
   line-height: 1.5;
   font-feature-settings: 'ss03';
   text-wrap: pretty;
+}
+
+/* ─── View Transitions (SPA) ───────────────────────────── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }
