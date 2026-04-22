@@ -1,0 +1,2 @@
+echo "🔎 Type-checking..."
+pnpm tsc -b --noEmit

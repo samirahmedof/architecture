@@ -1,5 +1,1 @@
-echo "🔎 Checking Types..."
-pnpm tsc --noEmit
-
-echo "✨ Linting & Formatting..."
-pnpm exec lint-staged
+lint-staged

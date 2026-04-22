@@ -5,19 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc -b --noEmit && vite build",
     "preview": "vite preview",
     "check": "biome check --write src",
     "lint": "biome lint --write src",
     "format": "biome format --write src",
     "prepare": "husky",
-    "commit": "cz",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "size": "size-limit",
-    "size:why": "size-limit --why",
     "lint:css-tokens": "node scripts/check-css-tokens.mjs",
     "types:css": "vite-css-modules"
   },
@@ -61,8 +59,6 @@
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
     "browserslist": "^4.24.5",
-    "commitizen": "^4.3.1",
-    "cz-git": "^1.12.0",
     "happy-dom": "20.9.0",
     "husky": "^9.1.7",
     "lightningcss": "^1.32.0",
@@ -83,11 +79,6 @@
     "*.css": [
       "node scripts/check-css-tokens.mjs"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
   },
   "size-limit": [
     {

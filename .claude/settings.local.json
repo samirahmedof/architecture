@@ -92,7 +92,10 @@
       "Bash(cat)",
       "Bash(node scripts/check-css-tokens.mjs /tmp/test-rgb.module.css)",
       "Bash(echo \"---exit: $?---\")",
-      "Bash(rm /tmp/test-rgb.module.css)"
+      "Bash(rm /tmp/test-rgb.module.css)",
+      "WebFetch(domain:typicode.github.io)",
+      "WebFetch(domain:cz-git.qbb.sh)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }
